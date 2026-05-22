@@ -10,7 +10,7 @@ on:
 jobs:
   main:
     name: Semantic Pull Request
-    if: github.repository == 'pzzyf/vue-vben-admin'
+    if: github.repository == 'pzzyf/ms'
     runs-on: ubuntu-latest
     steps:
       - name: Validate PR title
