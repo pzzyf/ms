@@ -1,0 +1,8 @@
+{
+  "name": "@ms/vite-config",
+  "version": "1.0.0",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "catalog:"
+  }
+}
