@@ -1,6 +1,7 @@
 {
   "name": "ms",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.33.4",
   "license": "ISC",
   "scripts": {
     "lint": "eslint .",
