@@ -1,0 +1,16 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "pnpm-lock.yaml",
+    "**/.env.*local",
+    "**/tsconfig*.json",
+    "internal/vite-config/*.json",
+    "internal/vite-config/src/**/*.ts"
+  ],
+  "globalEnv": ["NODE_ENV"],
+  "tasks": {
+    "typecheck": {
+      "outputs": []
+    }
+  }
+}

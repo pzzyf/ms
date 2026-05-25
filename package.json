@@ -17,6 +17,7 @@
     "eslint": "catalog:",
     "happy-dom": "catalog:",
     "tsdown": "catalog:",
+    "turbo": "catalog:",
     "vitest": "catalog:"
   }
 }
