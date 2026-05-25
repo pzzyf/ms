@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "postinstall": "pnpm -r run stub --if-present"
+    "postinstall": "pnpm -r run stub --if-present",
+    "test:unit": "vitest run --dom"
   },
   "devDependencies": {
     "@ms/eslint-config": "workspace:*",
@@ -14,6 +15,8 @@
     "@ms/vite-config": "workspace:*",
     "@types/node": "catalog:",
     "eslint": "catalog:",
-    "tsdown": "catalog:"
+    "happy-dom": "catalog:",
+    "tsdown": "catalog:",
+    "vitest": "catalog:"
   }
 }
