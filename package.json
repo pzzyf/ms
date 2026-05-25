@@ -7,7 +7,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "postinstall": "pnpm -r run stub --if-present",
-    "test:unit": "vitest run --dom --passWithNoTests"
+    "test:unit": "vitest run --dom --passWithNoTests",
+    "check:type": "turbo run typecheck"
   },
   "devDependencies": {
     "@ms/eslint-config": "workspace:*",
