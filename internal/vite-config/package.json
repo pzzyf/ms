@@ -1,8 +1,33 @@
 {
   "name": "@ms/vite-config",
+  "type": "module",
   "version": "1.0.0",
-  "license": "ISC",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "stub": "pnpm exec tsdown"
+  },
   "dependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "vite-plugin-pwa": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "@vitejs/plugin-vue-jsx": "catalog:",
+    "dotenv": "catalog:",
+    "sass-embedded": "catalog:",
+    "unplugin-dts": "catalog:",
     "vite": "catalog:"
   }
 }

@@ -1,6 +1,3 @@
-import type { Options as HtmlMinifierOptions } from 'html-minifier-terser';
-import type { PluginVisualizerOptions } from 'rollup-plugin-visualizer';
-import type { PluginOptions } from 'unplugin-dts';
 import type {
   ConfigEnv,
   PluginOption,
@@ -61,7 +58,6 @@ interface PrintPluginOptions {
 interface NitroMockPluginOptions {
   /**
    * Mock 服务器包名
-   * @default '@vbenjs/nitro-mock'
    */
   mockServerPackage?: string;
 
@@ -94,12 +90,6 @@ interface ArchiverPluginOptions {
    */
   outputDir?: string;
 }
-
-/**
- * HTML 插件配置
- * @description 用于配置基于 transformIndexHtml 的 HTML 压缩行为
- */
-type HtmlPluginOptions = HtmlMinifierOptions;
 
 /**
  * ImportMap 插件配置
@@ -181,9 +171,8 @@ interface CommonPluginOptions {
   /**
    * 是否开启依赖分析
    * @default false
-   * @description 使用 rollup-plugin-visualizer 分析依赖
    */
-  visualizer?: boolean | PluginVisualizerOptions;
+  visualizer?: boolean 
 }
 
 /**
@@ -298,7 +287,7 @@ interface LibraryPluginOptions extends CommonPluginOptions {
    * @default true
    * @description 生成 TypeScript 类型声明文件
    */
-  dts?: boolean | PluginOptions;
+  dts?: boolean;
 }
 
 /**
@@ -333,7 +322,6 @@ export type {
   ConditionPlugin,
   DefineApplicationOptions,
   DefineConfig,
-  HtmlPluginOptions,
   IImportMap,
   ImportmapPluginOptions,
   LibraryPluginOptions,
