@@ -9,6 +9,9 @@ catalogs:
     '@antfu/eslint-config':
       specifier: ^9.0.0
       version: 9.0.0
+    '@types/node':
+      specifier: ^25.9.1
+      version: 25.9.1
     '@vitejs/plugin-vue':
       specifier: ^6.0.6
       version: 6.0.6
@@ -48,7 +51,7 @@ importers:
         specifier: workspace:*
         version: link:internal/vite-config
       '@types/node':
-        specifier: ^25.9.1
+        specifier: 'catalog:'
         version: 25.9.1
       eslint:
         specifier: 'catalog:'
