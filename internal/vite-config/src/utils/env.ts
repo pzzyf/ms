@@ -7,8 +7,6 @@ import fs from 'node:fs/promises';
 
 import dotenv from 'dotenv';
 
-const getBoolean = (value: string | undefined) => value === 'true';
-
 const getString = (value: string | undefined, fallback: string) =>
   value ?? fallback;
 
@@ -68,7 +66,6 @@ async function loadAndConvertEnv(
   confFiles = getConfFiles(),
 ): Promise<
   Partial<ApplicationPluginOptions> & {
-    appTitle: string;
     base: string;
     port: number;
   }
@@ -76,34 +73,14 @@ async function loadAndConvertEnv(
   const envConfig = await loadEnv(match, confFiles);
 
   const {
-    VITE_APP_TITLE,
-    VITE_ARCHIVER,
     VITE_BASE,
-    VITE_COMPRESS,
-    VITE_DEVTOOLS,
-    VITE_INJECT_APP_LOADING,
-    VITE_NITRO_MOCK,
     VITE_PORT,
-    VITE_PWA,
-    VITE_VISUALIZER,
   } = envConfig;
 
-  const compressTypes = (VITE_COMPRESS ?? '')
-    .split(',')
-    .filter((item) => item === 'brotli' || item === 'gzip');
 
   return {
-    appTitle: getString(VITE_APP_TITLE, 'MS'),
-    archiver: getBoolean(VITE_ARCHIVER),
     base: getString(VITE_BASE, '/'),
-    compress: compressTypes.length > 0,
-    compressTypes,
-    devtools: getBoolean(VITE_DEVTOOLS),
-    injectAppLoading: getBoolean(VITE_INJECT_APP_LOADING),
-    nitroMock: getBoolean(VITE_NITRO_MOCK),
     port: getNumber(VITE_PORT, 5173),
-    pwa: getBoolean(VITE_PWA),
-    visualizer: getBoolean(VITE_VISUALIZER),
   };
 }
 
