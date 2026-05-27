@@ -13,6 +13,7 @@ catalog:
   dotenv: ^17.4.2
   eslint: ^10.3.0
   happy-dom: ^20.9.0
+  lefthook: ^2.1.8
   sass-embedded: ^1.100.0
   tsdown: ^0.22.0
   turbo: ^2.9.14
