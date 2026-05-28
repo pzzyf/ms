@@ -1,0 +1,16 @@
+{
+  "name": "@ms/turbo-run",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "turbo-run": "./bin/turbo-run.mjs"
+  },
+  "scripts": {
+    "stub": "pnpm exec tsdown"
+  }
+}

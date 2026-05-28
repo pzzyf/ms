@@ -89,6 +89,9 @@ importers:
       '@ms/tsconfig':
         specifier: workspace:*
         version: link:internal/tsconfig
+      '@ms/turbo-run':
+        specifier: workspace:*
+        version: link:scripts/turbo-run
       '@ms/vite-config':
         specifier: workspace:*
         version: link:internal/vite-config
@@ -192,6 +195,8 @@ importers:
       vite:
         specifier: 'catalog:'
         version: 8.0.13(@types/node@25.9.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0)
+
+  scripts/turbo-run: {}
 
 packages:
 

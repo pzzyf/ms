@@ -5,6 +5,7 @@ packages:
   - app
   - 'internal/*'
   - 'internal/lint-configs/*'
+  - 'scripts/*'
 
 catalog:
   '@antfu/eslint-config': ^9.0.0
