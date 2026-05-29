@@ -1,4 +1,18 @@
 {
   "name": "@ms/node-utils",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "stub": "pnpm exec tsdown"
+  },
+  "dependencies": {
+    "@manypkg/get-packages": "catalog:",
+    "consola": "catalog:",
+    "execa": "catalog:"
+  }
 }

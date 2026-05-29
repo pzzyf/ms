@@ -4,6 +4,7 @@
   "packageManager": "pnpm@10.33.4",
   "license": "ISC",
   "scripts": {
+    "dev": "turbo-run dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "vitest run --dom --passWithNoTests",
@@ -15,6 +16,7 @@
   "devDependencies": {
     "@ms/commitlint-config": "workspace:*",
     "@ms/eslint-config": "workspace:*",
+    "@ms/node-utils": "workspace:*",
     "@ms/tsconfig": "workspace:*",
     "@ms/turbo-run": "workspace:*",
     "@ms/vite-config": "workspace:*",
