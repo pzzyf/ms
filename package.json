@@ -11,7 +11,8 @@
     "check:type": "turbo run typecheck",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "pnpm -r run stub --if-present",
-    "prepare": "is-ci || pnpm exec lefthook install"
+    "prepare": "is-ci || pnpm exec lefthook install",
+    "catalog": "pnpm dlx codemod pnpm/catalog"
   },
   "devDependencies": {
     "@ms/commitlint-config": "workspace:*",

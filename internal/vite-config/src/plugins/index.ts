@@ -2,12 +2,15 @@ import type { PluginOption } from 'vite';
 
 import type {
   ConditionPlugin,
+  CommonPluginOptions,
+  ApplicationPluginOptions
 } from '../typing';
 
 import tailwindcss from '@tailwindcss/vite';
 import viteVue from '@vitejs/plugin-vue';
 import viteVueJsx from '@vitejs/plugin-vue-jsx';
 import viteDtsPlugin from 'unplugin-dts/vite';
+import { viteMetadataPlugin } from './inject-metadata';
 
 
 /**
@@ -29,7 +32,9 @@ async function loadConditionPlugins(conditionPlugins: ConditionPlugin[]) {
  * 根据条件获取通用的vite插件
  */
 async function loadCommonPlugins(
+  options: CommonPluginOptions
 ): Promise<ConditionPlugin[]> {
+  const { injectMetadata } = options;
   return [
     {
       condition: true,
@@ -44,15 +49,19 @@ async function loadCommonPlugins(
         tailwindcss(),
       ],
     },
+    {
+      condition: injectMetadata,
+      plugins: async () => [await viteMetadataPlugin()],
+    },
   ];
 }
 
 /**
  * 根据条件获取应用类型的vite插件
  */
-async function loadApplicationPlugins(): Promise<PluginOption[]> {
+async function loadApplicationPlugins(options: ApplicationPluginOptions): Promise<PluginOption[]> {
 
-  const commonPlugins = await loadCommonPlugins();
+  const commonPlugins = await loadCommonPlugins(options);
 
   return await loadConditionPlugins([
     ...commonPlugins,

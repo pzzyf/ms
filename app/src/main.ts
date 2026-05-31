@@ -1,4 +1,13 @@
-import { createApp } from 'vue'
-import App from './App.vue'
 
-createApp(App).mount('#app')
+
+async function initApplication() {
+
+  const env = import.meta.env.PROD ? 'prod' : 'dev';
+  const appVersion = import.meta.env.VITE_APP_VERSION;
+  const namespace = `${import.meta.env.VITE_APP_NAMESPACE}-${appVersion}-${env}`;
+
+  const { bootstrap } = await import('./bootstrap')
+  bootstrap(namespace)
+}
+
+initApplication()

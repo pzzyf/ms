@@ -1,18 +1,17 @@
 publicHoistPattern:
   - '@commitlint/*'
-
 packages:
   - app
-  - 'internal/*'
-  - 'internal/lint-configs/*'
-  - 'scripts/*'
-
+  - internal/*
+  - internal/lint-configs/*
+  - scripts/*
 catalog:
   '@antfu/eslint-config': ^9.0.0
   '@clack/prompts': ^1.4.0
   '@commitlint/cli': ^21.0.1
   '@commitlint/config-conventional': ^21.0.1
   '@manypkg/get-packages': ^3.1.0
+  '@pnpm/workspace.read-manifest': ^1000.3.1
   '@tailwindcss/vite': ^4.3.0
   '@types/node': ^25.9.1
   '@vitejs/plugin-vue': ^6.0.6
@@ -21,11 +20,14 @@ catalog:
   cac: ^7.0.0
   commitlint-plugin-function-rules: ^5.0.1
   consola: ^3.4.2
+  dayjs: ^1.11.21
   dotenv: ^17.4.2
   eslint: ^10.3.0
   execa: ^9.6.1
   happy-dom: ^20.9.0
   lefthook: ^2.1.8
+  pkg-types: ^2.3.1
+  pnpm-workspace-yaml: ^1.6.0
   sass-embedded: ^1.100.0
   tsdown: ^0.22.0
   turbo: ^2.9.14

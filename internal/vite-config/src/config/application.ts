@@ -11,12 +11,15 @@ import { getCommonConfig } from './common';
 function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
   return defineConfig(async (config) => {
     const options = await userConfigPromise?.(config);
+
     const { base, port } = await loadAndConvertEnv();
     const { command } = config;
     const { vite = {} } = options || {};
     const isBuild = command === 'build';
 
-    const plugins = await loadApplicationPlugins();
+    const plugins = await loadApplicationPlugins({
+      injectMetadata: true,
+    });
 
 
     const applicationConfig: UserConfig = {
@@ -29,10 +32,10 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
             entryFileNames: 'jse/index-[name]-[hash].js',
             minify: isBuild
               ? {
-                  compress: {
-                    dropDebugger: true,
-                  },
-                }
+                compress: {
+                  dropDebugger: true,
+                },
+              }
               : false,
           },
         },

@@ -1,4 +1,7 @@
 # TODO
 
+- eslint-config
 - <s>turbo-run</s>
-- node-utils
+- ~~node-utils~~
+- app
+- ~~inject-metadata~~

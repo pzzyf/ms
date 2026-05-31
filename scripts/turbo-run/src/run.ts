@@ -39,10 +39,6 @@ export async function run(options: RunOptions) {
     selectPkg = selectPkgs[0]?.packageJson?.name ?? '';
   }
 
-  console.log(selectPkg,'selectPkg');
-
-  console.info(`pnpm --filter=${selectPkg} run ${command}`)
-
   execaCommand(`pnpm --filter=${selectPkg} run ${command}`, {
     stdio: 'inherit',
   });

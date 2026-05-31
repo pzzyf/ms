@@ -13,6 +13,8 @@
   "dependencies": {
     "@manypkg/get-packages": "catalog:",
     "consola": "catalog:",
-    "execa": "catalog:"
+    "dayjs": "catalog:",
+    "execa": "catalog:",
+    "pkg-types": "catalog:"
   }
 }

@@ -37,4 +37,4 @@ async function getPackages() {
 }
 
 
-export { getPackages };
+export { findMonorepoRoot, getPackages };

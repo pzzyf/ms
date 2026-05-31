@@ -16,10 +16,14 @@
     "stub": "pnpm exec tsdown"
   },
   "dependencies": {
+    "@ms/node-utils": "workspace:*",
     "@tailwindcss/vite": "catalog:",
+    "dayjs": "catalog:",
+    "pnpm-workspace-yaml": "catalog:",
     "vite-plugin-pwa": "catalog:"
   },
   "devDependencies": {
+    "@pnpm/workspace.read-manifest": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
     "dotenv": "catalog:",
