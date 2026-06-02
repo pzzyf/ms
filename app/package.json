@@ -11,13 +11,12 @@
     "typecheck": "vue-tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
-    "vue": "catalog:"
-  },
-  "devDependencies": {
+    "@ms/common-ui": "workspace:*",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/tsconfig": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
+    "vue": "catalog:",
     "vue-tsc": "catalog:"
   }
 }

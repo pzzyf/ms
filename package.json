@@ -27,6 +27,8 @@
     "lefthook": "catalog:",
     "tsdown": "catalog:",
     "turbo": "catalog:",
-    "vitest": "catalog:"
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:"
   }
 }

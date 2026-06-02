@@ -5,6 +5,10 @@ packages:
   - internal/*
   - internal/lint-configs/*
   - scripts/*
+  - packages/*
+  - packages/@core/*
+  - packages/@core/base/*
+  - packages/effects/*
 catalog:
   '@antfu/eslint-config': ^9.0.0
   '@clack/prompts': ^1.4.0
@@ -16,6 +20,7 @@ catalog:
   '@types/node': ^25.9.1
   '@vitejs/plugin-vue': ^6.0.6
   '@vitejs/plugin-vue-jsx': ^5.1.5
+  '@vue/shared': ^3.5.35
   '@vue/tsconfig': ^0.9.1
   cac: ^7.0.0
   commitlint-plugin-function-rules: ^5.0.1

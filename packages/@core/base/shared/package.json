@@ -1,0 +1,13 @@
+{
+  "name": "@ms-core/shared",
+  "version": "1.0.0",
+  "exports": {
+    "./utils": {
+      "types": "./src/utils/index.ts",
+      "default": "./src/utils/index.ts"
+    }
+  },
+  "dependencies": {
+    "@vue/shared": "catalog:"
+  }
+}
