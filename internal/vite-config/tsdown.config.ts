@@ -4,7 +4,7 @@ import { defineConfig } from 'tsdown';
 export default defineConfig({
   clean: true,
   deps: {
-    neverBundle: ['@vben/node-utils'],
+    neverBundle: ['@ms/node-utils'],
     skipNodeModulesBundle: true,
   },
   dts: {
@@ -15,4 +15,8 @@ export default defineConfig({
   outExtensions: () => ({
     dts: '.d.ts',
   }),
+  copy: {
+    from: 'src/plugins/inject-app-loading/default-loading.html',
+    to: 'dist',
+  },
 });

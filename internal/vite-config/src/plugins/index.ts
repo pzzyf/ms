@@ -11,6 +11,7 @@ import viteVue from '@vitejs/plugin-vue';
 import viteVueJsx from '@vitejs/plugin-vue-jsx';
 import viteDtsPlugin from 'unplugin-dts/vite';
 import { viteMetadataPlugin } from './inject-metadata';
+import { viteInjectAppLoadingPlugin } from './inject-app-loading';
 
 
 /**
@@ -61,10 +62,19 @@ async function loadCommonPlugins(
  */
 async function loadApplicationPlugins(options: ApplicationPluginOptions): Promise<PluginOption[]> {
 
-  const commonPlugins = await loadCommonPlugins(options);
+  const {
+    injectAppLoading,
+    ...commonOptions
+  } = options;
+
+  const commonPlugins = await loadCommonPlugins(commonOptions);
 
   return await loadConditionPlugins([
     ...commonPlugins,
+    {
+      condition: injectAppLoading,
+      plugins: async () => [await viteInjectAppLoadingPlugin()]
+    }
   ]);
 }
 

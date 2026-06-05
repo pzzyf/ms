@@ -19,6 +19,7 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
 
     const plugins = await loadApplicationPlugins({
       injectMetadata: true,
+      injectAppLoading: true,
     });
 
 
