@@ -1,3 +1,5 @@
+import { unmountGlobalLoading } from '@ms/utils'
+
 async function initApplication() {
   const env = import.meta.env.PROD ? 'prod' : 'dev';
   const appVersion = import.meta.env.VITE_APP_VERSION;
@@ -5,6 +7,7 @@ async function initApplication() {
 
   const { bootstrap } = await import('./bootstrap')
   await bootstrap(namespace)
+  unmountGlobalLoading()
 }
 
 initApplication()

@@ -161,6 +161,9 @@ importers:
       '@ms/common-ui':
         specifier: workspace:*
         version: link:../packages/effects/common-ui
+      '@ms/utils':
+        specifier: workspace:*
+        version: link:../packages/utils
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
         version: 6.0.6(vite@8.0.13(@types/node@25.9.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))(vue@3.5.34(typescript@6.0.3))
@@ -279,6 +282,8 @@ importers:
       vue:
         specifier: 'catalog:'
         version: 3.5.34(typescript@6.0.3)
+
+  packages/utils: {}
 
   scripts/turbo-run:
     dependencies:
