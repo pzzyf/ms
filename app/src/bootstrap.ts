@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import { registerLoadingDirective } from '@ms/common-ui/es/loading'
+// import { registerLoadingDirective } from '@ms/common-ui/es/loading'
 import { initStores } from '@ms/stores'
 import { router } from './router'
 
@@ -9,9 +9,9 @@ async function bootstrap(namespace: string) {
 
   const app = createApp(App);
 
-  registerLoadingDirective(app, {
-    loading: 'loading'
-  })
+  // registerLoadingDirective(app, {
+  //   loading: 'loading'
+  // })
 
   // 配置 pinia-store
   await initStores(app, { namespace });

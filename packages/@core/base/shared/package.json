@@ -8,6 +8,10 @@
     }
   },
   "dependencies": {
-    "@vue/shared": "catalog:"
+    "@vue/shared": "catalog:",
+    "nprogress": "catalog:"
+  },
+  "devDependencies": {
+    "@types/nprogress": "catalog:"
   }
 }

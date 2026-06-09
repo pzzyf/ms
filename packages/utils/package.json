@@ -6,5 +6,8 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     }
+  },
+  "dependencies": {
+    "@ms-core/shared": "workspace:*"
   }
 }
