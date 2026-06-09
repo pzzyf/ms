@@ -8,3 +8,8 @@
 - ~~inject-metadata~~
 - packages
 - vite-config注入loading
+- task
+  - 主线
+    - router
+  - 支线
+    - preference

@@ -3,7 +3,7 @@ import App from './App.vue'
 
 import { registerLoadingDirective } from '@ms/common-ui/es/loading'
 import { initStores } from '@ms/stores'
-
+import { router } from './router'
 
 async function bootstrap(namespace: string) {
 
@@ -13,10 +13,10 @@ async function bootstrap(namespace: string) {
     loading: 'loading'
   })
 
-
-  // 配置 pinia-tore
+  // 配置 pinia-store
   await initStores(app, { namespace });
 
+  app.use(router);
 
   app.mount('#app')
 }
