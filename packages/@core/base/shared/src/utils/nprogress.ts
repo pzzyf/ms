@@ -1,6 +1,4 @@
 import type NProgress from "nprogress";
-import "nprogress/nprogress.css";
-
 
 let nProgressInstance: null | typeof NProgress = null;
 

@@ -1,0 +1,17 @@
+{
+  "name": "@ms-core/design",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "development": "./src/index.ts",
+      "production": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "nprogress": "catalog:"
+  },
+  "devDependencies": {
+    "@types/nprogress": "catalog:"
+  }
+}

@@ -179,6 +179,9 @@ importers:
       '@ms/stores':
         specifier: workspace:*
         version: link:../packages/stores
+      '@ms/styles':
+        specifier: workspace:*
+        version: link:../packages/styles
       '@ms/utils':
         specifier: workspace:*
         version: link:../packages/utils
@@ -289,6 +292,16 @@ importers:
         specifier: 'catalog:'
         version: 8.0.13(@types/node@25.9.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0)
 
+  packages/@core/base/design:
+    dependencies:
+      nprogress:
+        specifier: 'catalog:'
+        version: 0.2.0
+    devDependencies:
+      '@types/nprogress':
+        specifier: 'catalog:'
+        version: 0.2.3
+
   packages/@core/base/shared:
     dependencies:
       '@vue/shared':
@@ -319,6 +332,12 @@ importers:
       pinia-plugin-persistedstate:
         specifier: 'catalog:'
         version: 4.7.1(pinia@3.0.4(typescript@6.0.3)(vue@3.5.34(typescript@6.0.3)))
+
+  packages/styles:
+    dependencies:
+      '@ms-core/design':
+        specifier: workspace:*
+        version: link:../@core/base/design
 
   packages/utils:
     dependencies:

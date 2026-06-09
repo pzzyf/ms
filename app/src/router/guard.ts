@@ -8,17 +8,17 @@ import { startProgress, stopProgress } from "@ms/utils"
 
 function commonGuard(router: Router) {
   const loadedPaths = new Set<string>();
-  router.beforeEach((to) => {
+  router.beforeEach(async (to) => {
     to.meta.loaded = loadedPaths.has(to.path);
     if (!to.meta.loaded) {
-      startProgress();
+      await startProgress();
     }
     return true;
   });
 
-  router.afterEach((to) => {
+  router.afterEach(async (to) => {
     loadedPaths.add(to.path);
-    stopProgress();
+    await stopProgress();
   });
 }
 

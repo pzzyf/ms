@@ -13,6 +13,7 @@
   "dependencies": {
     "@ms/common-ui": "workspace:*",
     "@ms/stores": "workspace:*",
+    "@ms/styles": "workspace:*",
     "@ms/utils": "workspace:*",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/tsconfig": "catalog:",

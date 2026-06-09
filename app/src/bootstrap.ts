@@ -4,6 +4,7 @@ import App from './App.vue'
 // import { registerLoadingDirective } from '@ms/common-ui/es/loading'
 import { initStores } from '@ms/stores'
 import { router } from './router'
+import '@ms/styles';
 
 async function bootstrap(namespace: string) {
 
