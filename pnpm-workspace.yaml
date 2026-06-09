@@ -31,6 +31,8 @@ catalog:
   execa: ^9.6.1
   happy-dom: ^20.9.0
   lefthook: ^2.1.8
+  pinia: ^3.0.4
+  pinia-plugin-persistedstate: ^4.7.1
   pkg-types: ^2.3.1
   pnpm-workspace-yaml: ^1.6.0
   sass-embedded: ^1.100.0

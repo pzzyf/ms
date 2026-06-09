@@ -1,0 +1,14 @@
+{
+  "name": "@ms/stores",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "pinia": "catalog:",
+    "pinia-plugin-persistedstate": "catalog:"
+  }
+}
