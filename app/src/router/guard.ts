@@ -1,5 +1,6 @@
 import type { Router } from "vue-router"
 import { startProgress, stopProgress } from "@ms/utils"
+import { preferences } from "@ms/preferences";
 
 /**
  * 创建通用路由守卫
@@ -8,17 +9,19 @@ import { startProgress, stopProgress } from "@ms/utils"
 
 function commonGuard(router: Router) {
   const loadedPaths = new Set<string>();
-  router.beforeEach(async (to) => {
+  router.beforeEach((to) => {
     to.meta.loaded = loadedPaths.has(to.path);
-    if (!to.meta.loaded) {
-      await startProgress();
+    if (!to.meta.loaded && preferences.transition.progress) {
+      startProgress();
     }
     return true;
   });
 
-  router.afterEach(async (to) => {
+  router.afterEach((to) => {
     loadedPaths.add(to.path);
-    await stopProgress();
+    if (preferences.transition.progress) {
+      stopProgress();
+    }
   });
 }
 
