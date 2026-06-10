@@ -6,7 +6,7 @@ async function initApplication() {
   const appVersion = import.meta.env.VITE_APP_VERSION;
   const namespace = `${import.meta.env.VITE_APP_NAMESPACE}-${appVersion}-${env}`;
 
-  await initPreferences()
+  await initPreferences(namespace)
 
   const { bootstrap } = await import('./bootstrap')
   await bootstrap(namespace)

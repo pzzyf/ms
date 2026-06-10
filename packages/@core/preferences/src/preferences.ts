@@ -11,10 +11,11 @@ class PreferenceManager {
     this.state = reactive({ ...defaultPreferences });
   }
 
-  initPreferences = async () =>  {
+  initPreferences = async (namespace: string) => {
     if (this.isInitialized) {
       return;
     }
+    await this.saveToCache(namespace);
     this.isInitialized = true;
   }
 
@@ -24,6 +25,14 @@ class PreferenceManager {
   getPreferences = () => {
     return readonly(this.state);
   };
+
+  private async saveToCache(namespace: string) {
+    try {
+      localStorage.setItem(`${namespace}-preferences`, JSON.stringify(this.state));
+    } catch (error) {
+      console.error('Failed to save preferences to cache:', error);
+    }
+  }
 
 }
 
