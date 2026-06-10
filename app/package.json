@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ms/common-ui": "workspace:*",
+    "@ms/preferences": "workspace:*",
     "@ms/stores": "workspace:*",
     "@ms/styles": "workspace:*",
     "@ms/utils": "workspace:*",

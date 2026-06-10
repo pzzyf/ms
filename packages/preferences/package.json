@@ -1,0 +1,13 @@
+{
+  "name": "@ms/preferences",
+  "version": "1.0.0",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@ms-core/preferences": "workspace:*"
+  }
+}

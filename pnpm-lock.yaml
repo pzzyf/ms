@@ -176,6 +176,9 @@ importers:
       '@ms/common-ui':
         specifier: workspace:*
         version: link:../packages/effects/common-ui
+      '@ms/preferences':
+        specifier: workspace:*
+        version: link:../packages/preferences
       '@ms/stores':
         specifier: workspace:*
         version: link:../packages/stores
@@ -315,6 +318,12 @@ importers:
         specifier: 'catalog:'
         version: 0.2.3
 
+  packages/@core/preferences:
+    dependencies:
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.34(typescript@6.0.3)
+
   packages/effects/common-ui:
     dependencies:
       '@ms-core/shared':
@@ -323,6 +332,12 @@ importers:
       vue:
         specifier: 'catalog:'
         version: 3.5.34(typescript@6.0.3)
+
+  packages/preferences:
+    dependencies:
+      '@ms-core/preferences':
+        specifier: workspace:*
+        version: link:../@core/preferences
 
   packages/stores:
     dependencies:
