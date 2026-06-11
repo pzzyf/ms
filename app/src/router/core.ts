@@ -16,7 +16,6 @@ const coreRoutes: RouteRecordRaw[] = [
     redirect: preferences.app.defaultHomePath,
     children: [],
   },
-
   {
     component: AuthPageLayout,
     meta: {
