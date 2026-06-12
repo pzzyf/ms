@@ -1,13 +1,20 @@
 <script setup lang="ts">
+import { AuthPageLayout } from '@ms/layouts'
 
+import { preferences } from '@ms/preferences'
+import { computed } from 'vue'
+
+const appName = computed(() => preferences.app.name)
+const logo = computed(() => preferences.logo.source)
 </script>
 
 <template>
   <div>
-    1
+    <AuthPageLayout
+      :app-name="appName"
+      :logo="logo"
+    />
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

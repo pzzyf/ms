@@ -179,6 +179,9 @@ importers:
       '@ms/constants':
         specifier: workspace:*
         version: link:../packages/constants
+      '@ms/layouts':
+        specifier: workspace:*
+        version: link:../packages/effects/layouts
       '@ms/preferences':
         specifier: workspace:*
         version: link:../packages/preferences
@@ -334,6 +337,12 @@ importers:
       '@ms-core/shared':
         specifier: workspace:*
         version: link:../../@core/base/shared
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.34(typescript@6.0.3)
+
+  packages/effects/layouts:
+    dependencies:
       vue:
         specifier: 'catalog:'
         version: 3.5.34(typescript@6.0.3)
