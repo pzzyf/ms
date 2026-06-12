@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <div>
-    123
+  <div class=" font-bold">
+    123111
   </div>
 </template>
 

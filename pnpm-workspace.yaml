@@ -38,6 +38,7 @@ catalog:
   pkg-types: ^2.3.1
   pnpm-workspace-yaml: ^1.6.0
   sass-embedded: ^1.100.0
+  tailwindcss: ^4.3.0
   tsdown: ^0.22.0
   turbo: ^2.9.14
   typescript: ~6.0.2

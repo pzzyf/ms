@@ -3,8 +3,9 @@
 </script>
 
 <template>
-  <div>
-    <slot />
+  <div class=" text-2xl">
+    <div>123</div>
+    <router-view />
   </div>
 </template>
 

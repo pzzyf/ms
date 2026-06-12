@@ -1,14 +1,16 @@
 {
-  "name": "@ms/layouts",
+  "name": "@ms/tailwind-config",
   "version": "1.0.0",
   "exports": {
     ".": {
       "types": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./theme": {
+      "default": "./src/theme.css"
     }
   },
   "dependencies": {
-    "vue": "catalog:",
-    "vue-router": "catalog:"
+    "tailwindcss": "catalog:"
   }
 }

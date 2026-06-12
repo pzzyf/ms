@@ -18,6 +18,7 @@
     "@ms/commitlint-config": "workspace:*",
     "@ms/eslint-config": "workspace:*",
     "@ms/node-utils": "workspace:*",
+    "@ms/tailwind-config": "workspace:*",
     "@ms/tsconfig": "workspace:*",
     "@ms/turbo-run": "workspace:*",
     "@ms/vite-config": "workspace:*",
