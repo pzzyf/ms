@@ -34,3 +34,10 @@
     min-height: 100vh;
   }
 }
+
+/* Custom utilities (v4 @utility syntax) */
+@utility flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
