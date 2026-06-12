@@ -15,7 +15,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div v-for="item in toolbarList" :key="item">
+  <div v-for="item in toolbarList" :key="item" class="min-h-full">
     {{ item }}
   </div>
 </template>
