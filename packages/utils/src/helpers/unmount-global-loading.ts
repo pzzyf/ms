@@ -3,7 +3,6 @@
  */
 
 function unmountGlobalLoading() {
-
   const loadingElement = document.querySelector('#__app-loading__')
 
   if (loadingElement) {
@@ -11,20 +10,15 @@ function unmountGlobalLoading() {
 
     const injectLoadingElements = document.querySelectorAll(
       '[data-app-loading^="inject"]',
-    );
+    )
 
-    loadingElement.addEventListener('transitionend',
-      () => {
-        loadingElement.remove(); 
-        injectLoadingElements.forEach((el) => el.remove()); 
-      },
-      {
-        once: true,
-      });
-
-
+    loadingElement.addEventListener('transitionend', () => {
+      loadingElement.remove()
+      injectLoadingElements.forEach(el => el.remove())
+    }, {
+      once: true,
+    })
   }
-
 }
 
-export { unmountGlobalLoading };
+export { unmountGlobalLoading }

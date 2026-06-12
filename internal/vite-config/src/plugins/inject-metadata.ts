@@ -1,13 +1,15 @@
-import type { PluginOption } from 'vite';
+import type { PluginOption } from 'vite'
+
+import process from 'node:process'
 
 import {
   dateUtil,
   findMonorepoRoot,
   getPackages,
   readPackageJSON,
-} from '@ms/node-utils';
+} from '@ms/node-utils'
 
-import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest';
+import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest'
 
 function resolvePackageVersion(
   pkgsMeta: Record<string, string>,
@@ -16,38 +18,38 @@ function resolvePackageVersion(
   catalog: Record<string, string>,
 ) {
   if (value.includes('catalog:')) {
-    return catalog[name];
+    return catalog[name]
   }
 
   if (value.includes('workspace')) {
-    return pkgsMeta[name];
+    return pkgsMeta[name]
   }
 
-  return value;
+  return value
 }
 
 async function resolveMonorepoDependencies() {
-  const { packages } = await getPackages();
-  const manifest = await readWorkspaceManifest(findMonorepoRoot());
-  const catalog = manifest?.catalog || {};
+  const { packages } = await getPackages()
+  const manifest = await readWorkspaceManifest(findMonorepoRoot())
+  const catalog = manifest?.catalog || {}
 
-  const resultDevDependencies: Record<string, string | undefined> = {};
-  const resultDependencies: Record<string, string | undefined> = {};
-  const pkgsMeta: Record<string, string> = {};
+  const resultDevDependencies: Record<string, string | undefined> = {}
+  const resultDependencies: Record<string, string | undefined> = {}
+  const pkgsMeta: Record<string, string> = {}
 
   for (const { packageJson } of packages) {
-    pkgsMeta[packageJson.name] = packageJson.version;
+    pkgsMeta[packageJson.name] = packageJson.version
   }
 
   for (const { packageJson } of packages) {
-    const { dependencies = {}, devDependencies = {} } = packageJson;
+    const { dependencies = {}, devDependencies = {} } = packageJson
     for (const [key, value] of Object.entries(dependencies)) {
       resultDependencies[key] = resolvePackageVersion(
         pkgsMeta,
         key,
         value,
         catalog,
-      );
+      )
     }
     for (const [key, value] of Object.entries(devDependencies)) {
       resultDevDependencies[key] = resolvePackageVersion(
@@ -55,13 +57,13 @@ async function resolveMonorepoDependencies() {
         key,
         value,
         catalog,
-      );
+      )
     }
   }
   return {
     dependencies: resultDependencies,
     devDependencies: resultDevDependencies,
-  };
+  }
 }
 
 /**
@@ -70,27 +72,24 @@ async function resolveMonorepoDependencies() {
 async function viteMetadataPlugin(
   root = process.cwd(),
 ): Promise<PluginOption | undefined> {
-  const { author, description, homepage, license, version } =
-    await readPackageJSON(root);
+  const { author, description, homepage, license, version }
+    = await readPackageJSON(root)
 
-  console.log(version,'version');
-  
-
-  const buildTime = dateUtil().format('YYYY-MM-DD HH:mm:ss');
+  const buildTime = dateUtil().format('YYYY-MM-DD HH:mm:ss')
 
   return {
     async config() {
-      const { dependencies, devDependencies } =
-        await resolveMonorepoDependencies();
+      const { dependencies, devDependencies }
+        = await resolveMonorepoDependencies()
 
-      const isAuthorObject = typeof author === 'object';
-      const authorName = isAuthorObject ? author.name : author;
-      const authorEmail = isAuthorObject ? author.email : null;
-      const authorUrl = isAuthorObject ? author.url : null;
+      const isAuthorObject = typeof author === 'object'
+      const authorName = isAuthorObject ? author.name : author
+      const authorEmail = isAuthorObject ? author.email : null
+      const authorUrl = isAuthorObject ? author.url : null
 
       return {
         define: {
-          __VBEN_ADMIN_METADATA__: JSON.stringify({
+          '__VBEN_ADMIN_METADATA__': JSON.stringify({
             authorEmail,
             authorName,
             authorUrl,
@@ -104,11 +103,11 @@ async function viteMetadataPlugin(
           }),
           'import.meta.env.VITE_APP_VERSION': JSON.stringify(version),
         },
-      };
+      }
     },
     enforce: 'post',
     name: 'vite:inject-metadata',
-  };
+  }
 }
 
-export { viteMetadataPlugin };
+export { viteMetadataPlugin }

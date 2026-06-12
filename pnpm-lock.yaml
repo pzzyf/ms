@@ -161,6 +161,9 @@ importers:
       lefthook:
         specifier: 'catalog:'
         version: 2.1.8
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 4.3.0
       tsdown:
         specifier: 'catalog:'
         version: 0.22.0(typescript@6.0.3)(vue-tsc@3.2.9(typescript@6.0.3))

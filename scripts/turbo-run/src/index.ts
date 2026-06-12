@@ -1,19 +1,19 @@
-import { cac } from 'cac';
-import { run } from './run';
+import process from 'node:process'
+import { cac } from 'cac'
+import { run } from './run'
 
-try{
-
-  const turboRun = cac('turbo-run');
+try {
+  const turboRun = cac('turbo-run')
 
   turboRun
     .command('[script]', 'Run a command in turbo mode')
     .action(async (command: string) => {
-      run({ command });
-    });
+      run({ command })
+    })
 
-  turboRun.parse();
-
-}catch(err){
-    console.error(err);
-    process.exit(1);
+  turboRun.parse()
+}
+catch (err) {
+  console.error(err)
+  process.exit(1)
 }

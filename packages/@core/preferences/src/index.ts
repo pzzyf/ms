@@ -1,8 +1,8 @@
-import { preferencesManager } from './preferences';
+import { preferencesManager } from './preferences'
 
 export const {
   getPreferences,
   initPreferences,
-} = preferencesManager;
+} = preferencesManager
 
-export const preferences = getPreferences();
+export const preferences = getPreferences()

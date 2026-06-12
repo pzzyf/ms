@@ -1,9 +1,8 @@
-import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
-import { createRouterGuard } from './guard';
+import { createRouterGuard } from './guard'
 
-import { routes } from "./routes";
-
+import { routes } from './routes'
 
 const router = createRouter({
   history:
@@ -13,13 +12,13 @@ const router = createRouter({
   routes,
   scrollBehavior: (to, _from, savedPosition) => {
     if (savedPosition) {
-      return savedPosition;
+      return savedPosition
     }
-    return to.hash ? { behavior: 'smooth', el: to.hash } : { left: 0, top: 0 };
+    return to.hash ? { behavior: 'smooth', el: to.hash } : { left: 0, top: 0 }
   },
 })
 
 // 创建路由守卫
-createRouterGuard(router);
+createRouterGuard(router)
 
 export { router }

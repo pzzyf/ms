@@ -1,45 +1,46 @@
-import { cancel, isCancel, select } from '@clack/prompts';
-import { getPackages,execaCommand } from '@ms/node-utils';
-
+import process from 'node:process'
+import { cancel, isCancel, select } from '@clack/prompts'
+import { execaCommand, getPackages } from '@ms/node-utils'
 
 interface RunOptions {
-  command?: string;
+  command?: string
 }
 
 export async function run(options: RunOptions) {
-  const { command } = options;
+  const { command } = options
   if (!command) {
-    console.error('No command provided');
-    process.exit(1);
+    console.error('No command provided')
+    process.exit(1)
   }
 
-  const { packages } = await getPackages();
+  const { packages } = await getPackages()
 
   // 只显示有对应命令的包
   const selectPkgs = packages.filter((pkg) => {
-    return (pkg?.packageJson as Record<string, any>)?.scripts?.[command];
-  });
+    return (pkg?.packageJson as Record<string, any>)?.scripts?.[command]
+  })
 
-  let selectPkg: string | symbol;
+  let selectPkg: string | symbol
 
   if (selectPkgs.length > 1) {
     selectPkg = await select<string>({
       message: `Select the app you need to run [${command}]:`,
-      options: selectPkgs.map((item) => ({
+      options: selectPkgs.map(item => ({
         label: item?.packageJson.name,
         value: item?.packageJson.name,
       })),
-    });
+    })
 
     if (isCancel(selectPkg) || !selectPkg) {
-      cancel('👋 Has cancelled');
-      process.exit(0);
+      cancel('👋 Has cancelled')
+      process.exit(0)
     }
-  } else {
-    selectPkg = selectPkgs[0]?.packageJson?.name ?? '';
+  }
+  else {
+    selectPkg = selectPkgs[0]?.packageJson?.name ?? ''
   }
 
   execaCommand(`pnpm --filter=${selectPkg} run ${command}`, {
     stdio: 'inherit',
-  });
+  })
 }

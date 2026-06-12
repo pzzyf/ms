@@ -1,41 +1,40 @@
-import type { PluginOption } from 'vite';
+import type { PluginOption } from 'vite'
 
 import type {
-  ConditionPlugin,
+  ApplicationPluginOptions,
   CommonPluginOptions,
-  ApplicationPluginOptions
-} from '../typing';
+  ConditionPlugin,
+} from '../typing'
 
-import tailwindcss from '@tailwindcss/vite';
-import viteVue from '@vitejs/plugin-vue';
-import viteVueJsx from '@vitejs/plugin-vue-jsx';
-import viteDtsPlugin from 'unplugin-dts/vite';
-import { viteMetadataPlugin } from './inject-metadata';
-import { viteInjectAppLoadingPlugin } from './inject-app-loading';
-
+import tailwindcss from '@tailwindcss/vite'
+import viteVue from '@vitejs/plugin-vue'
+import viteVueJsx from '@vitejs/plugin-vue-jsx'
+import viteDtsPlugin from 'unplugin-dts/vite'
+import { viteInjectAppLoadingPlugin } from './inject-app-loading'
+import { viteMetadataPlugin } from './inject-metadata'
 
 /**
  * 获取条件成立的 vite 插件
  * @param conditionPlugins
  */
 async function loadConditionPlugins(conditionPlugins: ConditionPlugin[]) {
-  const plugins: PluginOption[] = [];
+  const plugins: PluginOption[] = []
   for (const conditionPlugin of conditionPlugins) {
     if (conditionPlugin.condition) {
-      const realPlugins = await conditionPlugin.plugins();
-      plugins.push(...realPlugins);
+      const realPlugins = await conditionPlugin.plugins()
+      plugins.push(...realPlugins)
     }
   }
-  return plugins.flat();
+  return plugins.flat()
 }
 
 /**
  * 根据条件获取通用的vite插件
  */
 async function loadCommonPlugins(
-  options: CommonPluginOptions
+  options: CommonPluginOptions,
 ): Promise<ConditionPlugin[]> {
-  const { injectMetadata } = options;
+  const { injectMetadata } = options
   return [
     {
       condition: true,
@@ -54,31 +53,30 @@ async function loadCommonPlugins(
       condition: injectMetadata,
       plugins: async () => [await viteMetadataPlugin()],
     },
-  ];
+  ]
 }
 
 /**
  * 根据条件获取应用类型的vite插件
  */
 async function loadApplicationPlugins(options: ApplicationPluginOptions): Promise<PluginOption[]> {
-
   const {
     injectAppLoading,
     ...commonOptions
-  } = options;
+  } = options
 
-  const commonPlugins = await loadCommonPlugins(commonOptions);
+  const commonPlugins = await loadCommonPlugins(commonOptions)
 
   return await loadConditionPlugins([
     ...commonPlugins,
     {
       condition: injectAppLoading,
-      plugins: async () => [await viteInjectAppLoadingPlugin()]
-    }
-  ]);
+      plugins: async () => [await viteInjectAppLoadingPlugin()],
+    },
+  ])
 }
 
 export {
   loadApplicationPlugins,
   viteDtsPlugin,
-};
+}

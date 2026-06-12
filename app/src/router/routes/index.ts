@@ -1,11 +1,11 @@
-import { coreRoutes } from "../core";
-import type { RouteRecordRaw } from "vue-router";
-import { traverseTreeValues } from "@ms/utils"
+import type { RouteRecordRaw } from 'vue-router'
+import { traverseTreeValues } from '@ms/utils'
+import { coreRoutes } from '../core'
 
 const routes: RouteRecordRaw[] = [
   ...coreRoutes,
 ]
 
-const coreRouteNames = traverseTreeValues(coreRoutes, (route) => route.name);
+const coreRouteNames = traverseTreeValues(coreRoutes, route => route.name)
 
-export { routes, coreRouteNames }
+export { coreRouteNames, routes }

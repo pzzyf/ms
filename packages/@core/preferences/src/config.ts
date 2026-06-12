@@ -142,6 +142,6 @@ const defaultPreferences = {
     themeToggle: true,
     timezone: true,
   },
-};
+}
 
-export { defaultPreferences };
+export { defaultPreferences }

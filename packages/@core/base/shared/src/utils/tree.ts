@@ -1,37 +1,35 @@
 interface TreeConfigOptions {
   // 子属性的名称，默认为'children'
-  childProps: string;
+  childProps: string
 }
 
-
 function traverseTreeValues<T, V>(tree: T[], getValue: (node: T) => V, options?: TreeConfigOptions): V[] {
-
   const result: V[] = []
   const { childProps } = options || {
     childProps: 'children',
-  };
+  }
 
   const dfs = (treeNode: T) => {
     const value = getValue(treeNode)
-    result.push(value);
+    result.push(value)
     const children = (treeNode as Record<string, any>)?.[childProps]
 
-    if(!children){
+    if (!children) {
       return
     }
 
     if (children.length > 0) {
       for (const child of children) {
-        dfs(child);
+        dfs(child)
       }
     }
   }
 
-  for(const treeNode of tree){
+  for (const treeNode of tree) {
     dfs(treeNode)
   }
 
-  return result.filter(Boolean);
+  return result.filter(Boolean)
 }
 
 export { traverseTreeValues }

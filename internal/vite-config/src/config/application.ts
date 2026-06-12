@@ -1,27 +1,26 @@
-import type { UserConfig } from 'vite';
+import type { UserConfig } from 'vite'
 
-import type { DefineApplicationOptions } from '../typing';
+import type { DefineApplicationOptions } from '../typing'
 
-import { defineConfig, mergeConfig } from 'vite';
+import { defineConfig, mergeConfig } from 'vite'
 
-import { loadApplicationPlugins } from '../plugins';
-import { loadAndConvertEnv } from '../utils/env';
-import { getCommonConfig } from './common';
+import { loadApplicationPlugins } from '../plugins'
+import { loadAndConvertEnv } from '../utils/env'
+import { getCommonConfig } from './common'
 
 function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
   return defineConfig(async (config) => {
-    const options = await userConfigPromise?.(config);
+    const options = await userConfigPromise?.(config)
 
-    const { base, port } = await loadAndConvertEnv();
-    const { command } = config;
-    const { vite = {} } = options || {};
-    const isBuild = command === 'build';
+    const { base, port } = await loadAndConvertEnv()
+    const { command } = config
+    const { vite = {} } = options || {}
+    const isBuild = command === 'build'
 
     const plugins = await loadApplicationPlugins({
       injectMetadata: true,
       injectAppLoading: true,
-    });
-
+    })
 
     const applicationConfig: UserConfig = {
       base,
@@ -33,10 +32,10 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
             entryFileNames: 'jse/index-[name]-[hash].js',
             minify: isBuild
               ? {
-                compress: {
-                  dropDebugger: true,
-                },
-              }
+                  compress: {
+                    dropDebugger: true,
+                  },
+                }
               : false,
           },
         },
@@ -53,15 +52,14 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
           ],
         },
       },
-    };
+    }
 
     const mergedCommonConfig = mergeConfig(
       await getCommonConfig(),
       applicationConfig,
-    );
-    return mergeConfig(mergedCommonConfig, vite);
-  });
+    )
+    return mergeConfig(mergedCommonConfig, vite)
+  })
 }
 
-
-export { defineApplicationConfig };
+export { defineApplicationConfig }

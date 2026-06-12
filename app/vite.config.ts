@@ -1,4 +1,4 @@
-import { defineConfig } from '@ms/vite-config';
+import { defineConfig } from '@ms/vite-config'
 
 export default defineConfig(async () => {
   return {
@@ -8,7 +8,7 @@ export default defineConfig(async () => {
         proxy: {
           '/api': {
             changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, ''),
+            rewrite: path => path.replace(/^\/api/, ''),
             // mock代理目标地址
             target: 'http://localhost:5320/api',
             ws: true,
@@ -16,5 +16,5 @@ export default defineConfig(async () => {
         },
       },
     },
-  };
-});
+  }
+})

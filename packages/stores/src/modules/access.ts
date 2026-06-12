@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 
-
 type AccessToken = string | null
 
 interface AccessState {
@@ -9,7 +8,7 @@ interface AccessState {
 
 const useAccessStore = defineStore('core-access', {
   state: (): AccessState => ({
-    accessToken: null
+    accessToken: null,
   }),
 })
 

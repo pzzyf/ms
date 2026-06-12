@@ -1,6 +1,6 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-type UserInfo = {
+interface UserInfo {
   homePath: string
 }
 
@@ -11,7 +11,7 @@ interface AccessState {
 const useUserStore = defineStore('user', {
   state: (): AccessState => ({
     userInfo: null,
-  })
+  }),
 })
 
 export { useUserStore }

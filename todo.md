@@ -3,14 +3,16 @@
 - eslint-config
 - <s>turbo-run</s>
 - ~~node-utils~~
-- app
-  - loading
+- ~~app~~
+  - ~~loading~~
 - ~~inject-metadata~~
-- packages
-- vite-config注入loading
+- ~~packages~~
+- ~~vite-config注入loading~~
 - task
   - 主线
-    - router
+    - app
   - 支线
-    - preference
-    - tailwindcss
+    - ~~preference~~
+    - ~~tailwindcss~~
+    - lint/format
+    - theme

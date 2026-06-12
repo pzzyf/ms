@@ -1,31 +1,31 @@
-import type { Router } from "vue-router"
-import { startProgress, stopProgress } from "@ms/utils"
-import { preferences } from "@ms/preferences";
-import { useAccessStore, useUserStore } from "@ms/stores";
-import { LOGIN_PATH } from "@ms/constants"
+import type { Router } from 'vue-router'
+import { LOGIN_PATH } from '@ms/constants'
+import { preferences } from '@ms/preferences'
+import { useAccessStore, useUserStore } from '@ms/stores'
+import { startProgress, stopProgress } from '@ms/utils'
 import { coreRouteNames } from '#/router/routes'
 
 /**
  * 创建通用路由守卫
- * @param router 
+ * @param router
  */
 
 function commonGuard(router: Router) {
-  const loadedPaths = new Set<string>();
+  const loadedPaths = new Set<string>()
   router.beforeEach((to) => {
-    to.meta.loaded = loadedPaths.has(to.path);
+    to.meta.loaded = loadedPaths.has(to.path)
     if (!to.meta.loaded && preferences.transition.progress) {
-      startProgress();
+      startProgress()
     }
-    return true;
-  });
+    return true
+  })
 
   router.afterEach((to) => {
-    loadedPaths.add(to.path);
+    loadedPaths.add(to.path)
     if (preferences.transition.progress) {
-      stopProgress();
+      stopProgress()
     }
-  });
+  })
 }
 
 function setupAccessGuard(router: Router) {
@@ -36,19 +36,19 @@ function setupAccessGuard(router: Router) {
     if (coreRouteNames.includes(to.name as string)) {
       if (to.path === LOGIN_PATH && accessStore.accessToken) {
         return decodeURIComponent(
-          (to.query?.redirect as string) ||
-          userStore.userInfo?.homePath ||
-          preferences.app.defaultHomePath,
-        );
+          (to.query?.redirect as string)
+          || userStore.userInfo?.homePath
+          || preferences.app.defaultHomePath,
+        )
       }
-      return true;
+      return true
     }
 
     // accessToken 检查
     if (!accessStore.accessToken) {
       // 明确声明忽略权限访问权限，则可以访问
       if (to.meta.ignoreAccess) {
-        return true;
+        return true
       }
 
       // 没有访问权限，跳转登录页面
@@ -62,12 +62,11 @@ function setupAccessGuard(router: Router) {
               : { redirect: encodeURIComponent(to.fullPath) },
           // 携带当前跳转的页面，登录后重新跳转该页面
           replace: true,
-        };
+        }
       }
-      return to;
+      return to
     }
   })
-
 }
 
 function createRouterGuard(router: Router) {
