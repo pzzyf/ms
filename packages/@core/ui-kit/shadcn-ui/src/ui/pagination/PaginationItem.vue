@@ -15,12 +15,13 @@ const props = withDefaults(defineProps<PaginationListItemProps & {
   size: 'icon',
 })
 
-const delegatedProps = reactiveOmit(props, 'class', 'size', 'isActive')
+const delegatedProps = reactiveOmit(props, 'class', 'size', 'isActive', 'value')
 </script>
 
 <template>
   <PaginationListItem
     data-slot="pagination-item"
+    :value="value"
     v-bind="delegatedProps"
     :class="cn(
       buttonVariants({

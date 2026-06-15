@@ -84,6 +84,9 @@ catalogs:
     happy-dom:
       specifier: ^20.9.0
       version: 20.9.0
+    is-ci:
+      specifier: ^4.1.0
+      version: 4.1.0
     lefthook:
       specifier: ^2.1.8
       version: 2.1.8
@@ -182,6 +185,9 @@ importers:
       happy-dom:
         specifier: 'catalog:'
         version: 20.9.0
+      is-ci:
+        specifier: 'catalog:'
+        version: 4.1.0
       lefthook:
         specifier: 'catalog:'
         version: 2.1.8
@@ -415,6 +421,9 @@ importers:
 
   packages/effects/layouts:
     dependencies:
+      '@ms-core/shadcn-ui':
+        specifier: workspace:*
+        version: link:../../@core/ui-kit/shadcn-ui
       '@ms/preferences':
         specifier: workspace:*
         version: link:../../preferences
@@ -3168,6 +3177,10 @@ packages:
   is-callable@1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
     engines: {node: '>= 0.4'}
+
+  is-ci@4.1.0:
+    resolution: {integrity: sha512-Ab9bQDQ11lWootZUI5qxgN2ZXwxNI5hTwnsvOc1wyxQ7zQ8OkEDw79mI0+9jI3x432NfwbVRru+3noJfXF6lSQ==}
+    hasBin: true
 
   is-core-module@2.16.2:
     resolution: {integrity: sha512-evOr8xfXKxE6qSR0hSXL2r3sd7ALj8+7jQEUvPYcm5sgZFdJ+AYzT6yNmJenvIYQBgIGwfwz08sL8zoL7yq2BA==}
@@ -7797,6 +7810,10 @@ snapshots:
       builtin-modules: 5.2.0
 
   is-callable@1.2.7: {}
+
+  is-ci@4.1.0:
+    dependencies:
+      ci-info: 4.4.0
 
   is-core-module@2.16.2:
     dependencies:

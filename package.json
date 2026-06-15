@@ -25,6 +25,7 @@
     "@types/node": "catalog:",
     "eslint": "catalog:",
     "happy-dom": "catalog:",
+    "is-ci": "catalog:",
     "lefthook": "catalog:",
     "tailwindcss": "catalog:",
     "tsdown": "catalog:",
