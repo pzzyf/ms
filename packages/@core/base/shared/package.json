@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@vue/shared": "catalog:",
-    "nprogress": "catalog:"
+    "clsx": "catalog:",
+    "nprogress": "catalog:",
+    "tailwind-merge": "catalog:"
   },
   "devDependencies": {
     "@types/nprogress": "catalog:"

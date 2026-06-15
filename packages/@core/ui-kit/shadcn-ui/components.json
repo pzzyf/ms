@@ -9,7 +9,9 @@
     "cssVariables": true
   },
   "aliases": {
-    "components": "@ms-core/shadcn-ui/components",
+    "components": "@ms-core/shadcn-ui",
+    "hooks": "@ms-core/shadcn-ui/hooks",
+    "composables": "@ms-core/shadcn-ui/composables",
     "utils": "@ms-core/shared/utils"
   }
 }
