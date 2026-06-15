@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PrimitiveProps } from 'reka-ui'
-import { MinusIcon } from '@radix-icons/vue'
+import { MinusIcon } from '@lucide/vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 
 const props = defineProps<PrimitiveProps>()

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { HTMLAttributes } from 'vue'
+import { ChevronRightIcon } from '@lucide/vue'
 import { cn } from '@ms-core/shared/utils'
-import { ChevronRightIcon } from '@radix-icons/vue'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']

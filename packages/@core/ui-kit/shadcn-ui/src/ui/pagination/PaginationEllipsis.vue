@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PaginationEllipsisProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
+import { EllipsisIcon } from '@lucide/vue'
 import { cn } from '@ms-core/shared/utils'
-import { DotsHorizontalIcon } from '@radix-icons/vue'
 import { reactiveOmit } from '@vueuse/core'
 import { PaginationEllipsis } from 'reka-ui'
 
@@ -18,7 +18,7 @@ const delegatedProps = reactiveOmit(props, 'class')
     :class="cn('flex size-9 items-center justify-center', props.class)"
   >
     <slot>
-      <DotsHorizontalIcon class="size-4" />
+      <EllipsisIcon class="size-4" />
       <span class="sr-only">More pages</span>
     </slot>
   </PaginationEllipsis>

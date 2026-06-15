@@ -2,9 +2,9 @@
 import type { ButtonVariants } from '@ms-core/shadcn-ui/ui/button'
 import type { PaginationPrevProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
+import { ChevronLeftIcon } from '@lucide/vue'
 import { buttonVariants } from '@ms-core/shadcn-ui/ui/button'
 import { cn } from '@ms-core/shared/utils'
-import { ChevronLeftIcon } from '@radix-icons/vue'
 import { reactiveOmit } from '@vueuse/core'
 import { PaginationPrev, useForwardProps } from 'reka-ui'
 

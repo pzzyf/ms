@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { DropdownMenuSubTriggerProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
+import { ChevronRightIcon } from '@lucide/vue'
 import { cn } from '@ms-core/shared/utils'
-import { ChevronRightIcon } from '@radix-icons/vue'
 import { reactiveOmit } from '@vueuse/core'
 import {
   DropdownMenuSubTrigger,

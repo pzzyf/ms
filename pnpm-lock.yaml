@@ -21,15 +21,15 @@ catalogs:
     '@internationalized/date':
       specifier: ^3.12.2
       version: 3.12.2
+    '@lucide/vue':
+      specifier: ^1.18.0
+      version: 1.18.0
     '@manypkg/get-packages':
       specifier: ^3.1.0
       version: 3.1.0
     '@pnpm/workspace.read-manifest':
       specifier: ^1000.3.1
       version: 1000.3.1
-    '@radix-icons/vue':
-      specifier: ^1.0.0
-      version: 1.0.0
     '@tailwindcss/vite':
       specifier: ^4.3.0
       version: 4.3.0
@@ -404,12 +404,12 @@ importers:
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.12.2
+      '@lucide/vue':
+        specifier: 'catalog:'
+        version: 1.18.0(vue@3.5.34(typescript@6.0.3))
       '@ms-core/shared':
         specifier: workspace:*
         version: link:../../base/shared
-      '@radix-icons/vue':
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.34(typescript@6.0.3))
       '@tanstack/vue-table':
         specifier: 'catalog:'
         version: 8.21.3(vue@3.5.34(typescript@6.0.3))
@@ -1396,6 +1396,11 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
 
+  '@lucide/vue@1.18.0':
+    resolution: {integrity: sha512-DmnUpDB85PlMZ+ofjZLcKq3JoJnaD1bk7SIj9xwUvqerfNqA6hCLa0/m3gIybH6rdrErABbqvTD8yYJdNqiZ3Q==}
+    peerDependencies:
+      vue: '>=3.0.1'
+
   '@manypkg/find-root@3.1.0':
     resolution: {integrity: sha512-BcSqCyKhBVZ5YkSzOiheMCV41kqAFptW6xGqYSTjkVTl9XQpr+pqHhwgGCOHQtjDCv7Is6EFyA14Sm5GVbVABA==}
     engines: {node: '>=20.0.0'}
@@ -1558,11 +1563,6 @@ packages:
 
   '@quansync/fs@1.0.0':
     resolution: {integrity: sha512-4TJ3DFtlf1L5LDMaM6CanJ/0lckGNtJcMjQ1NAV6zDmA0tEHKZtxNKin8EgPaVX1YzljbxckyT2tJrpQKAtngQ==}
-
-  '@radix-icons/vue@1.0.0':
-    resolution: {integrity: sha512-gKWWk9tTK/laDRRNe5KLLR8A0qUwx4q4+DN8Fq48hJ904u78R82ayAO3TrxbNLgyn2D0h6rRiGdLzQWj7rPcvA==}
-    peerDependencies:
-      vue: '>= 3'
 
   '@rolldown/binding-android-arm64@1.0.1':
     resolution: {integrity: sha512-fJI3I0r3C3Oj/zdBCpaCmBRZYf07xpaq4yCfDDoSFm+beWNzbIl26puW8RraUdugoJw/95zerNOn6jasAhzSmg==}
@@ -6675,6 +6675,10 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
+  '@lucide/vue@1.18.0(vue@3.5.34(typescript@6.0.3))':
+    dependencies:
+      vue: 3.5.34(typescript@6.0.3)
+
   '@manypkg/find-root@3.1.0':
     dependencies:
       '@manypkg/tools': 2.1.1
@@ -6803,10 +6807,6 @@ snapshots:
   '@quansync/fs@1.0.0':
     dependencies:
       quansync: 1.0.0
-
-  '@radix-icons/vue@1.0.0(vue@3.5.34(typescript@6.0.3))':
-    dependencies:
-      vue: 3.5.34(typescript@6.0.3)
 
   '@rolldown/binding-android-arm64@1.0.1':
     optional: true

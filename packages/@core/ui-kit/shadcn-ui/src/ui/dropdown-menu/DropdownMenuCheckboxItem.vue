@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { DropdownMenuCheckboxItemEmits, DropdownMenuCheckboxItemProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
+import { CheckIcon } from '@lucide/vue'
 import { cn } from '@ms-core/shared/utils'
-import { CheckIcon } from '@radix-icons/vue'
 import { reactiveOmit } from '@vueuse/core'
 import {
   DropdownMenuCheckboxItem,

@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@internationalized/date": "catalog:",
+    "@lucide/vue": "catalog:",
     "@ms-core/shared": "workspace:*",
-    "@radix-icons/vue": "catalog:",
     "@tanstack/vue-table": "catalog:",
     "@unovis/vue": "catalog:",
     "@vee-validate/zod": "catalog:",
