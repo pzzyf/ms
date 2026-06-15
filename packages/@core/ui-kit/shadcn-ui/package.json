@@ -12,18 +12,10 @@
     "@internationalized/date": "catalog:",
     "@lucide/vue": "catalog:",
     "@ms-core/shared": "workspace:*",
-    "@tanstack/vue-table": "catalog:",
-    "@unovis/vue": "catalog:",
-    "@vee-validate/zod": "catalog:",
     "@vueuse/core": "catalog:",
     "class-variance-authority": "catalog:",
-    "embla-carousel-vue": "catalog:",
     "reka-ui": "catalog:",
-    "vaul-vue": "catalog:",
     "vee-validate": "catalog:",
-    "vue": "catalog:",
-    "vue-input-otp": "catalog:",
-    "vue-sonner": "catalog:",
-    "zod": "catalog:"
+    "vue": "catalog:"
   }
 }
