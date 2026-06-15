@@ -11,7 +11,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   toolbar: true,
-  toolbarList: () => ['color', 'language', 'layout', 'theme'],
+  toolbarList: () => ['layout'],
 })
 </script>
 

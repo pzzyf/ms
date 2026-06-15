@@ -6,6 +6,11 @@
       "types": "./src/index.ts",
       "development": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./ui/*": {
+      "types": "./src/ui/*/index.ts",
+      "development": "./src/ui/*/index.ts",
+      "default": "./src/ui/*/index.ts"
     }
   },
   "dependencies": {
