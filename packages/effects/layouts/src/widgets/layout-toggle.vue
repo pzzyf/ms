@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MsDropdownRadioMenu } from '@ms-core/shadcn-ui'
+import { MsDropdownRadioMenu, MsIconButton } from '@ms-core/shadcn-ui'
 
 defineOptions({
   name: 'AuthenticationLayoutToggle',
@@ -7,5 +7,7 @@ defineOptions({
 </script>
 
 <template>
-  <MsDropdownRadioMenu />
+  <MsDropdownRadioMenu>
+    <MsIconButton />
+  </MsDropdownRadioMenu>
 </template>

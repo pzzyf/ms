@@ -16,6 +16,7 @@
   "dependencies": {
     "@internationalized/date": "catalog:",
     "@lucide/vue": "catalog:",
+    "@ms-core/icons": "workspace:*",
     "@ms-core/shared": "workspace:*",
     "@vueuse/core": "catalog:",
     "class-variance-authority": "catalog:",
