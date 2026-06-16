@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ms-core/shadcn-ui": "workspace:*",
+    "@ms-core/typings": "workspace:*",
     "@ms/icons": "workspace:*",
     "@ms/preferences": "workspace:*",
     "vue": "catalog:",

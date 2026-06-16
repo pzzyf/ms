@@ -13,6 +13,7 @@
     - app
   - 支线
     - ~~preference~~
+      - updatePreferences
     - ~~tailwindcss~~
     - lint/format
     - theme
