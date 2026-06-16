@@ -5,4 +5,6 @@ export const {
   initPreferences,
 } = preferencesManager
 
+export * from './use-preferences'
+
 export const preferences = getPreferences()

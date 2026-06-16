@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { MsDropdownRadioMenu, MsIconButton } from '@ms-core/shadcn-ui'
 import { InspectionPanel, PanelLeft, PanelRight } from '@ms/icons'
-import { preferences } from '@ms/preferences'
-import { computed } from 'vue'
+import { usePreferences } from '@ms/preferences'
 
 defineOptions({
   name: 'AuthenticationLayoutToggle',
 })
 
-const authPanelRight = computed(() => preferences.app.authPageLayout === 'panel-right')
-const authPanelLeft = computed(() => preferences.app.authPageLayout === 'panel-left')
-const authPanelCenter = computed(() => preferences.app.authPageLayout === 'panel-center')
+const { authPanelRight, authPanelLeft, authPanelCenter } = usePreferences()
 </script>
 
 <template>
