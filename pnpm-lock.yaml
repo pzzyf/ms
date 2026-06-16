@@ -433,6 +433,9 @@ importers:
       '@ms-core/shadcn-ui':
         specifier: workspace:*
         version: link:../../@core/ui-kit/shadcn-ui
+      '@ms/icons':
+        specifier: workspace:*
+        version: link:../../icons
       '@ms/preferences':
         specifier: workspace:*
         version: link:../../preferences
@@ -442,6 +445,12 @@ importers:
       vue-router:
         specifier: 'catalog:'
         version: 5.1.0(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.34(typescript@6.0.3)))(vite@8.0.13(@types/node@25.9.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))(vue@3.5.34(typescript@6.0.3))
+
+  packages/icons:
+    dependencies:
+      '@ms-core/icons':
+        specifier: workspace:*
+        version: link:../@core/base/icons
 
   packages/preferences:
     dependencies:
