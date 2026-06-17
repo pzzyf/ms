@@ -13,7 +13,9 @@
     - app
   - 支线
     - ~~preference~~
-      - updatePreferences
+      - ~~updatePreferences~~
     - ~~tailwindcss~~
     - lint/format
     - theme
+    - skills
+    - auth/login

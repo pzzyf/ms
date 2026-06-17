@@ -1,7 +1,7 @@
 const defaultPreferences = {
   app: {
     accessMode: 'frontend',
-    authPageLayout: 'panel-right',
+    authPageLayout: 'panel-center',
     checkUpdatesInterval: 1,
     colorGrayMode: false,
     colorWeakMode: false,
