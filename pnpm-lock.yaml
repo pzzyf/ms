@@ -213,29 +213,29 @@ importers:
         specifier: 'catalog:'
         version: 3.5.34(typescript@6.0.3)
 
-  app:
+  apps/fe:
     dependencies:
       '@ms/common-ui':
         specifier: workspace:*
-        version: link:../packages/effects/common-ui
+        version: link:../../packages/effects/common-ui
       '@ms/constants':
         specifier: workspace:*
-        version: link:../packages/constants
+        version: link:../../packages/constants
       '@ms/layouts':
         specifier: workspace:*
-        version: link:../packages/effects/layouts
+        version: link:../../packages/effects/layouts
       '@ms/preferences':
         specifier: workspace:*
-        version: link:../packages/preferences
+        version: link:../../packages/preferences
       '@ms/stores':
         specifier: workspace:*
-        version: link:../packages/stores
+        version: link:../../packages/stores
       '@ms/styles':
         specifier: workspace:*
-        version: link:../packages/styles
+        version: link:../../packages/styles
       '@ms/utils':
         specifier: workspace:*
-        version: link:../packages/utils
+        version: link:../../packages/utils
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
         version: 6.0.6(vite@8.0.13(@types/node@25.9.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))(vue@3.5.34(typescript@6.0.3))

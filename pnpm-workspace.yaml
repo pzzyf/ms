@@ -1,7 +1,7 @@
 publicHoistPattern:
   - '@commitlint/*'
 packages:
-  - app
+  - apps/*
   - internal/*
   - internal/lint-configs/*
   - scripts/*

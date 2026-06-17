@@ -3,7 +3,7 @@ import { initStores } from '@ms/stores'
 import { createApp } from 'vue'
 
 import App from './App.vue'
-import { router } from './router'
+import { router } from './router/index.js'
 import '@ms/styles'
 
 async function bootstrap(namespace: string) {
