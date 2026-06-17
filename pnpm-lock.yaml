@@ -72,6 +72,9 @@ catalogs:
     dayjs:
       specifier: ^1.11.21
       version: 1.11.21
+    defu:
+      specifier: ^6.1.7
+      version: 6.1.7
     dotenv:
       specifier: ^17.4.2
       version: 17.4.2
@@ -370,6 +373,9 @@ importers:
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
+      defu:
+        specifier: 'catalog:'
+        version: 6.1.7
       nprogress:
         specifier: 'catalog:'
         version: 0.2.0
@@ -385,6 +391,9 @@ importers:
 
   packages/@core/preferences:
     dependencies:
+      '@ms-core/shared':
+        specifier: workspace:*
+        version: link:../base/shared
       vue:
         specifier: 'catalog:'
         version: 3.5.34(typescript@6.0.3)

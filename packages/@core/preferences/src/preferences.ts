@@ -1,4 +1,6 @@
-import { reactive, readonly } from 'vue'
+import { merge } from '@ms-core/shared/utils'
+
+import { markRaw, reactive, readonly } from 'vue'
 
 import { defaultPreferences } from './config'
 
@@ -23,6 +25,11 @@ class PreferenceManager {
    */
   getPreferences = () => {
     return readonly(this.state)
+  }
+
+  updatePreferences = (update: any) => {
+    const mergedState = merge({}, update, markRaw(this.state))
+    Object.assign(this.state, mergedState)
   }
 
   private async saveToCache(namespace: string) {

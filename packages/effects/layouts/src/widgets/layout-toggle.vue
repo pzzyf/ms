@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { MsDropdownMenuItem } from '@ms-core/shadcn-ui'
+import type { AuthPageLayoutType } from '@ms/types'
 // import type { AuthPageLayoutType } from '@ms-core/typings'
 import { MsDropdownRadioMenu, MsIconButton } from '@ms-core/shadcn-ui'
 import { InspectionPanel, PanelLeft, PanelRight } from '@ms/icons'
-import { preferences, usePreferences } from '@ms/preferences'
+import { preferences, updatePreferences, usePreferences } from '@ms/preferences'
 import { computed } from 'vue'
 
 defineOptions({
@@ -12,15 +13,15 @@ defineOptions({
 
 const { authPanelRight, authPanelLeft, authPanelCenter } = usePreferences()
 
-// function handleUpdate(value: string) {
-//   if (!value)
-//     return
-//   updatePreferences({
-//     app: {
-//       authPageLayout: value as AuthPageLayoutType,
-//     },
-//   })
-// }
+function handleUpdate(value: string | undefined): any {
+  if (!value)
+    return
+  updatePreferences({
+    app: {
+      authPageLayout: value as AuthPageLayoutType,
+    },
+  })
+}
 
 const menus = computed((): MsDropdownMenuItem[] => [
   {
@@ -42,7 +43,7 @@ const menus = computed((): MsDropdownMenuItem[] => [
 </script>
 
 <template>
-  <MsDropdownRadioMenu :menus="menus" :model-value="preferences.app.authPageLayout">
+  <MsDropdownRadioMenu :menus="menus" :model-value="preferences.app.authPageLayout" @update:model-value="handleUpdate">
     <MsIconButton>
       <PanelRight v-if="authPanelRight" class="size-4" />
       <PanelLeft v-if="authPanelLeft" class="size-4" />

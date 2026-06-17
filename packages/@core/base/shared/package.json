@@ -10,6 +10,7 @@
   "dependencies": {
     "@vue/shared": "catalog:",
     "clsx": "catalog:",
+    "defu": "catalog:",
     "nprogress": "catalog:",
     "tailwind-merge": "catalog:"
   },

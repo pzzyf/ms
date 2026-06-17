@@ -33,6 +33,7 @@ catalog:
   commitlint-plugin-function-rules: ^5.0.1
   consola: ^3.4.2
   dayjs: ^1.11.21
+  defu: ^6.1.7
   dotenv: ^17.4.2
   eslint: ^10.3.0
   execa: ^9.6.1

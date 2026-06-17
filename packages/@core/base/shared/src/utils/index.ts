@@ -1,4 +1,5 @@
 export * from './css'
 export * from './inference'
+export * from './merge'
 export * from './nprogress'
 export * from './tree'
