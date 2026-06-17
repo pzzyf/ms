@@ -10,7 +10,8 @@
 - ~~vite-config注入loading~~
 - task
   - 主线
-    - app
+    - fe
+    - be
   - 支线
     - ~~preference~~
       - ~~updatePreferences~~
@@ -18,4 +19,5 @@
     - lint/format
     - theme
     - skills
-    - auth/login
+    - auth/login (ing)
+      - form
