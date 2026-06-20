@@ -12,6 +12,7 @@
     }
   },
   "dependencies": {
+    "@ms-core/form-ui": "workspace:*",
     "@ms-core/shared": "workspace:*",
     "vue": "catalog:"
   }

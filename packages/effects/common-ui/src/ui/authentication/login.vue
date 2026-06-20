@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { AuthenticationProps } from './types'
+import { useMsForm } from '@ms-core/form-ui'
+
 import Title from './auth-title.vue'
 
 interface Props extends AuthenticationProps {}
@@ -10,6 +12,8 @@ withDefaults(defineProps<Props>(), {
 })
 
 function handleSubmit() {}
+
+const [Form] = useMsForm()
 </script>
 
 <template>
