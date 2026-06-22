@@ -10,6 +10,7 @@
   "dependencies": {
     "@ms-core/shadcn-ui": "workspace:*",
     "@ms-core/shared": "workspace:*",
+    "@ms-core/typings": "workspace:*",
     "vee-validate": "catalog:",
     "vue": "catalog:"
   }

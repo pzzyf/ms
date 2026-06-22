@@ -5,9 +5,14 @@
     "./utils": {
       "types": "./src/utils/index.ts",
       "default": "./src/utils/index.ts"
+    },
+    "./store": {
+      "types": "./src/store.ts",
+      "default": "./src/store.ts"
     }
   },
   "dependencies": {
+    "@tanstack/vue-store": "catalog:",
     "@vue/shared": "catalog:",
     "clsx": "catalog:",
     "defu": "catalog:",

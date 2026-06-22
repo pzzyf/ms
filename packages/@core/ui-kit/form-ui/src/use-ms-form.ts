@@ -1,10 +1,23 @@
-import { defineComponent, h } from 'vue'
+import type { BaseFormComponentType, ExtendedFormApi, MsFormProps } from './type.js'
+import { useSelector } from '@ms-core/shared/store'
+import { defineComponent, h, isReactive, watch } from 'vue'
+import { FormApi } from './form-api.js'
 import MsUseForm from './ms-use-form.vue'
 
-function useMsForm() {
+function useMsForm<
+  T extends BaseFormComponentType = BaseFormComponentType,
+>(options: MsFormProps<T>) {
+  const IS_REACTIVE = isReactive(options)
+  const api = new FormApi(options)
+  const extendedApi: ExtendedFormApi = api as never
+  extendedApi.useStore = (selector) => {
+    return useSelector(api.store, selector)
+  }
+
   const Form = defineComponent(
-    (props, { attrs, slots }) => {
-      return () => h(MsUseForm, { ...props, ...attrs }, slots)
+    (props: MsFormProps, { attrs, slots }) => {
+      return () =>
+        h(MsUseForm, { ...props, ...attrs, formApi: extendedApi }, slots)
     },
     {
       name: 'MsUseForm',
@@ -12,7 +25,17 @@ function useMsForm() {
     },
   )
 
-  return [Form]
+  // Add reactivity support
+  if (IS_REACTIVE) {
+    watch(
+      () => options.schema,
+      () => {
+      },
+      { immediate: true },
+    )
+  }
+
+  return [Form, extendedApi]
 }
 
 export { useMsForm }

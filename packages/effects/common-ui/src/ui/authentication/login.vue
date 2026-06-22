@@ -13,7 +13,7 @@ withDefaults(defineProps<Props>(), {
 
 function handleSubmit() {}
 
-const [Form] = useMsForm()
+const [Form] = useMsForm({})
 </script>
 
 <template>
