@@ -400,6 +400,15 @@ importers:
 
   packages/@core/ui-kit/form-ui:
     dependencies:
+      '@ms-core/shadcn-ui':
+        specifier: workspace:*
+        version: link:../shadcn-ui
+      '@ms-core/shared':
+        specifier: workspace:*
+        version: link:../../base/shared
+      vee-validate:
+        specifier: 'catalog:'
+        version: 4.15.1(vue@3.5.34(typescript@6.0.3))
       vue:
         specifier: 'catalog:'
         version: 3.5.34(typescript@6.0.3)
@@ -418,6 +427,9 @@ importers:
       '@ms-core/shared':
         specifier: workspace:*
         version: link:../../base/shared
+      '@ms-core/typings':
+        specifier: workspace:*
+        version: link:../../base/typings
       '@vueuse/core':
         specifier: 'catalog:'
         version: 14.3.0(vue@3.5.34(typescript@6.0.3))

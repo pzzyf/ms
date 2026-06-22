@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import { Form } from './form-render'
+
 defineOptions({
   name: 'MsUseForm',
 })
 </script>
 
 <template>
-  <div>
-    123
-  </div>
+  <Form />
 </template>
 
 <style scoped>
