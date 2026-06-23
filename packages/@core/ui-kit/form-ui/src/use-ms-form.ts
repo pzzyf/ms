@@ -1,6 +1,6 @@
 import type { BaseFormComponentType, ExtendedFormApi, MsFormProps } from './type.js'
 import { useSelector } from '@ms-core/shared/store'
-import { defineComponent, h, isReactive, watch } from 'vue'
+import { defineComponent, h, isReactive, onBeforeUnmount, watch } from 'vue'
 import { FormApi } from './form-api.js'
 import MsUseForm from './ms-use-form.vue'
 
@@ -16,6 +16,10 @@ function useMsForm<
 
   const Form = defineComponent(
     (props: MsFormProps, { attrs, slots }) => {
+      onBeforeUnmount(() => {
+        api.unmount()
+      })
+      api.setState({ ...props, ...attrs })
       return () =>
         h(MsUseForm, { ...props, ...attrs, formApi: extendedApi }, slots)
     },

@@ -1,6 +1,8 @@
+import type { Recordable } from '@ms-core/typings'
 import type { FormActions, MsFormProps } from './type'
 
 import { Store } from '@ms-core/shared/store'
+import { bindMethods, isFunction, mergeWithArrayOverride, StateHandler } from '@ms-core/shared/utils'
 
 function getDefaultState(): MsFormProps {
   return {
@@ -28,9 +30,12 @@ function getDefaultState(): MsFormProps {
 
 class FormApi {
   public form = {} as FormActions
+  isMounted = false
   public state: null | MsFormProps = null
+  stateHandler: StateHandler
   public store: Store<MsFormProps>
   private prevState: null | MsFormProps = null
+  private latestSubmissionValues: null | Recordable<any> = null
 
   constructor(options: MsFormProps = {}) {
     const storeState = { ...options }
@@ -49,6 +54,8 @@ class FormApi {
     })
 
     this.state = this.store.state
+    this.stateHandler = new StateHandler()
+    bindMethods(this)
   }
 
   private updateState() {
@@ -66,6 +73,29 @@ class FormApi {
         this.form?.setFieldValue?.(schema.fieldName, undefined)
       }
     }
+  }
+
+  setState(
+    stateOrFn:
+      | ((prev: MsFormProps) => Partial<MsFormProps>)
+      | Partial<MsFormProps>,
+  ) {
+    if (isFunction(stateOrFn)) {
+      this.store.setState((prev) => {
+        return mergeWithArrayOverride(stateOrFn(prev), prev)
+      })
+    }
+    else {
+      this.store.setState(prev => mergeWithArrayOverride(stateOrFn, prev))
+    }
+  }
+
+  unmount() {
+    this.form?.resetForm?.()
+    // this.state = null;
+    this.latestSubmissionValues = null
+    this.isMounted = false
+    this.stateHandler.reset()
   }
 }
 
