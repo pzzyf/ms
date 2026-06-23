@@ -1,5 +1,5 @@
 import type { Recordable } from '@ms-core/typings'
-import type { FormActions, MsFormProps } from './type'
+import type { FormActions, MsFormProps } from './types'
 
 import { Store } from '@ms-core/shared/store'
 import { bindMethods, isFunction, mergeWithArrayOverride, StateHandler } from '@ms-core/shared/utils'
@@ -88,6 +88,10 @@ class FormApi {
     else {
       this.store.setState(prev => mergeWithArrayOverride(stateOrFn, prev))
     }
+  }
+
+  getLatestSubmissionValues() {
+    return this.latestSubmissionValues || {}
   }
 
   unmount() {

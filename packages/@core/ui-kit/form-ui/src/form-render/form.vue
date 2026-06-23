@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { GenericObject } from 'vee-validate'
-import type { FormRenderProps } from '../type'
+import type { FormRenderProps } from '../types'
 import { Form } from '@ms-core/shadcn-ui'
 import { cn } from '@ms-core/shared/utils'
 import { computed } from 'vue'

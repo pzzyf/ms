@@ -156,6 +156,9 @@ catalogs:
     vue-tsc:
       specifier: ^3.2.8
       version: 3.2.9
+    zod:
+      specifier: ^4.4.3
+      version: 4.4.3
 
 importers:
 
@@ -236,6 +239,9 @@ importers:
       '@ms/styles':
         specifier: workspace:*
         version: link:../../packages/styles
+      '@ms/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@ms/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -421,6 +427,9 @@ importers:
       vue:
         specifier: 'catalog:'
         version: 3.5.34(typescript@6.0.3)
+      zod:
+        specifier: 'catalog:'
+        version: 4.4.3
 
   packages/@core/ui-kit/shadcn-ui:
     dependencies:
@@ -4972,6 +4981,9 @@ packages:
   yoctocolors@2.1.2:
     resolution: {integrity: sha512-CzhO+pFNo8ajLM2d2IW/R93ipy99LWjtwblvC1RsoSUMZgyLbYFr221TnSNT7GjGdYui6P459mw9JH/g/zW2ug==}
     engines: {node: '>=18'}
+
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -9791,5 +9803,7 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yoctocolors@2.1.2: {}
+
+  zod@4.4.3: {}
 
   zwitch@2.0.4: {}

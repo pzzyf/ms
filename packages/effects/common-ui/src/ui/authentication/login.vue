@@ -1,19 +1,31 @@
 <script setup lang="ts">
+import type { MsFormSchema } from '@ms-core/form-ui'
 import type { AuthenticationProps } from './types'
 import { useMsForm } from '@ms-core/form-ui'
 
+import { computed, reactive } from 'vue'
 import Title from './auth-title.vue'
 
-interface Props extends AuthenticationProps {}
+interface Props extends AuthenticationProps {
+  formSchema?: MsFormSchema[]
+}
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   title: '',
   subTitle: '',
+  formSchema: () => [],
 })
 
 function handleSubmit() {}
 
-const [Form] = useMsForm({})
+const [Form] = useMsForm(reactive({
+  commonConfig: {
+    hideLabel: true,
+    hideRequiredMark: true,
+  },
+  schema: computed(() => props.formSchema),
+  showDefaultActions: false,
+}))
 </script>
 
 <template>

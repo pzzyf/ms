@@ -20,6 +20,7 @@
     "@ms/preferences": "workspace:*",
     "@ms/stores": "workspace:*",
     "@ms/styles": "workspace:*",
+    "@ms/types": "workspace:*",
     "@ms/utils": "workspace:*",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/tsconfig": "catalog:",

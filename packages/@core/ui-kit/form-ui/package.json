@@ -12,6 +12,7 @@
     "@ms-core/shared": "workspace:*",
     "@ms-core/typings": "workspace:*",
     "vee-validate": "catalog:",
-    "vue": "catalog:"
+    "vue": "catalog:",
+    "zod": "catalog:"
   }
 }

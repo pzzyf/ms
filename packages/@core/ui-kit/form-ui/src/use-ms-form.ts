@@ -1,4 +1,4 @@
-import type { BaseFormComponentType, ExtendedFormApi, MsFormProps } from './type.js'
+import type { BaseFormComponentType, ExtendedFormApi, MsFormProps } from './types'
 import { useSelector } from '@ms-core/shared/store'
 import { defineComponent, h, isReactive, onBeforeUnmount, watch } from 'vue'
 import { FormApi } from './form-api.js'
