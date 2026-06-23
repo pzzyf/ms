@@ -1,5 +1,6 @@
 {
   "name": "@ms-core/shared",
+  "type": "module",
   "version": "1.0.0",
   "exports": {
     "./utils": {
@@ -9,6 +10,10 @@
     "./store": {
       "types": "./src/store.ts",
       "default": "./src/store.ts"
+    },
+    "./global-state": {
+      "types": "./src/global-state.ts",
+      "default": "./src/global-state.ts"
     }
   },
   "dependencies": {
@@ -16,6 +21,7 @@
     "@vue/shared": "catalog:",
     "clsx": "catalog:",
     "defu": "catalog:",
+    "es-toolkit": "catalog:",
     "nprogress": "catalog:",
     "tailwind-merge": "catalog:"
   },

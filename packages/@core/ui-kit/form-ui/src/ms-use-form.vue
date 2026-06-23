@@ -1,7 +1,12 @@
 <!-- eslint-disable no-console -->
 <script setup lang="ts">
 import type { ExtendedFormApi, MsFormProps } from './types'
+import { useForwardPriorityValues } from '@ms-core/composables'
 import { Form } from './form-render'
+
+import {
+  useFormInitial,
+} from './use-form-context'
 
 interface Props extends MsFormProps {
   formApi?: ExtendedFormApi
@@ -15,11 +20,13 @@ const props = defineProps<Props>()
 
 const state = props.formApi?.useStore?.()
 
-console.log(state)
+const forward = useForwardPriorityValues(props, state)
+
+const { form } = useFormInitial(forward)
 </script>
 
 <template>
-  <Form />
+  <Form v-bind="forward" :collapsed="state?.collapsed" :form="form" />
 </template>
 
 <style scoped>

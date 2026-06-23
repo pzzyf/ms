@@ -1,5 +1,6 @@
 export * from './button'
 export * from './dropdown-menu'
 export * from './render-content'
+export * from './select'
 export * from './spinner'
 export * from './tooltip'

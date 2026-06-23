@@ -36,6 +36,7 @@ catalog:
   dayjs: ^1.11.21
   defu: ^6.1.7
   dotenv: ^17.4.2
+  es-toolkit: ^1.48.1
   eslint: ^10.3.0
   execa: ^9.6.1
   happy-dom: ^20.9.0
@@ -62,3 +63,4 @@ catalog:
   vue-router: ^5.1.0
   vue-tsc: ^3.2.8
   zod: ^4.4.3
+  zod-defaults: ^0.2.3

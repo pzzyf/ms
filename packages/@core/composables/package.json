@@ -1,0 +1,11 @@
+{
+  "name": "@ms-core/composables",
+  "version": "1.0.0",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@ms-core/shared": "workspace:*",
+    "vue": "catalog:"
+  }
+}

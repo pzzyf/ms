@@ -68,7 +68,7 @@ const renderContentKey = computed(() => {
 </script>
 
 <template>
-  <FormField v-if="!hide" v-slot="slotProps" :name="fieldName">
+  <FormField v-slot="slotProps" :name="fieldName">
     <FormItem
       :class="{
         'form-valid-error': isInValid,

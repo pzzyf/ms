@@ -2,7 +2,7 @@
 import type { MsFormSchema } from '@ms/common-ui'
 import type { BasicOption } from '@ms/types'
 import { AuthenticationLogin, z } from '@ms/common-ui'
-import { computed } from 'vue'
+import { computed, markRaw } from 'vue'
 
 const MOCK_USER_OPTIONS: BasicOption[] = [
   {
@@ -29,11 +29,13 @@ const formSchema = computed((): MsFormSchema[] => {
       },
       fieldName: 'selectAccount',
       label: '快速选择账号',
-      rules: z
-        .string()
-        .min(1, { message: '快速选择账号' })
-        .optional()
-        .default('vben'),
+      rules: markRaw(
+        z
+          .string()
+          .min(1, { message: '快速选择账号' })
+          .optional()
+          .default('vben'),
+      ),
     },
   ]
 })

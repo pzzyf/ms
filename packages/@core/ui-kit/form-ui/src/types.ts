@@ -2,6 +2,7 @@ import type { MsButtonProps } from '@ms-core/shadcn-ui'
 import type { ClassType, MaybeComputedRef } from '@ms-core/typings'
 import type { FieldOptions, FormContext, GenericObject } from 'vee-validate'
 import type { Component, HtmlHTMLAttributes, Ref } from 'vue'
+import type { ZodTypeAny } from 'zod'
 import type { FormApi } from './form-api'
 
 export type FormLayout = 'horizontal' | 'inline' | 'vertical'
@@ -336,4 +337,38 @@ export interface MsFormProps<
    * @default false
    */
   submitOnEnter?: boolean
+}
+
+export interface FormShape {
+  /** 默认值 */
+  default?: any
+  /** 字段名 */
+  fieldName: string
+  /** 是否必填 */
+  required?: boolean
+  rules?: ZodTypeAny
+}
+
+export interface MsFormAdapterOptions<
+  T extends BaseFormComponentType = BaseFormComponentType,
+> {
+  config?: {
+    baseModelPropName?: string
+    disabledOnChangeListener?: boolean
+    disabledOnInputListener?: boolean
+    emptyStateValue?: null | undefined
+    modelPropNameMap?: Partial<Record<T, string>>
+  }
+  defineRules?: {
+    required?: (
+      value: any,
+      params: any,
+      ctx: Record<string, any>,
+    ) => boolean | string
+    selectRequired?: (
+      value: any,
+      params: any,
+      ctx: Record<string, any>,
+    ) => boolean | string
+  }
 }

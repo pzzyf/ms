@@ -1,3 +1,5 @@
+export { setupMsForm } from './config'
+
 export type {
   BaseFormComponentType,
   ExtendedFormApi,
