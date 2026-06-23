@@ -17,7 +17,7 @@ type ExtendFormProps = MsFormProps & { formApi?: ExtendedFormApi }
 
 export const [injectFormProps, provideFormProps]
   = createContext<[ComputedRef<ExtendFormProps> | ExtendFormProps, FormActions]>(
-    'VbenFormProps',
+    'MsFormProps',
   )
 
 export const [injectComponentRefMap, provideComponentRefMap]

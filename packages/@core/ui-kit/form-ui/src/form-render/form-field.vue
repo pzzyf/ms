@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FormSchema, MaybeComponentProps } from '../types'
-import { FormField, FormItem, FormLabel, FormMessage, MsRenderContent, MsTooltip } from '@ms-core/shadcn-ui'
-import { cn, isFunction, isString } from '@ms-core/shared/utils'
+import { FormField, FormItem, FormLabel, FormMessage, MsRenderContent, MsSelect, MsTooltip } from '@ms-core/shadcn-ui'
+import { cn, isFunction } from '@ms-core/shared/utils'
 import { useFieldError } from 'vee-validate'
 import { computed } from 'vue'
 
@@ -15,7 +15,6 @@ const {
   labelClass,
   labelWidth,
   disabled,
-  component,
   renderComponentContent,
 } = defineProps<
   Props & {
@@ -47,12 +46,6 @@ const isInValid = computed(() => errors.value?.length > 0)
 
 const shouldDisabled = computed(() => {
   return disabled
-})
-
-const FieldComponent = computed(() => {
-  const finalComponent = isString(component)
-
-  return finalComponent
 })
 
 const customContentRender = computed(() => {
@@ -107,7 +100,7 @@ const renderContentKey = computed(() => {
               }"
             >
               <component
-                :is="FieldComponent"
+                :is="MsSelect"
                 :class="{
                   'border-destructive hover:border-destructive/80 focus:border-destructive focus:shadow-[0_0_0_2px_rgba(255,38,5,0.06)]':
                     isInValid,

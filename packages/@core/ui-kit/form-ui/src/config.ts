@@ -7,24 +7,28 @@ import type {
 } from './types'
 
 import {
+  MsButton,
   MsSelect,
 } from '@ms-core/shadcn-ui'
 
 import { globalShareState } from '@ms-core/shared/global-state'
 import { defineRule } from 'vee-validate'
+import { h } from 'vue'
 
 const DEFAULT_MODEL_PROP_NAME = 'modelValue'
 
 export const DEFAULT_FORM_COMMON_CONFIG: FormCommonConfig = {}
 
 export const COMPONENT_MAP: Record<string, Component> = {
+  DefaultButton: h(MsButton, { size: 'sm', variant: 'outline' }),
+  PrimaryButton: h(MsButton, { size: 'sm', variant: 'default' }),
   MsSelect,
 }
 
 export const COMPONENT_BIND_EVENT_MAP: Partial<
   Record<BaseFormComponentType, string>
 > = {
-  VbenCheckbox: 'checked',
+  MsCheckbox: 'checked',
 }
 
 export function setupMsForm<

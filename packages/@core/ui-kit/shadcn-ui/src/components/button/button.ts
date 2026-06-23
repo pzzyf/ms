@@ -27,7 +27,7 @@ export type CustomRenderType = (() => Component | string) | string
 
 export type ValueType = boolean | number | string
 
-export interface VbenButtonGroupProps extends Pick<
+export interface MsButtonGroupProps extends Pick<
   MsButtonProps,
   'disabled'
 > {

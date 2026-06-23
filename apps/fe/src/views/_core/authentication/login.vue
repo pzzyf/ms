@@ -7,7 +7,7 @@ import { computed, markRaw } from 'vue'
 const MOCK_USER_OPTIONS: BasicOption[] = [
   {
     label: 'Super',
-    value: 'vben',
+    value: 'ms',
   },
   {
     label: 'Admin',
@@ -34,7 +34,7 @@ const formSchema = computed((): MsFormSchema[] => {
           .string()
           .min(1, { message: '快速选择账号' })
           .optional()
-          .default('vben'),
+          .default('ms'),
       ),
     },
   ]
