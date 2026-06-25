@@ -22,5 +22,6 @@
     - auth/login (ing)
       - useform
         - form
-          - provide inject
+          - ~~provide inject~~
+            - props
         - api

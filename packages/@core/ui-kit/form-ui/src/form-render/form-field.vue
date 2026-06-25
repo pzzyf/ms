@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FormSchema, MaybeComponentProps } from '../types'
 import { FormField, FormItem, FormLabel, FormMessage, MsRenderContent, MsTooltip } from '@ms-core/shadcn-ui'
-import { cn, isFunction, isString } from '@ms-core/shared/utils'
+import { cn, isString } from '@ms-core/shared/utils'
 import { useFieldError } from 'vee-validate'
 import { computed } from 'vue'
 import { useFormContext } from './context'
@@ -10,14 +10,15 @@ interface Props extends FormSchema {}
 
 const {
   colon,
+  commonComponentProps,
   hide,
   label,
   fieldName,
   labelClass,
   labelWidth,
   disabled,
-  renderComponentContent,
   component,
+  componentProps,
 } = defineProps<
   Props & {
     commonComponentProps?: MaybeComponentProps
@@ -52,16 +53,21 @@ const shouldDisabled = computed(() => {
   return disabled
 })
 
-const customContentRender = computed(() => {
-  if (!isFunction(renderComponentContent)) {
-    return {}
+const computedProps = computed(() => {
+  return {
+    ...commonComponentProps,
+    ...componentProps,
   }
-  return {}
 })
 
-const renderContentKey = computed(() => {
-  return Object.keys(customContentRender.value)
-})
+function createComponentProps(slotProps: Record<string, any>) {
+  const binds = {
+    ...slotProps.componentField,
+    ...computedProps.value,
+  }
+
+  return binds
+}
 
 const FieldComponent = computed(() => {
   const finalComponent = isString(component)
@@ -120,20 +126,9 @@ const FieldComponent = computed(() => {
                   'border-destructive hover:border-destructive/80 focus:border-destructive focus:shadow-[0_0_0_2px_rgba(255,38,5,0.06)]':
                     isInValid,
                 }"
+                v-bind="createComponentProps(slotProps)"
                 :disabled="shouldDisabled"
-              >
-                <template
-                  v-for="name in renderContentKey"
-                  :key="name"
-                  #[name]="renderSlotProps"
-                >
-                  <MsRenderContent
-                    :content="123"
-                    v-bind="{ ...renderSlotProps, formContext: slotProps }"
-                  />
-                </template>
-                <!-- <slot></slot> -->
-              </component>
+              />
               <MsTooltip
                 v-if="isInValid"
                 :delay-duration="300"

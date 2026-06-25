@@ -25,6 +25,8 @@ const state = props.formApi?.useStore?.()
 
 const forward = useForwardPriorityValues(props, state)
 
+console.log(forward, 'forward')
+
 const { form } = useFormInitial(forward)
 </script>
 
