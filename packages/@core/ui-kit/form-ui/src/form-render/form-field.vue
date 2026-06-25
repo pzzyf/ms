@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { FormSchema, MaybeComponentProps } from '../types'
-import { FormField, FormItem, FormLabel, FormMessage, MsRenderContent, MsSelect, MsTooltip } from '@ms-core/shadcn-ui'
-import { cn, isFunction } from '@ms-core/shared/utils'
+import { FormField, FormItem, FormLabel, FormMessage, MsRenderContent, MsTooltip } from '@ms-core/shadcn-ui'
+import { cn, isFunction, isString } from '@ms-core/shared/utils'
 import { useFieldError } from 'vee-validate'
 import { computed } from 'vue'
+import { useFormContext } from './context'
 
 interface Props extends FormSchema {}
 
@@ -16,11 +17,14 @@ const {
   labelWidth,
   disabled,
   renderComponentContent,
+  component,
 } = defineProps<
   Props & {
     commonComponentProps?: MaybeComponentProps
   }
 >()
+
+const { componentMap } = useFormContext()
 
 const labelStyle = computed(() => {
   return labelClass?.includes('w-')
@@ -57,6 +61,17 @@ const customContentRender = computed(() => {
 
 const renderContentKey = computed(() => {
   return Object.keys(customContentRender.value)
+})
+
+const FieldComponent = computed(() => {
+  const finalComponent = isString(component)
+    ? componentMap.value[component]
+    : component
+  if (!finalComponent) {
+    // 组件未注册
+    console.warn(`Component ${component} is not registered`)
+  }
+  return finalComponent
 })
 </script>
 
@@ -100,7 +115,7 @@ const renderContentKey = computed(() => {
               }"
             >
               <component
-                :is="MsSelect"
+                :is="FieldComponent"
                 :class="{
                   'border-destructive hover:border-destructive/80 focus:border-destructive focus:shadow-[0_0_0_2px_rgba(255,38,5,0.06)]':
                     isInValid,

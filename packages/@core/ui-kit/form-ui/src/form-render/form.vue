@@ -3,8 +3,9 @@ import type { GenericObject } from 'vee-validate'
 import type { FormCommonConfig, FormRenderProps, FormSchema } from '../types'
 import { Form } from '@ms-core/shadcn-ui'
 import { cn, isFunction, mergeWithArrayOverride } from '@ms-core/shared/utils'
-
 import { computed } from 'vue'
+
+import { provideFormRenderProps } from './context'
 import FormField from './form-field.vue'
 
 interface Props extends FormRenderProps {}
@@ -21,6 +22,8 @@ const props = withDefaults(
 )
 
 const emits = defineEmits<{ submit: [event: any] }>()
+
+provideFormRenderProps(props)
 
 const wrapperClass = computed(() => {
   const cls = ['flex']

@@ -111,7 +111,7 @@ export interface FormRenderProps<
   /**
    * 组件集合
    */
-  componentMap?: Record<BaseFormComponentType, Component>
+  componentMap: Record<BaseFormComponentType, Component>
   /**
    * 表单字段映射到时间格式
    */

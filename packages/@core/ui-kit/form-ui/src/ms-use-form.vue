@@ -2,6 +2,9 @@
 <script setup lang="ts">
 import type { ExtendedFormApi, MsFormProps } from './types'
 import { useForwardPriorityValues } from '@ms-core/composables'
+import {
+  COMPONENT_MAP,
+} from './config'
 import { Form } from './form-render'
 
 import {
@@ -26,7 +29,7 @@ const { form } = useFormInitial(forward)
 </script>
 
 <template>
-  <Form v-bind="forward" :collapsed="state?.collapsed" :form="form" />
+  <Form v-bind="forward" :collapsed="state?.collapsed" :form="form" :component-map="COMPONENT_MAP" />
 </template>
 
 <style scoped>
