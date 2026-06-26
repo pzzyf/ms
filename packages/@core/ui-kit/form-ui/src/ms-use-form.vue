@@ -3,7 +3,9 @@
 import type { ExtendedFormApi, MsFormProps } from './types'
 import { useForwardPriorityValues } from '@ms-core/composables'
 import {
+  COMPONENT_BIND_EVENT_MAP,
   COMPONENT_MAP,
+  DEFAULT_FORM_COMMON_CONFIG,
 } from './config'
 import { Form } from './form-render'
 
@@ -25,13 +27,18 @@ const state = props.formApi?.useStore?.()
 
 const forward = useForwardPriorityValues(props, state)
 
-console.log(forward, 'forward')
-
 const { form } = useFormInitial(forward)
 </script>
 
 <template>
-  <Form v-bind="forward" :collapsed="state?.collapsed" :form="form" :component-map="COMPONENT_MAP" />
+  <Form
+    v-bind="forward"
+    :collapsed="state?.collapsed"
+    :component-bind-event-map="COMPONENT_BIND_EVENT_MAP"
+    :component-map="COMPONENT_MAP"
+    :form="form"
+    :global-common-config="DEFAULT_FORM_COMMON_CONFIG"
+  />
 </template>
 
 <style scoped>

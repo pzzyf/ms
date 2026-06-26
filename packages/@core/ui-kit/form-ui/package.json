@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "@ms-core/composables": "workspace:*",
+    "@ms-core/icons": "workspace:*",
     "@ms-core/shadcn-ui": "workspace:*",
     "@ms-core/shared": "workspace:*",
     "@ms-core/typings": "workspace:*",
+    "@vee-validate/zod": "catalog:",
+    "@vueuse/core": "catalog:",
     "vee-validate": "catalog:",
     "vue": "catalog:",
     "zod": "catalog:",

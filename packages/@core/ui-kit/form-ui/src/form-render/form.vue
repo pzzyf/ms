@@ -1,11 +1,24 @@
 <script setup lang="ts">
 import type { GenericObject } from 'vee-validate'
-import type { FormCommonConfig, FormRenderProps, FormSchema } from '../types'
-import { Form } from '@ms-core/shadcn-ui'
-import { cn, isFunction, mergeWithArrayOverride } from '@ms-core/shared/utils'
-import { computed } from 'vue'
 
+import type {
+  FormCommonConfig,
+  FormRenderProps,
+  FormSchema,
+} from '../types'
+
+import { Form } from '@ms-core/shadcn-ui'
+
+import {
+  cn,
+  isFunction,
+  mergeWithArrayOverride,
+} from '@ms-core/shared/utils'
+import { computed, useTemplateRef } from 'vue'
+
+import { provideComponentRefMap } from '../use-form-context'
 import { provideFormRenderProps } from './context'
+import { useExpandable } from './expandable'
 import FormField from './form-field.vue'
 
 interface Props extends FormRenderProps {}
@@ -21,9 +34,9 @@ const props = withDefaults(
   },
 )
 
-const emits = defineEmits<{ submit: [event: any] }>()
-
-provideFormRenderProps(props)
+const emits = defineEmits<{
+  submit: [event: any]
+}>()
 
 const wrapperClass = computed(() => {
   const cls = ['flex']
@@ -36,15 +49,26 @@ const wrapperClass = computed(() => {
   return cn(...cls, props.wrapperClass)
 })
 
-const formComponents = computed(() => (props.form ? 'form' : Form))
+provideFormRenderProps(props)
+provideComponentRefMap(new Map<string, unknown>())
+
+const wrapperRef = useTemplateRef<HTMLElement>('wrapperRef')
+const { isCalculated, keepFormItemIndex } = useExpandable(props, wrapperRef)
+
+const formComponent = computed(() => (props.form ? 'form' : Form))
 
 const formComponentProps = computed(() => {
   return props.form
     ? {
+        onSubmit: props.form.handleSubmit(val => emits('submit', val)),
       }
     : {
         onSubmit: (val: GenericObject) => emits('submit', val),
       }
+})
+
+const formCollapsed = computed(() => {
+  return props.collapsed && isCalculated.value
 })
 
 const computedSchema = computed(
@@ -69,8 +93,14 @@ const computedSchema = computed(
       modelPropName = '',
       wrapperClass = '',
     } = mergeWithArrayOverride(props.commonConfig, props.globalCommonConfig)
-    return (props.schema || []).map((schema) => {
-      const hidden = false
+    return (props.schema || []).map((schema, index) => {
+      const keepIndex = keepFormItemIndex.value
+
+      const hidden
+        // 折叠状态 & 显示折叠按钮 & 当前索引大于保留索引
+        = props.showCollapseButton && !!formCollapsed.value && keepIndex
+          ? keepIndex <= index
+          : false
 
       // 处理函数形式的formItemClass
       let resolvedSchemaFormItemClass = schema.formItemClass
@@ -117,8 +147,8 @@ const computedSchema = computed(
 </script>
 
 <template>
-  <component :is="formComponents" v-bind="formComponentProps">
-    <div :class="wrapperClass">
+  <component :is="formComponent" v-bind="formComponentProps">
+    <div ref="wrapperRef" :class="wrapperClass">
       <template v-for="cSchema in computedSchema" :key="cSchema.fieldName">
         <FormField
           v-bind="cSchema"
@@ -133,5 +163,3 @@ const computedSchema = computed(
     </div>
   </component>
 </template>
-
-<style scoped></style>

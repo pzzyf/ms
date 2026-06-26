@@ -9,7 +9,7 @@ import { createContext } from '@ms-core/shadcn-ui'
 import { isString, mergeWithArrayOverride, set } from '@ms-core/shared/utils'
 import { useForm } from 'vee-validate'
 
-import { computed, unref, useSlots } from 'vue'
+import { computed, toRaw, unref, useSlots } from 'vue'
 import { object, ZodIntersection, ZodNumber, ZodObject, ZodString } from 'zod'
 import { getDefaultsForSchema } from 'zod-defaults'
 
@@ -47,15 +47,18 @@ export function useFormInitial(
   function generateInitialValues() {
     const initialValues: Record<string, any> = {}
 
-    const zodObject: Record<string, ZodType> = {};
-    (unref(props).schema || []).forEach((item) => {
+    const zodObject: Record<string, ZodType> = {}
+    const schema = unref(props).schema || []
+
+    schema.forEach((item) => {
       if (Reflect.has(item, 'defaultValue')) {
         set(initialValues, item.fieldName, item.defaultValue)
       }
       else if (item.rules && !isString(item.rules)) {
+        const rule = toRaw(item.rules)
         // 检查规则是否适合提取默认值
-        const customDefaultValue = getCustomDefaultValue(item.rules)
-        zodObject[item.fieldName] = item.rules
+        const customDefaultValue = getCustomDefaultValue(rule)
+        zodObject[item.fieldName] = rule
         if (customDefaultValue !== undefined) {
           initialValues[item.fieldName] = customDefaultValue
         }
@@ -72,6 +75,8 @@ export function useFormInitial(
   }
   // 自定义默认值提取逻辑
   function getCustomDefaultValue(rule: any): any {
+    rule = toRaw(rule)
+
     if (rule instanceof ZodString) {
       return '' // 默认为空字符串
     }

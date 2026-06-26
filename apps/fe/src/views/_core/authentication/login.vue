@@ -3,6 +3,7 @@ import type { MsFormSchema } from '@ms/common-ui'
 import type { BasicOption } from '@ms/types'
 import { AuthenticationLogin, z } from '@ms/common-ui'
 import { computed, markRaw } from 'vue'
+import { useAuthStore } from '#/store/auth'
 
 const MOCK_USER_OPTIONS: BasicOption[] = [
   {
@@ -37,12 +38,39 @@ const formSchema = computed((): MsFormSchema[] => {
           .default('ms'),
       ),
     },
+    {
+      component: 'MsInput',
+      componentProps: {
+        placeholder: '快速选择账号',
+      },
+      dependencies: {
+        trigger(values, form) {
+          if (values.selectAccount) {
+            const findUser = MOCK_USER_OPTIONS.find(
+              item => item.value === values.selectAccount,
+            )
+            if (findUser) {
+              form.setValues({
+                password: '123456',
+                username: findUser.value,
+              })
+            }
+          }
+        },
+        triggerFields: ['selectAccount'],
+      },
+      fieldName: 'username',
+      label: '名称',
+      rules: z.string().min(1, { message: '快速选择账号' }),
+    },
   ]
 })
+
+const authStore = useAuthStore()
 </script>
 
 <template>
-  <AuthenticationLogin :form-schema="formSchema" />
+  <AuthenticationLogin :form-schema="formSchema" :loading="authStore.loginLoading" />
 </template>
 
 <style scoped>

@@ -18,14 +18,16 @@ const props = withDefaults(defineProps<Props>(), {
 
 function handleSubmit() {}
 
-const [Form] = useMsForm(reactive({
-  commonConfig: {
-    hideLabel: true,
-    hideRequiredMark: true,
-  },
-  schema: computed(() => props.formSchema),
-  showDefaultActions: false,
-}))
+const [Form] = useMsForm(
+  reactive({
+    commonConfig: {
+      hideLabel: true,
+      hideRequiredMark: true,
+    },
+    schema: computed(() => props.formSchema),
+    showDefaultActions: false,
+  }),
+)
 </script>
 
 <template>

@@ -1,8 +1,11 @@
 import type { MsButtonProps } from '@ms-core/shadcn-ui'
 import type { ClassType, MaybeComputedRef } from '@ms-core/typings'
+
 import type { FieldOptions, FormContext, GenericObject } from 'vee-validate'
+
 import type { Component, HtmlHTMLAttributes, Ref } from 'vue'
 import type { ZodTypeAny } from 'zod'
+
 import type { FormApi } from './form-api'
 
 export type FormLayout = 'horizontal' | 'inline' | 'vertical'
@@ -21,6 +24,17 @@ type Breakpoints = '2xl:' | '3xl:' | '' | 'lg:' | 'md:' | 'sm:' | 'xl:'
 
 type GridCols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13
 
+export type WrapperClassType
+  = | `${Breakpoints}grid-cols-${GridCols}`
+    | (Record<never, never> & string)
+
+export type FormItemClassType
+  = | `${Breakpoints}cols-end-${'auto' | GridCols}`
+    | `${Breakpoints}cols-span-${'auto' | 'full' | GridCols}`
+    | `${Breakpoints}cols-start-${'auto' | GridCols}`
+    | (Record<never, never> & string)
+    | WrapperClassType
+
 export type FormFieldOptions = Partial<
   FieldOptions & {
     validateOnBlur?: boolean
@@ -30,11 +44,182 @@ export type FormFieldOptions = Partial<
   }
 >
 
-export type ArrayToStringFields = Array<
-  | [string[], string?] // 嵌套数组格式，可选分隔符
-  | string // 单个字段，使用默认分隔符
-  | string[]
->
+export interface FormShape {
+  /** 默认值 */
+  default?: any
+  /** 字段名 */
+  fieldName: string
+  /** 是否必填 */
+  required?: boolean
+  rules?: ZodTypeAny
+}
+
+export type MaybeComponentPropKey
+  = | 'options'
+    | 'placeholder'
+    | 'title'
+    | keyof HtmlHTMLAttributes
+    | (Record<never, never> & string)
+
+export type MaybeComponentProps = { [K in MaybeComponentPropKey]?: any }
+
+export type FormActions = FormContext<GenericObject>
+
+export type CustomRenderType = (() => Component | string) | string
+
+export type FormSchemaRuleType
+  = | 'required'
+    | 'selectRequired'
+    | null
+    | (Record<never, never> & string)
+    | ZodTypeAny
+
+type FormItemDependenciesCondition<T = boolean | PromiseLike<boolean>> = (
+  value: Partial<Record<string, any>>,
+  actions: FormActions,
+) => T
+
+type FormItemDependenciesConditionWithRules = (
+  value: Partial<Record<string, any>>,
+  actions: FormActions,
+) => FormSchemaRuleType | PromiseLike<FormSchemaRuleType>
+
+type FormItemDependenciesConditionWithProps = (
+  value: Partial<Record<string, any>>,
+  actions: FormActions,
+) => MaybeComponentProps | PromiseLike<MaybeComponentProps>
+
+export interface FormItemDependencies {
+  /**
+   * 组件参数
+   * @returns 组件参数
+   */
+  componentProps?: FormItemDependenciesConditionWithProps
+  /**
+   * 是否禁用
+   * @returns 是否禁用
+   */
+  disabled?: boolean | FormItemDependenciesCondition
+  /**
+   * 是否渲染（删除dom）
+   * @returns 是否渲染
+   */
+  if?: boolean | FormItemDependenciesCondition
+  /**
+   * 是否必填
+   * @returns 是否必填
+   */
+  required?: FormItemDependenciesCondition
+  /**
+   * 字段规则
+   */
+  rules?: FormItemDependenciesConditionWithRules
+  /**
+   * 是否隐藏(Css)
+   * @returns 是否隐藏
+   */
+  show?: boolean | FormItemDependenciesCondition
+  /**
+   * 任意触发都会执行
+   */
+  trigger?: FormItemDependenciesCondition<void>
+  /**
+   * 触发字段
+   */
+  triggerFields: string[]
+}
+
+type ComponentProps
+  = | ((
+    value: Partial<Record<string, any>>,
+    actions: FormActions,
+  ) => MaybeComponentProps)
+  | MaybeComponentProps
+
+export interface FormCommonConfig {
+  /**
+   * 在Label后显示一个冒号
+   */
+  colon?: boolean
+  /**
+   * 所有表单项的props
+   */
+  componentProps?: ComponentProps
+  /**
+   * 所有表单项的控件样式
+   */
+  controlClass?: string
+  /**
+   * 所有表单项的禁用状态
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * 是否禁用所有表单项的change事件监听
+   * @default true
+   */
+  disabledOnChangeListener?: boolean
+  /**
+   * 是否禁用所有表单项的input事件监听
+   * @default true
+   */
+  disabledOnInputListener?: boolean
+  /**
+   * 所有表单项的空状态值,默认都是undefined，naive-ui的空状态值是null
+   */
+  emptyStateValue?: null | undefined
+  /**
+   * 所有表单项的控件样式
+   * @default {}
+   */
+  formFieldProps?: FormFieldOptions
+  /**
+   * 所有表单项的栅格布局，支持函数形式
+   * @default ""
+   */
+  formItemClass?: (() => string) | string
+  /**
+   * 隐藏所有表单项label
+   * @default false
+   */
+  hideLabel?: boolean
+  /**
+   * 是否隐藏必填标记
+   * @default false
+   */
+  hideRequiredMark?: boolean
+  /**
+   * 所有表单项的label样式
+   * @default ""
+   */
+  labelClass?: string
+  /**
+   * 所有表单项的label宽度
+   */
+  labelWidth?: number
+  /**
+   * 所有表单项的model属性名
+   * @default "modelValue"
+   */
+  modelPropName?: string
+  /**
+   * 所有表单项的wrapper样式
+   */
+  wrapperClass?: string
+}
+
+type RenderComponentContentType = (
+  value: Partial<Record<string, any>>,
+  api: FormActions,
+) => Record<string, any>
+
+export type HandleSubmitFn = (
+  values: Record<string, any>,
+) => Promise<void> | void
+
+export type HandleResetFn = (
+  values: Record<string, any>,
+) => Promise<void> | void
 
 export type FieldMappingTime = [
   string,
@@ -47,31 +232,43 @@ export type FieldMappingTime = [
   )?,
 ][]
 
-export type HandleResetFn = (
-  values: Record<string, any>,
-) => Promise<void> | void
+export type ArrayToStringFields = Array<
+  | [string[], string?] // 嵌套数组格式，可选分隔符
+  | string // 单个字段，使用默认分隔符
+  | string[]
+>
 
-export type HandleSubmitFn = (
-  values: Record<string, any>,
-) => Promise<void> | void
+export interface FormSchema<
+  T extends BaseFormComponentType = BaseFormComponentType,
+> extends FormCommonConfig {
+  /** 组件 */
+  component: Component | T
+  /** 组件参数 */
+  componentProps?: ComponentProps
+  /** 默认值 */
+  defaultValue?: any
+  /** 依赖 */
+  dependencies?: FormItemDependencies
+  /** 描述 */
+  description?: CustomRenderType
+  /** 字段名 */
+  fieldName: string
+  /** 帮助信息 */
+  help?: CustomRenderType
+  /** 是否隐藏表单项 */
+  hide?: boolean
+  /** 表单项 */
+  label?: CustomRenderType
+  // 自定义组件内部渲染
+  renderComponentContent?: RenderComponentContentType
+  /** 字段规则 */
+  rules?: FormSchemaRuleType
+  /** 后缀 */
+  suffix?: CustomRenderType
+}
 
-export type WrapperClassType
-  = | `${Breakpoints}grid-cols-${GridCols}`
-    | (Record<never, never> & string)
-
-export type MaybeComponentPropKey
-  = | 'options'
-    | 'placeholder'
-    | 'title'
-    | keyof HtmlHTMLAttributes
-    | (Record<never, never> & string)
-
-export type MaybeComponentProps = { [K in MaybeComponentPropKey]?: any }
-
-export interface ActionButtonOptions extends MsButtonProps {
-  [key: string]: any
-  content?: MaybeComputedRef<string>
-  show?: boolean
+export interface FormFieldProps extends FormSchema {
+  required?: boolean
 }
 
 export interface FormRenderProps<
@@ -144,113 +341,10 @@ export interface FormRenderProps<
   wrapperClass?: WrapperClassType
 }
 
-export interface FormCommonConfig {
-  /**
-   * 在Label后显示一个冒号
-   */
-  colon?: boolean
-  /**
-   * 所有表单项的props
-   */
-  componentProps?: any
-  /**
-   * 所有表单项的控件样式
-   */
-  controlClass?: string
-  /**
-   * 所有表单项的禁用状态
-   * @default false
-   */
-  disabled?: boolean
-  /**
-   * 是否禁用所有表单项的change事件监听
-   * @default true
-   */
-  disabledOnChangeListener?: boolean
-  /**
-   * 是否禁用所有表单项的input事件监听
-   * @default true
-   */
-  disabledOnInputListener?: boolean
-  /**
-   * 所有表单项的空状态值,默认都是undefined，naive-ui的空状态值是null
-   */
-  emptyStateValue?: null | undefined
-  /**
-   * 所有表单项的控件样式
-   * @default {}
-   */
-  formFieldProps?: any
-  /**
-   * 所有表单项的栅格布局，支持函数形式
-   * @default ""
-   */
-  formItemClass?: (() => string) | string
-  /**
-   * 隐藏所有表单项label
-   * @default false
-   */
-  hideLabel?: boolean
-  /**
-   * 是否隐藏必填标记
-   * @default false
-   */
-  hideRequiredMark?: boolean
-  /**
-   * 所有表单项的label样式
-   * @default ""
-   */
-  labelClass?: string
-  /**
-   * 所有表单项的label宽度
-   */
-  labelWidth?: number
-  /**
-   * 所有表单项的model属性名
-   * @default "modelValue"
-   */
-  modelPropName?: string
-  /**
-   * 所有表单项的wrapper样式
-   */
-  wrapperClass?: string
-}
-
-export interface FormSchema<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> extends FormCommonConfig {
-  /** 组件 */
-  component: Component | T
-  /** 组件参数 */
-  componentProps?: any
-  /** 默认值 */
-  defaultValue?: any
-  /** 依赖 */
-  dependencies?: any
-  /** 描述 */
-  description?: any
-  /** 字段名 */
-  fieldName: string
-  /** 帮助信息 */
-  help?: any
-  /** 是否隐藏表单项 */
-  hide?: boolean
-  /** 表单项 */
-  label?: any
-  // 自定义组件内部渲染
-  renderComponentContent?: any
-  /** 字段规则 */
-  rules?: any
-  /** 后缀 */
-  suffix?: any
-}
-
-export type FormActions = FormContext<GenericObject>
-
-export type ExtendedFormApi = FormApi & {
-  useStore: <T = NoInfer<MsFormProps>>(
-    selector?: (state: NoInfer<MsFormProps>) => T,
-  ) => Readonly<Ref<T>>
+export interface ActionButtonOptions extends MsButtonProps {
+  [key: string]: any
+  content?: MaybeComputedRef<string>
+  show?: boolean
 }
 
 export interface MsFormProps<
@@ -339,14 +433,10 @@ export interface MsFormProps<
   submitOnEnter?: boolean
 }
 
-export interface FormShape {
-  /** 默认值 */
-  default?: any
-  /** 字段名 */
-  fieldName: string
-  /** 是否必填 */
-  required?: boolean
-  rules?: ZodTypeAny
+export type ExtendedFormApi = FormApi & {
+  useStore: <T = NoInfer<MsFormProps>>(
+    selector?: (state: NoInfer<MsFormProps>) => T,
+  ) => Readonly<Ref<T>>
 }
 
 export interface MsFormAdapterOptions<

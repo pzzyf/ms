@@ -42,6 +42,9 @@ catalogs:
     '@types/nprogress':
       specifier: ^0.2.3
       version: 0.2.3
+    '@vee-validate/zod':
+      specifier: ^4.15.1
+      version: 4.15.1
     '@vitejs/plugin-vue':
       specifier: ^6.0.6
       version: 6.0.6
@@ -257,6 +260,9 @@ importers:
       '@vue/tsconfig':
         specifier: 'catalog:'
         version: 0.9.1(typescript@6.0.3)(vue@3.5.34(typescript@6.0.3))
+      pinia:
+        specifier: 'catalog:'
+        version: 3.0.4(typescript@6.0.3)(vue@3.5.34(typescript@6.0.3))
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -433,6 +439,9 @@ importers:
       '@ms-core/composables':
         specifier: workspace:*
         version: link:../../composables
+      '@ms-core/icons':
+        specifier: workspace:*
+        version: link:../../base/icons
       '@ms-core/shadcn-ui':
         specifier: workspace:*
         version: link:../shadcn-ui
@@ -442,6 +451,12 @@ importers:
       '@ms-core/typings':
         specifier: workspace:*
         version: link:../../base/typings
+      '@vee-validate/zod':
+        specifier: 'catalog:'
+        version: 4.15.1(vue@3.5.34(typescript@6.0.3))(zod@4.4.3)
+      '@vueuse/core':
+        specifier: 'catalog:'
+        version: 14.3.0(vue@3.5.34(typescript@6.0.3))
       vee-validate:
         specifier: 'catalog:'
         version: 4.15.1(vue@3.5.34(typescript@6.0.3))
@@ -2161,6 +2176,11 @@ packages:
   '@typescript-eslint/visitor-keys@8.59.3':
     resolution: {integrity: sha512-f1UQF7ggd42YiwI5wGrRaPsa+P0CINBlrkLPmGfpq/u/I/oVtecoEIfFR9ag/oa1sLOsRNZ6xehf6qMZhQGBDg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@vee-validate/zod@4.15.1':
+    resolution: {integrity: sha512-329Z4TDBE5Vx0FdbA8S4eR9iGCFFUNGbxjpQ20ff5b5wGueScjocUIx9JHPa79LTG06RnlUR4XogQsjN4tecKA==}
+    peerDependencies:
+      zod: ^3.24.0
 
   '@vitejs/plugin-vue-jsx@5.1.5':
     resolution: {integrity: sha512-jIAsvHOEtWpslLOI2MeElGFxH7M8pM83BU/Tor4RLyiwH0FM4nUW3xdvbw20EeU9wc5IspQwMq225K3CMnJEpA==}
@@ -6675,6 +6695,14 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.59.3
       eslint-visitor-keys: 5.0.1
+
+  '@vee-validate/zod@4.15.1(vue@3.5.34(typescript@6.0.3))(zod@4.4.3)':
+    dependencies:
+      type-fest: 4.41.0
+      vee-validate: 4.15.1(vue@3.5.34(typescript@6.0.3))
+      zod: 4.4.3
+    transitivePeerDependencies:
+      - vue
 
   '@vitejs/plugin-vue-jsx@5.1.5(vite@8.0.13(@types/node@25.9.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))(vue@3.5.34(typescript@6.0.3))':
     dependencies:
