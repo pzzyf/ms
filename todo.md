@@ -23,5 +23,7 @@
       - useform
         - form
           - ~~provide inject~~
-            - props
+            - ~~props~~
+            - ~~component style~~
+          - provide all components that might be used.
         - api

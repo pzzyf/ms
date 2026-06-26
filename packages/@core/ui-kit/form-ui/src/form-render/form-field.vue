@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FormSchema, MaybeComponentProps } from '../types'
-import { FormField, FormItem, FormLabel, FormMessage, MsRenderContent, MsTooltip } from '@ms-core/shadcn-ui'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage, MsRenderContent, MsTooltip } from '@ms-core/shadcn-ui'
 import { cn, isString } from '@ms-core/shared/utils'
 import { useFieldError } from 'vee-validate'
 import { computed } from 'vue'
