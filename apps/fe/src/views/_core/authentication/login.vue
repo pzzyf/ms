@@ -63,6 +63,15 @@ const formSchema = computed((): MsFormSchema[] => {
       label: '名称',
       rules: z.string().min(1, { message: '快速选择账号' }),
     },
+    {
+      component: 'MsInputPassword',
+      componentProps: {
+        placeholder: '密码',
+      },
+      fieldName: 'password',
+      label: '密码',
+      rules: z.string().min(1, { message: '请输入密码' }),
+    },
   ]
 })
 
@@ -70,7 +79,7 @@ const authStore = useAuthStore()
 </script>
 
 <template>
-  <AuthenticationLogin :form-schema="formSchema" :loading="authStore.loginLoading" />
+  <AuthenticationLogin :form-schema="formSchema" :loading="authStore.loginLoading" @submit="authStore.authLogin" />
 </template>
 
 <style scoped>

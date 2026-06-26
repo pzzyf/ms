@@ -10,6 +10,7 @@ import {
   MsButton,
   MsCheckbox,
   Input as MsInput,
+  MsInputPassword,
   MsSelect,
 } from '@ms-core/shadcn-ui'
 
@@ -27,6 +28,7 @@ export const COMPONENT_MAP: Record<string, Component> = {
   MsInput,
   MsSelect,
   MsCheckbox,
+  MsInputPassword,
 }
 
 export const COMPONENT_BIND_EVENT_MAP: Partial<

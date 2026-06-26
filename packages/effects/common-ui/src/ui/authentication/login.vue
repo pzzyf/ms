@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { MsFormSchema } from '@ms-core/form-ui'
+import type { Recordable } from '@ms-core/typings'
 import type { AuthenticationProps } from './types'
 import { useMsForm } from '@ms-core/form-ui'
 
+import { MsButton } from '@ms-core/shadcn-ui'
 import { computed, reactive } from 'vue'
 import Title from './auth-title.vue'
 
@@ -13,12 +15,15 @@ interface Props extends AuthenticationProps {
 const props = withDefaults(defineProps<Props>(), {
   title: '',
   subTitle: '',
+  loading: false,
   formSchema: () => [],
 })
 
-function handleSubmit() {}
+const emit = defineEmits<{
+  submit: [Recordable<any>]
+}>()
 
-const [Form] = useMsForm(
+const [Form, formApi] = useMsForm(
   reactive({
     commonConfig: {
       hideLabel: true,
@@ -28,6 +33,14 @@ const [Form] = useMsForm(
     showDefaultActions: false,
   }),
 )
+
+async function handleSubmit() {
+  const { valid } = await formApi.validate()
+  const values = await formApi.getValues()
+  if (valid) {
+    emit('submit', values)
+  }
+}
 </script>
 
 <template>
@@ -48,6 +61,18 @@ const [Form] = useMsForm(
     </slot>
 
     <Form />
+
+    <MsButton
+      :class="{
+        'cursor-wait': loading,
+      }"
+      :loading="loading"
+      aria-label="login"
+      class="w-full"
+      @click="handleSubmit"
+    >
+      {{ submitButtonText || '登陆' }}
+    </MsButton>
   </div>
 </template>
 

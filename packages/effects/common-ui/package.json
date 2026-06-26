@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@ms-core/form-ui": "workspace:*",
+    "@ms-core/shadcn-ui": "workspace:*",
     "@ms-core/shared": "workspace:*",
+    "@ms-core/typings": "workspace:*",
     "vue": "catalog:"
   }
 }

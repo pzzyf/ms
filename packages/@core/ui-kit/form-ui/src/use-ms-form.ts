@@ -39,7 +39,7 @@ function useMsForm<
     )
   }
 
-  return [Form, extendedApi]
+  return [Form, extendedApi] as const
 }
 
 export { useMsForm }

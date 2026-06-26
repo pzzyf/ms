@@ -25,5 +25,7 @@
           - ~~provide inject~~
             - ~~props~~
             - ~~component style~~
-          - provide all components that might be used.
-        - api
+          - ~~provide all components that might be used.~~
+        - ~~api~~
+      - guard
+    - request

@@ -1,8 +1,11 @@
 import type { Recordable } from '@ms-core/typings'
-import type { FormActions, MsFormProps } from './types'
+import type { FormContext, GenericObject } from 'vee-validate'
+
+import type { MsFormProps } from './types'
 
 import { Store } from '@ms-core/shared/store'
 import { bindMethods, isFunction, mergeWithArrayOverride, StateHandler } from '@ms-core/shared/utils'
+import { toRaw } from 'vue'
 
 function getDefaultState(): MsFormProps {
   return {
@@ -29,7 +32,7 @@ function getDefaultState(): MsFormProps {
 }
 
 class FormApi {
-  public form = {} as FormActions
+  public form: FormContext<GenericObject> | null = null
   isMounted = false
   public state: null | MsFormProps = null
   stateHandler: StateHandler
@@ -58,6 +61,14 @@ class FormApi {
     bindMethods(this)
   }
 
+  private getForm() {
+    if (!this.form) {
+      throw new Error('[MsForm]: form instance is not mounted.')
+    }
+
+    return this.form
+  }
+
   private updateState() {
     const currentSchema = this.state?.schema ?? []
     const prevSchema = this.prevState?.schema ?? []
@@ -73,6 +84,11 @@ class FormApi {
         this.form?.setFieldValue?.(schema.fieldName, undefined)
       }
     }
+  }
+
+  mount(form: FormContext<GenericObject>) {
+    this.form = form
+    this.isMounted = true
   }
 
   setState(
@@ -94,9 +110,26 @@ class FormApi {
     return this.latestSubmissionValues || {}
   }
 
+  getValues<TValues extends GenericObject = GenericObject>() {
+    const values = toRaw(this.getForm().values)
+
+    try {
+      return structuredClone(values) as TValues
+    }
+    catch {
+      return { ...values } as TValues
+    }
+  }
+
+  validate(
+    ...args: Parameters<FormContext<GenericObject>['validate']>
+  ): ReturnType<FormContext<GenericObject>['validate']> {
+    return this.getForm().validate(...args)
+  }
+
   unmount() {
     this.form?.resetForm?.()
-    // this.state = null;
+    this.form = null
     this.latestSubmissionValues = null
     this.isMounted = false
     this.stateHandler.reset()

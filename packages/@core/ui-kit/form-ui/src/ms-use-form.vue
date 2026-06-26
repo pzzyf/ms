@@ -28,6 +28,8 @@ const state = props.formApi?.useStore?.()
 const forward = useForwardPriorityValues(props, state)
 
 const { form } = useFormInitial(forward)
+
+props.formApi?.mount(form)
 </script>
 
 <template>
