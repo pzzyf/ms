@@ -1,10 +1,13 @@
 import type { AxiosInstance, AxiosResponse } from 'axios'
 import type { RequestClientConfig, RequestClientOptions } from './types'
+import { bindMethods, merge } from '@ms/utils'
 
-import { merge } from '@ms/utils'
 import axios from 'axios'
+import { InterceptorManager } from './modules/interceptor'
 
 class RequestClient {
+  public addRequestInterceptor: InterceptorManager['addRequestInterceptor']
+  public addResponseInterceptor: InterceptorManager['addResponseInterceptor']
   public readonly instance: AxiosInstance
 
   constructor(options: RequestClientOptions = {}) {
@@ -21,6 +24,15 @@ class RequestClient {
     const requestConfig = merge(axiosConfig, defaultConfig)
 
     this.instance = axios.create(requestConfig)
+
+    bindMethods(this)
+
+    // 实例化拦截器管理器
+    const interceptorManager = new InterceptorManager(this.instance)
+    this.addRequestInterceptor
+      = interceptorManager.addRequestInterceptor.bind(interceptorManager)
+    this.addResponseInterceptor
+      = interceptorManager.addResponseInterceptor.bind(interceptorManager)
   }
 
   /**

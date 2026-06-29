@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig, CreateAxiosDefaults } from 'axios'
+import type { AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios'
 
 interface ExtendOptions<T = any> {
 
@@ -20,9 +20,31 @@ interface ExtendOptions<T = any> {
 
 type RequestClientConfig<T = any> = AxiosRequestConfig<T> & ExtendOptions<T>
 
+type RequestResponse<T = any> = AxiosResponse<T> & {
+  config: RequestClientConfig<T>
+}
+
 type RequestClientOptions = CreateAxiosDefaults & ExtendOptions
+
+interface RequestInterceptorConfig {
+  fulfilled?: (
+    config: ExtendOptions & InternalAxiosRequestConfig,
+  ) =>
+    | (ExtendOptions & InternalAxiosRequestConfig<any>)
+    | Promise<ExtendOptions & InternalAxiosRequestConfig<any>>
+  rejected?: (error: any) => any
+}
+
+interface ResponseInterceptorConfig<T = any> {
+  fulfilled?: (
+    response: RequestResponse<T>,
+  ) => Promise<RequestResponse> | RequestResponse
+  rejected?: (error: any) => any
+}
 
 export type {
   RequestClientConfig,
   RequestClientOptions,
+  RequestInterceptorConfig,
+  ResponseInterceptorConfig,
 }
