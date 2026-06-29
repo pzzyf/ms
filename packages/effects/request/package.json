@@ -1,0 +1,8 @@
+{
+  "name": "@ms/request",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ms/utils": "workspace:*",
+    "axios": "catalog:"
+  }
+}
