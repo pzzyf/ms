@@ -12,6 +12,7 @@ import viteVueJsx from '@vitejs/plugin-vue-jsx'
 import viteDtsPlugin from 'unplugin-dts/vite'
 import { viteInjectAppLoadingPlugin } from './inject-app-loading'
 import { viteMetadataPlugin } from './inject-metadata'
+import { viteNitroMockPlugin } from './nitro-mock'
 
 /**
  * 获取条件成立的 vite 插件
@@ -62,6 +63,8 @@ async function loadCommonPlugins(
 async function loadApplicationPlugins(options: ApplicationPluginOptions): Promise<PluginOption[]> {
   const {
     injectAppLoading,
+    nitroMock,
+    nitroMockOptions,
     ...commonOptions
   } = options
 
@@ -72,6 +75,12 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
     {
       condition: injectAppLoading,
       plugins: async () => [await viteInjectAppLoadingPlugin()],
+    },
+    {
+      condition: nitroMock,
+      plugins: async () => {
+        return [await viteNitroMockPlugin(nitroMockOptions)]
+      },
     },
   ])
 }

@@ -37,4 +37,12 @@ async function getPackages() {
   return await getPackagesFunc(root)
 }
 
-export { findMonorepoRoot, getPackages }
+/**
+ * 获取大仓指定的包
+ */
+async function getPackage(pkgName: string) {
+  const { packages } = await getPackages()
+  return packages.find(pkg => pkg.packageJson.name === pkgName)
+}
+
+export { findMonorepoRoot, getPackage, getPackages }

@@ -19,6 +19,8 @@
     "@ms/node-utils": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "dayjs": "catalog:",
+    "get-port": "catalog:",
+    "nitropack": "catalog:",
     "pnpm-workspace-yaml": "catalog:",
     "vite-plugin-pwa": "catalog:"
   },
