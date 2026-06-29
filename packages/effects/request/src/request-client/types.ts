@@ -1,6 +1,14 @@
-import type { CreateAxiosDefaults } from 'axios'
+import type { AxiosRequestConfig, CreateAxiosDefaults } from 'axios'
 
-interface ExtendOptions {
+interface ExtendOptions<T = any> {
+
+  paramsSerializer?:
+    | 'brackets'
+    | 'comma'
+    | 'indices'
+    | 'repeat'
+    | AxiosRequestConfig<T>['paramsSerializer']
+
   /**
    * 响应数据的返回方式。
    * - raw: 原始的AxiosResponse，包括headers、status等，不做是否成功请求的检查。
@@ -10,8 +18,11 @@ interface ExtendOptions {
   responseReturn?: 'body' | 'data' | 'raw'
 }
 
+type RequestClientConfig<T = any> = AxiosRequestConfig<T> & ExtendOptions<T>
+
 type RequestClientOptions = CreateAxiosDefaults & ExtendOptions
 
 export type {
+  RequestClientConfig,
   RequestClientOptions,
 }
