@@ -28,5 +28,6 @@
           - ~~provide all components that might be used.~~
         - ~~api~~
       - guard
-    - request
+    - ~~request~~
+    - mockPlugin
     - api auth/login

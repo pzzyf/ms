@@ -41,9 +41,11 @@ catalog:
   es-toolkit: ^1.48.1
   eslint: ^10.3.0
   execa: ^9.6.1
+  h3: ^1.15.4
   happy-dom: ^20.9.0
   is-ci: ^4.1.0
   lefthook: ^2.1.8
+  nitropack: ^2.12.4
   nprogress: ^0.2.0
   pinia: ^3.0.4
   pinia-plugin-persistedstate: ^4.7.1

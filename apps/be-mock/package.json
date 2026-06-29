@@ -1,0 +1,12 @@
+{
+  "name": "@ms/be-mock",
+  "private": true,
+  "scripts": {
+    "build": "nitro build",
+    "dev": "nitro dev"
+  },
+  "devDependencies": {
+    "h3": "catalog:",
+    "nitropack": "catalog:"
+  }
+}
