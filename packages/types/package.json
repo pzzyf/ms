@@ -5,9 +5,13 @@
     ".": {
       "types": "./src/index.ts",
       "import": "./src/index.ts"
+    },
+    "./global": {
+      "types": "./global.d.ts"
     }
   },
   "dependencies": {
-    "@ms-core/typings": "workspace:*"
+    "@ms-core/typings": "workspace:*",
+    "vue-router": "catalog:"
   }
 }

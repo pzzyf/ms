@@ -16,12 +16,15 @@
   "dependencies": {
     "@ms/common-ui": "workspace:*",
     "@ms/constants": "workspace:*",
+    "@ms/hooks": "workspace:*",
     "@ms/layouts": "workspace:*",
     "@ms/preferences": "workspace:*",
+    "@ms/request": "workspace:*",
     "@ms/stores": "workspace:*",
     "@ms/styles": "workspace:*",
     "@ms/types": "workspace:*",
     "@ms/utils": "workspace:*",
+
     "@vitejs/plugin-vue": "catalog:",
     "@vue/tsconfig": "catalog:",
     "pinia": "catalog:",

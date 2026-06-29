@@ -4,6 +4,9 @@ export default defineConfig(
   {
     typescript: true,
     vue: true,
+    rules: {
+      'ts/no-namespace': 'off',
+    },
   },
   {
     files: ['pnpm-workspace.yaml'],

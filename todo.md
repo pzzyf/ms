@@ -29,3 +29,4 @@
         - ~~api~~
       - guard
     - request
+    - api auth/login

@@ -1,20 +1,23 @@
+/* eslint-disable no-console */
 import type { Recordable, UserInfo } from '@ms/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { loginApi } from '#/api'
 
 const useAuthStore = defineStore('auth', () => {
   const loginLoading = ref(false)
 
-  function authLogin(params: Recordable<any>) {
+  async function authLogin(params: Recordable<any>) {
     const userInfo: null | UserInfo = null
     try {
       loginLoading.value = true
+      const { accessToken } = await loginApi(params)
+      console.log(accessToken, 'accessToken')
     }
     finally {
       loginLoading.value = false
     }
 
-    // eslint-disable-next-line no-console
     console.log(params, 'params')
 
     return {
