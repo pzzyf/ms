@@ -12,6 +12,7 @@ interface AccessState {
    */
   accessToken: AccessToken
   loginExpired: boolean
+  isAccessChecked: boolean
 }
 
 const useAccessStore = defineStore('core-access', {
@@ -25,11 +26,15 @@ const useAccessStore = defineStore('core-access', {
     setLoginExpired(loginExpired: boolean) {
       this.loginExpired = loginExpired
     },
+    setIsAccessChecked(isAccessChecked: boolean) {
+      this.isAccessChecked = isAccessChecked
+    },
   },
   state: (): AccessState => ({
     accessToken: null,
     accessCodes: [],
     loginExpired: false,
+    isAccessChecked: false,
   }),
 })
 

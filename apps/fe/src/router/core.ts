@@ -15,7 +15,13 @@ const coreRoutes: RouteRecordRaw[] = [
     name: 'Root',
     path: '/',
     redirect: preferences.app.defaultHomePath,
-    children: [],
+    children: [
+      {
+        name: 'Analytics',
+        path: 'analytics',
+        component: () => import('#/views/dashboard/analytics/index.vue'),
+      },
+    ],
   },
   {
     component: AuthPageLayout,

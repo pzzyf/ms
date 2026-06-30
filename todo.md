@@ -19,15 +19,16 @@
     - lint/format
     - theme
     - skills
-    - auth/login (ing)
-      - useform
-        - form
+    - ~~auth/login (ing)~~
+      - ~~useform~~
+        - ~~form~~
           - ~~provide inject~~
             - ~~props~~
             - ~~component style~~
           - ~~provide all components that might be used.~~
         - ~~api~~
-      - guard
+      - ~~guard~~
     - ~~request~~
-    - mockPlugin
-    - api auth/login
+    - ~~mockPlugin~~
+    - ~~api auth/login~~
+    - layout

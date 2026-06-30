@@ -8,6 +8,7 @@
     }
   },
   "dependencies": {
-    "@ms-core/shared": "workspace:*"
+    "@ms-core/shared": "workspace:*",
+    "vue-router": "catalog:"
   }
 }

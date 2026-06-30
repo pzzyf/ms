@@ -4,6 +4,7 @@ import { preferences } from '@ms/preferences'
 import { useAccessStore, useUserStore } from '@ms/stores'
 import { startProgress, stopProgress } from '@ms/utils'
 import { coreRouteNames } from '#/router/routes'
+import { useAuthStore } from '#/store'
 
 /**
  * 创建通用路由守卫
@@ -29,9 +30,11 @@ function commonGuard(router: Router) {
 }
 
 function setupAccessGuard(router: Router) {
-  router.beforeEach((to) => {
+  router.beforeEach(async (to) => {
     const accessStore = useAccessStore()
     const userStore = useUserStore()
+    const authStore = useAuthStore()
+
     // 基本路由，这些路由不需要进入权限拦截
     if (coreRouteNames.includes(to.name as string)) {
       if (to.path === LOGIN_PATH && accessStore.accessToken) {
@@ -65,6 +68,20 @@ function setupAccessGuard(router: Router) {
         }
       }
       return to
+    }
+
+    // 是否已经生成过动态路由
+    if (accessStore.isAccessChecked) {
+      return true
+    }
+
+    // 生成路由表
+    // 当前登录用户拥有的角色标识列表
+    const userInfo = userStore.userInfo || (await authStore.fetchUserInfo())
+    const userRoles = userInfo.roles ?? []
+
+    if (userRoles) {
+      return true
     }
   })
 }

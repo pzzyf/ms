@@ -5,9 +5,7 @@ defineOptions({
 </script>
 
 <template>
-  <div>
-    1
-  </div>
+  <router-view />
 </template>
 
 <style scoped>
