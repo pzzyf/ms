@@ -5,6 +5,9 @@
     "build": "nitro build",
     "dev": "nitro dev"
   },
+  "dependencies": {
+    "jsonwebtoken": "catalog:"
+  },
   "devDependencies": {
     "h3": "catalog:",
     "nitropack": "catalog:"

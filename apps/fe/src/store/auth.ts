@@ -1,28 +1,61 @@
-/* eslint-disable no-console */
 import type { Recordable, UserInfo } from '@ms/types'
+import { preferences } from '@ms/preferences'
+import { useAccessStore, useUserStore } from '@ms/stores'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { loginApi } from '#/api'
+import { useRouter } from 'vue-router'
+import { getAccessCodesApi, getUserInfoApi, loginApi } from '#/api'
 
-const useAuthStore = defineStore('auth', () => {
+export const useAuthStore = defineStore('auth', () => {
+  const accessStore = useAccessStore()
+  const userStore = useUserStore()
   const loginLoading = ref(false)
+  const router = useRouter()
 
-  async function authLogin(params: Recordable<any>) {
-    const userInfo: null | UserInfo = null
+  async function authLogin(params: Recordable<any>, onSuccess?: () => Promise<void> | void) {
+    let userInfo: null | UserInfo = null
     try {
       loginLoading.value = true
       const { accessToken } = await loginApi(params)
-      console.log(accessToken, 'accessToken')
+
+      if (accessToken) {
+        accessStore.setAccessToken(accessToken)
+
+        // 获取用户信息并存储到 accessStore 中
+        const [fetchUserInfoResult, accessCodes] = await Promise.all([
+          fetchUserInfo(),
+          getAccessCodesApi(),
+        ])
+        userInfo = fetchUserInfoResult
+
+        userStore.setUserInfo(userInfo)
+        accessStore.setAccessCodes(accessCodes)
+
+        if (accessStore.loginExpired) {
+          accessStore.setLoginExpired(false)
+        }
+        else {
+          onSuccess
+            ? await onSuccess?.()
+            : await router.push(
+                userInfo.homePath || preferences.app.defaultHomePath,
+              )
+        }
+      }
     }
     finally {
       loginLoading.value = false
     }
 
-    console.log(params, 'params')
-
     return {
       userInfo,
     }
+  }
+
+  async function fetchUserInfo() {
+    let userInfo: null | UserInfo = null
+    userInfo = await getUserInfoApi()
+    return userInfo
   }
 
   return {
@@ -30,5 +63,3 @@ const useAuthStore = defineStore('auth', () => {
     authLogin,
   }
 })
-
-export { useAuthStore }

@@ -46,6 +46,7 @@ catalog:
   h3: ^1.15.4
   happy-dom: ^20.9.0
   is-ci: ^4.1.0
+  jsonwebtoken: ^9.0.3
   lefthook: ^2.1.8
   nitropack: ^2.13.4
   nprogress: ^0.2.0
