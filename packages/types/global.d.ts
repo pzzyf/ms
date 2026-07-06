@@ -3,6 +3,7 @@ import type { RouteMeta as IRouteMeta } from '@ms-core/typings'
 import 'vue-router'
 
 declare module 'vue-router' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- required for module augmentation
   interface RouteMeta extends IRouteMeta {}
 }
 

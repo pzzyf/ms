@@ -25,6 +25,8 @@ catalog:
   "@types/eslint": ^9.6.1
   "@types/node": ^25.9.1
   "@types/nprogress": ^0.2.3
+  "@typescript-eslint/eslint-plugin": ^8.62.1
+  "@typescript-eslint/parser": ^8.62.1
   "@vee-validate/zod": ^4.15.1
   "@vitejs/plugin-vue": ^6.0.6
   "@vitejs/plugin-vue-jsx": ^5.1.5

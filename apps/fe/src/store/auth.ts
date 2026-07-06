@@ -53,9 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
-    let userInfo: null | UserInfo = null
-    userInfo = await getUserInfoApi()
-    return userInfo
+    return await getUserInfoApi()
   }
 
   return {

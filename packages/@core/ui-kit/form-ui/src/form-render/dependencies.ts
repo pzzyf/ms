@@ -37,7 +37,13 @@ export default function useDependencies(
 
   const formRenderProps = injectRenderFormProps()
 
-  const formApi = formRenderProps.form!
+  const getFormApi = () => {
+    const formApi = formRenderProps.form
+    if (!formApi) {
+      throw new Error('Function dependencies require a form instance')
+    }
+    return formApi
+  }
 
   if (!values) {
     throw new Error('useDependencies should be used within <VbenForm>')
@@ -88,7 +94,7 @@ export default function useDependencies(
       const formValues = values.value
 
       if (isFunction(whenIf)) {
-        isIf.value = !!(await whenIf(formValues, formApi))
+        isIf.value = !!(await whenIf(formValues, getFormApi()))
         // 不渲染
         if (!isIf.value)
           return
@@ -101,33 +107,33 @@ export default function useDependencies(
 
       // 2. 判断show，如果show为false，则隐藏
       if (isFunction(show)) {
-        isShow.value = !!(await show(formValues, formApi))
+        isShow.value = !!(await show(formValues, getFormApi()))
       }
       else if (isBoolean(show)) {
         isShow.value = show
       }
 
       if (isFunction(componentProps)) {
-        dynamicComponentProps.value = await componentProps(formValues, formApi)
+        dynamicComponentProps.value = await componentProps(formValues, getFormApi())
       }
 
       if (isFunction(rules)) {
-        dynamicRules.value = await rules(formValues, formApi)
+        dynamicRules.value = await rules(formValues, getFormApi())
       }
 
       if (isFunction(disabled)) {
-        isDisabled.value = !!(await disabled(formValues, formApi))
+        isDisabled.value = !!(await disabled(formValues, getFormApi()))
       }
       else if (isBoolean(disabled)) {
         isDisabled.value = disabled
       }
 
       if (isFunction(required)) {
-        isRequired.value = !!(await required(formValues, formApi))
+        isRequired.value = !!(await required(formValues, getFormApi()))
       }
 
       if (isFunction(trigger)) {
-        await trigger(formValues, formApi)
+        await trigger(formValues, getFormApi())
       }
     },
     { deep: true, immediate: true },

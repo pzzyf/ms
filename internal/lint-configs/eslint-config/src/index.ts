@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-import { ignores, javascript } from './configs';
+import { ignores, javascript,typescript } from './configs';
 
 type FlatConfig = Linter.Config
 
@@ -15,6 +15,7 @@ async function defineConfig(config: FlatConfig[] = []) {
   const configs: FlatConfigPromise[] = [
     ignores(),
     javascript(),
+    typescript(),
     ...config
   ]
 
