@@ -12,7 +12,8 @@
     "stub": "pnpm exec tsdown"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:",
+    "@eslint/js": "catalog:",
+    "@types/eslint": "catalog:",
     "eslint": "catalog:"
   }
 }

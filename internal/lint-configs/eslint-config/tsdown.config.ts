@@ -8,7 +8,7 @@ export default defineConfig({
   dts: {
     resolver: 'tsc',
   },
-  entry: ['index.ts'],
+  entry: ['src/index.ts'],
   format: ['esm'],
   outExtensions: () => ({
     dts: '.d.ts',
