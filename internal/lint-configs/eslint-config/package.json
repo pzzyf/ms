@@ -14,6 +14,8 @@
   "devDependencies": {
     "@eslint/js": "catalog:",
     "@types/eslint": "catalog:",
-    "eslint": "catalog:"
+    "eslint": "catalog:",
+    "eslint-plugin-unused-imports": "catalog:",
+    "globals": "catalog:"
   }
 }

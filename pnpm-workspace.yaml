@@ -43,8 +43,10 @@ catalog:
   dotenv: ^17.4.2
   es-toolkit: ^1.48.1
   eslint: ^10.3.0
+  eslint-plugin-unused-imports: ^4.4.1
   execa: ^9.6.1
   get-port: ^7.2.0
+  globals: ^17.7.0
   h3: ^1.15.4
   happy-dom: ^20.9.0
   is-ci: ^4.1.0
