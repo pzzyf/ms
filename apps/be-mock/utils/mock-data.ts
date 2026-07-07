@@ -314,12 +314,12 @@ export const MOCK_MENU_LIST = [
 
 export function getMenuIds(menus: any[]) {
   const ids: number[] = []
-  menus.forEach((item) => {
+  for (const item of menus) {
     ids.push(item.id)
     if (item.children && item.children.length > 0) {
       ids.push(...getMenuIds(item.children))
     }
-  })
+  }
   return ids
 }
 

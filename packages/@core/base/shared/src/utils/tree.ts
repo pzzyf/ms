@@ -3,7 +3,11 @@ interface TreeConfigOptions {
   childProps: string
 }
 
-function traverseTreeValues<T, V>(tree: T[], getValue: (node: T) => V, options?: TreeConfigOptions): V[] {
+function traverseTreeValues<T, V>(
+  tree: T[],
+  getValue: (node: T) => V,
+  options?: TreeConfigOptions,
+): V[] {
   const result: V[] = []
   const { childProps } = options || {
     childProps: 'children',

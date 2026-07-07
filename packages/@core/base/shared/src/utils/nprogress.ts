@@ -1,20 +1,22 @@
 import type NProgress from 'nprogress'
 
-let nProgressInstance: null | typeof NProgress = null
+const nProgressState: { instance: null | typeof NProgress } = {
+  instance: null,
+}
 
 async function loadNprogress() {
-  if (nProgressInstance) {
-    return nProgressInstance
+  if (nProgressState.instance) {
+    return nProgressState.instance
   }
 
-  nProgressInstance = await import('nprogress')
+  nProgressState.instance = await import('nprogress')
 
-  nProgressInstance.configure({
+  nProgressState.instance.configure({
     showSpinner: true,
     speed: 300,
   })
 
-  return nProgressInstance
+  return nProgressState.instance
 }
 
 async function startProgress() {

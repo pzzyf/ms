@@ -20,26 +20,26 @@ export function usePriorityValue<
 >(key: K, props: T, state: Readonly<Ref<NoInfer<S>>> | undefined) {
   const instance = getCurrentInstance()
   const slots = useSlots()
-  const attrs = useAttrs() as T
+  const attributes = useAttrs() as T
 
   const value = computed((): T[K] => {
     // props不管有没有传，都会有默认值，会影响这里的顺序，
     // 通过判断原始props是否有值来判断是否传入
-    const rawProps = (instance?.vnode?.props || {}) as T
+    const rawProperties = (instance?.vnode?.props || {}) as T
 
-    const standardRawProps = {} as T
+    const standardRawProperties = {} as T
 
-    for (const [key, value] of Object.entries(rawProps)) {
-      standardRawProps[kebabToCamelCase(key) as K] = value
+    for (const [key, value] of Object.entries(rawProperties)) {
+      standardRawProperties[kebabToCamelCase(key) as K] = value
     }
-    const propsKey
-      = standardRawProps?.[key] === undefined ? undefined : props[key]
+    const propertiesKey =
+      standardRawProperties?.[key] === undefined ? undefined : props[key]
 
     // slot可以关闭
     return getFirstNonNullOrUndefined(
       slots[key as string],
-      attrs[key],
-      propsKey,
+      attributes[key],
+      propertiesKey,
       state?.value?.[key as keyof S],
     ) as T[K]
   })
@@ -56,11 +56,11 @@ export function usePriorityValues<
   T extends Record<string, any>,
   S extends Ref<Record<string, any>> = Readonly<Ref<NoInfer<T>, NoInfer<T>>>,
 >(props: T, state: S | undefined) {
-  const result: { [K in keyof T]: ComputedRef<T[K]> } = {} as never;
+  const result: { [K in keyof T]: ComputedRef<T[K]> } = {} as never
 
-  (Object.keys(props) as (keyof T)[]).forEach((key) => {
+  for (const key of Object.keys(props) as (keyof T)[]) {
     result[key] = usePriorityValue(key as keyof typeof props, props, state)
-  })
+  }
 
   return result
 }
@@ -74,21 +74,21 @@ export function useForwardPriorityValues<
   T extends Record<string, any>,
   S extends Ref<Record<string, any>> = Readonly<Ref<NoInfer<T>, NoInfer<T>>>,
 >(props: T, state: S | undefined) {
-  const computedResult: { [K in keyof T]: ComputedRef<T[K]> } = {} as never;
+  const computedResult: { [K in keyof T]: ComputedRef<T[K]> } = {} as never
 
-  (Object.keys(props) as (keyof T)[]).forEach((key) => {
+  for (const key of Object.keys(props) as (keyof T)[]) {
     computedResult[key] = usePriorityValue(
       key as keyof typeof props,
       props,
       state,
     )
-  })
+  }
 
   return computed(() => {
     const unwrapResult: Record<string, any> = {}
-    Object.keys(props).forEach((key) => {
+    for (const key of Object.keys(props)) {
       unwrapResult[key] = unref(computedResult[key])
-    })
+    }
     return unwrapResult as { [K in keyof T]: T[K] }
   })
 }

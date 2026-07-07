@@ -7,13 +7,15 @@ import { useId } from 'vue'
 
 import { Checkbox } from '../../ui/checkbox'
 
-const props = defineProps<CheckboxRootProps & { indeterminate?: boolean }>()
+const properties = defineProps<
+  CheckboxRootProps & { indeterminate?: boolean }
+>()
 
 const emits = defineEmits<CheckboxRootEmits>()
 
 const checked = defineModel<boolean>()
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(properties, emits)
 
 const id = useId()
 </script>
@@ -21,6 +23,6 @@ const id = useId()
 <template>
   <div class="flex items-center">
     <Checkbox v-bind="forwarded" :id="id" v-model="checked" />
-    <label :for="id" class="ml-2 cursor-pointer text-sm"> <slot /> </label>
+    <label :for="id" class="ml-2 cursor-pointer text-sm"> <slot></slot> </label>
   </div>
 </template>

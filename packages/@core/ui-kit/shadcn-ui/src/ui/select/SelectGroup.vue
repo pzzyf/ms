@@ -6,10 +6,7 @@ const props = defineProps<SelectGroupProps>()
 </script>
 
 <template>
-  <SelectGroup
-    data-slot="select-group"
-    v-bind="props"
-  >
-    <slot />
+  <SelectGroup data-slot="select-group" v-bind="props">
+    <slot></slot>
   </SelectGroup>
 </template>

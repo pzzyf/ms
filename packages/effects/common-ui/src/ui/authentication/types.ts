@@ -1,4 +1,4 @@
-interface AuthenticationProps {
+interface AuthenticationProperties {
   /**
    * @zh_CN 验证码登录路径
    */
@@ -67,4 +67,4 @@ interface AuthenticationProps {
   submitButtonText?: string
 }
 
-export type { AuthenticationProps }
+export type { AuthenticationProperties as AuthenticationProps }

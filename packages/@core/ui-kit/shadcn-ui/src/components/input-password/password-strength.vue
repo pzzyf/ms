@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const props = withDefaults(defineProps<{ password?: string }>(), {
+const properties = withDefaults(defineProps<{ password?: string }>(), {
   password: '',
 })
 
@@ -15,7 +15,7 @@ const strengthList: string[] = [
 ]
 
 const currentStrength = computed(() => {
-  return checkPasswordStrength(props.password)
+  return checkPasswordStrength(properties.password)
 })
 
 const currentColor = computed(() => {
@@ -29,24 +29,19 @@ function checkPasswordStrength(password: string) {
   let strength = 0
 
   // Check length
-  if (password.length >= 8)
-    strength++
+  if (password.length >= 8) strength++
 
   // Check for lowercase letters
-  if (/[a-z]/.test(password))
-    strength++
+  if (/[a-z]/.test(password)) strength++
 
   // Check for uppercase letters
-  if (/[A-Z]/.test(password))
-    strength++
+  if (/[A-Z]/.test(password)) strength++
 
   // Check for numbers
-  if (/\d/.test(password))
-    strength++
+  if (/\d/.test(password)) strength++
 
   // Check for special characters
-  if (/[^\da-z]/i.test(password))
-    strength++
+  if (/[^\da-z]/i.test(password)) strength++
 
   return strength
 }
@@ -64,7 +59,7 @@ function checkPasswordStrength(password: string) {
             width: currentStrength >= index ? '100%' : '',
           }"
           class="absolute left-0 h-full w-0 rounded-sm transition-all duration-500"
-        />
+        ></span>
       </div>
     </template>
   </div>

@@ -60,11 +60,10 @@ export function setupMsForm<
     }
   }
 
-  const baseModelPropName
-    = config?.baseModelPropName ?? DEFAULT_MODEL_PROP_NAME
-  const modelPropNameMap = config?.modelPropNameMap as
-    | Record<BaseFormComponentType, string>
-    | undefined
+  const baseModelPropertyName =
+    config?.baseModelPropName ?? DEFAULT_MODEL_PROP_NAME
+  const modelPropertyNameMap = config?.modelPropNameMap as
+    Record<BaseFormComponentType, string> | undefined
 
   const components = globalShareState.getComponents()
 
@@ -72,13 +71,13 @@ export function setupMsForm<
     const key = component as BaseFormComponentType
     COMPONENT_MAP[key] = components[component as never]
 
-    if (baseModelPropName !== DEFAULT_MODEL_PROP_NAME) {
-      COMPONENT_BIND_EVENT_MAP[key] = baseModelPropName
+    if (baseModelPropertyName !== DEFAULT_MODEL_PROP_NAME) {
+      COMPONENT_BIND_EVENT_MAP[key] = baseModelPropertyName
     }
 
     // 覆盖特殊组件的modelPropName
-    if (modelPropNameMap && modelPropNameMap[key]) {
-      COMPONENT_BIND_EVENT_MAP[key] = modelPropNameMap[key]
+    if (modelPropertyNameMap && Object.hasOwn(modelPropertyNameMap, key)) {
+      COMPONENT_BIND_EVENT_MAP[key] = modelPropertyNameMap[key]
     }
   }
 }

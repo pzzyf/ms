@@ -1,14 +1,14 @@
 {
   "name": "@ms/node-utils",
   "version": "1.0.0",
+  "scripts": {
+    "stub": "pnpm exec tsdown"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     }
-  },
-  "scripts": {
-    "stub": "pnpm exec tsdown"
   },
   "dependencies": {
     "@manypkg/get-packages": "catalog:",
@@ -17,5 +17,8 @@
     "dayjs": "catalog:",
     "execa": "catalog:",
     "pkg-types": "catalog:"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:"
   }
 }

@@ -5,7 +5,9 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { AccordionContent } from 'reka-ui'
 
-const props = defineProps<AccordionContentProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  AccordionContentProps & { class?: HTMLAttributes['class'] }
+>()
 
 const delegatedProps = reactiveOmit(props, 'class')
 </script>
@@ -17,7 +19,7 @@ const delegatedProps = reactiveOmit(props, 'class')
     class="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
   >
     <div :class="cn('pt-0 pb-4', props.class)">
-      <slot />
+      <slot></slot>
     </div>
   </AccordionContent>
 </template>

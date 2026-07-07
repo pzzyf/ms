@@ -11,11 +11,13 @@ import {
   useForwardProps,
 } from 'reka-ui'
 
-const props = defineProps<SelectItemProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  SelectItemProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class')
 
-const forwardedProps = useForwardProps(delegatedProps)
+const forwardedProps = useForwardProps(delegatedProperties)
 </script>
 
 <template>
@@ -38,7 +40,7 @@ const forwardedProps = useForwardProps(delegatedProps)
     </span>
 
     <SelectItemText>
-      <slot />
+      <slot></slot>
     </SelectItemText>
   </SelectItem>
 </template>

@@ -26,7 +26,7 @@ export function defaultResponseInterceptor({
         if (config.responseReturn === 'body') {
           return responseData
         }
-        else if (
+        if (
           isFunction(successCode)
             ? successCode(responseData[codeField])
             : responseData[codeField] === successCode

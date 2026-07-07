@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type { MsFormSchema } from '@ms-core/form-ui'
 import type { Recordable } from '@ms-core/typings'
-import type { AuthenticationProps } from './types'
+import type { AuthenticationProps as AuthenticationProperties } from './types'
 import { useMsForm } from '@ms-core/form-ui'
 
 import { MsButton } from '@ms-core/shadcn-ui'
 import { computed, reactive } from 'vue'
 import Title from './auth-title.vue'
 
-interface Props extends AuthenticationProps {
+interface Properties extends AuthenticationProperties {
   formSchema?: MsFormSchema[]
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const properties = withDefaults(defineProps<Properties>(), {
   title: '',
   subTitle: '',
   loading: false,
@@ -29,7 +29,7 @@ const [Form, formApi] = useMsForm(
       hideLabel: true,
       hideRequiredMark: true,
     },
-    schema: computed(() => props.formSchema),
+    schema: computed(() => properties.formSchema),
     showDefaultActions: false,
   }),
 )
@@ -76,6 +76,4 @@ async function handleSubmit() {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

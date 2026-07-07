@@ -2,7 +2,11 @@ import type { ComputedRef } from 'vue'
 
 import type { ZodType } from 'zod'
 
-import type { ExtendedFormApi, FormActions, MsFormProps } from './types'
+import type {
+  ExtendedFormApi,
+  FormActions,
+  MsFormProps as MsFormProperties,
+} from './types'
 
 import { createContext } from '@ms-core/shadcn-ui'
 
@@ -13,24 +17,24 @@ import { computed, toRaw, unref, useSlots } from 'vue'
 import { object, ZodIntersection, ZodNumber, ZodObject, ZodString } from 'zod'
 import { getDefaultsForSchema } from 'zod-defaults'
 
-type ExtendFormProps = MsFormProps & { formApi?: ExtendedFormApi }
+type ExtendFormProperties = MsFormProperties & { formApi?: ExtendedFormApi }
 
-export const [injectFormProps, provideFormProps]
-  = createContext<[ComputedRef<ExtendFormProps> | ExtendFormProps, FormActions]>(
-    'MsFormProps',
-  )
+export const [injectFormProperties, provideFormProperties] =
+  createContext<
+    [ComputedRef<ExtendFormProperties> | ExtendFormProperties, FormActions]
+  >('MsFormProps')
 
-export const [injectComponentRefMap, provideComponentRefMap]
-  = createContext<Map<string, unknown>>('ComponentRefMap')
+export const [injectComponentReferenceMap, provideComponentReferenceMap] =
+  createContext<Map<string, unknown>>('ComponentRefMap')
 
 export function useFormInitial(
-  props: ComputedRef<MsFormProps> | MsFormProps,
+  properties: ComputedRef<MsFormProperties> | MsFormProperties,
 ) {
   const slots = useSlots()
   const initialValues = generateInitialValues()
 
   const form = useForm({
-    ...(Object.keys(initialValues)?.length ? { initialValues } : {}),
+    ...(Object.keys(initialValues)?.length && { initialValues }),
   })
 
   const delegatedSlots = computed(() => {
@@ -48,13 +52,12 @@ export function useFormInitial(
     const initialValues: Record<string, any> = {}
 
     const zodObject: Record<string, ZodType> = {}
-    const schema = unref(props).schema || []
+    const schema = unref(properties).schema || []
 
-    schema.forEach((item) => {
+    for (const item of schema) {
       if (Reflect.has(item, 'defaultValue')) {
         set(initialValues, item.fieldName, item.defaultValue)
-      }
-      else if (item.rules && !isString(item.rules)) {
+      } else if (item.rules && !isString(item.rules)) {
         const rule = toRaw(item.rules)
         // 检查规则是否适合提取默认值
         const customDefaultValue = getCustomDefaultValue(rule)
@@ -63,7 +66,7 @@ export function useFormInitial(
           initialValues[item.fieldName] = customDefaultValue
         }
       }
-    })
+    }
 
     const schemaInitialValues = getDefaultsForSchema(object(zodObject))
 
@@ -80,10 +83,10 @@ export function useFormInitial(
     if (rule instanceof ZodString) {
       return '' // 默认为空字符串
     }
-    else if (rule instanceof ZodNumber) {
+    if (rule instanceof ZodNumber) {
       return null // 默认为 null（避免显示 0）
     }
-    else if (rule instanceof ZodObject) {
+    if (rule instanceof ZodObject) {
       // 递归提取嵌套对象的默认值
       const defaultValues: Record<string, any> = {}
       for (const [key, valueSchema] of Object.entries(rule.shape)) {
@@ -91,15 +94,15 @@ export function useFormInitial(
       }
       return defaultValues
     }
-    else if (rule instanceof ZodIntersection) {
+    if (rule instanceof ZodIntersection) {
       // 对于交集类型，从schema 提取默认值
       const leftDefaultValue = getCustomDefaultValue(rule._def.left)
       const rightDefaultValue = getCustomDefaultValue(rule._def.right)
 
       // 如果左右两边都能提取默认值，合并它们
       if (
-        typeof leftDefaultValue === 'object'
-        && typeof rightDefaultValue === 'object'
+        typeof leftDefaultValue === 'object' &&
+        typeof rightDefaultValue === 'object'
       ) {
         return { ...leftDefaultValue, ...rightDefaultValue }
       }
@@ -107,9 +110,7 @@ export function useFormInitial(
       // 否则优先使用左边的默认值
       return leftDefaultValue ?? rightDefaultValue
     }
-    else {
-      return undefined // 其他类型不提供默认值
-    }
+    return undefined // 其他类型不提供默认值
   }
 
   return {

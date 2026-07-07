@@ -1,5 +1,3 @@
-import { isFunction, isObject, isString } from '@vue/shared'
-
 /**
  * 检查传入的值是否为boolean
  * @param value
@@ -20,10 +18,6 @@ function getFirstNonNullOrUndefined<T>(
   return undefined
 }
 
-export {
-  getFirstNonNullOrUndefined,
-  isBoolean,
-  isFunction,
-  isObject,
-  isString,
-}
+export { getFirstNonNullOrUndefined, isBoolean }
+
+export { isFunction, isString, isObject } from '@vue/shared'

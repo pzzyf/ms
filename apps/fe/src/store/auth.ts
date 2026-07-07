@@ -12,11 +12,14 @@ export const useAuthStore = defineStore('auth', () => {
   const loginLoading = ref(false)
   const router = useRouter()
 
-  async function authLogin(params: Recordable<any>, onSuccess?: () => Promise<void> | void) {
+  async function authLogin(
+    parameters: Recordable<any>,
+    onSuccess?: () => Promise<void> | void,
+  ) {
     let userInfo: null | UserInfo = null
     try {
       loginLoading.value = true
-      const { accessToken } = await loginApi(params)
+      const { accessToken } = await loginApi(parameters)
 
       if (accessToken) {
         accessStore.setAccessToken(accessToken)
@@ -33,8 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
 
         if (accessStore.loginExpired) {
           accessStore.setLoginExpired(false)
-        }
-        else {
+        } else {
           onSuccess
             ? await onSuccess?.()
             : await router.push(
@@ -42,8 +44,7 @@ export const useAuthStore = defineStore('auth', () => {
               )
         }
       }
-    }
-    finally {
+    } finally {
       loginLoading.value = false
     }
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ButtonVariants } from '../../ui'
-import type { MsButtonProps } from './button'
+import type { MsButtonProps as MsButtonProperties } from './button'
 
 import { cn } from '@ms-core/shared/utils'
 
@@ -8,7 +8,7 @@ import { computed, useSlots } from 'vue'
 
 import MsButton from './button.vue'
 
-interface Props extends MsButtonProps {
+interface Properties extends MsButtonProperties {
   class?: any
   disabled?: boolean
   onClick?: () => void
@@ -18,7 +18,7 @@ interface Props extends MsButtonProps {
   variant?: ButtonVariants['variant']
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Properties>(), {
   disabled: false,
   onClick: () => {},
   tooltipDelayDuration: 200,
@@ -40,6 +40,6 @@ const showTooltip = computed(() => !!slots.tooltip || !!props.tooltip)
     size="icon"
     @click="onClick"
   >
-    <slot />
+    <slot></slot>
   </MsButton>
 </template>

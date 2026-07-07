@@ -1,30 +1,30 @@
 import type { UserConfig } from 'vite'
 
-import type { DefineApplicationOptions } from '../typing'
+import type { DefineApplicationOptions as DefineAppOptions } from '../typing'
 
 import { defineConfig, mergeConfig } from 'vite'
 
-import { loadApplicationPlugins } from '../plugins'
-import { loadAndConvertEnv } from '../utils/env'
+import { loadApplicationPlugins as loadAppPlugins } from '../plugins'
+import { loadAndConvertEnv as loadAndConvertEnvironment } from '../utils/env'
 import { getCommonConfig } from './common'
 
-function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
+function defineAppConfig(userConfigPromise?: DefineAppOptions) {
   return defineConfig(async (config) => {
     const options = await userConfigPromise?.(config)
 
-    const { base, port } = await loadAndConvertEnv()
+    const { base, port } = await loadAndConvertEnvironment()
     const { command } = config
     const { vite = {} } = options || {}
     const isBuild = command === 'build'
 
-    const plugins = await loadApplicationPlugins({
+    const plugins = await loadAppPlugins({
       injectMetadata: true,
       injectAppLoading: true,
       nitroMock: !isBuild,
       nitroMockOptions: {},
     })
 
-    const applicationConfig: UserConfig = {
+    const appConfig: UserConfig = {
       base,
       build: {
         rolldownOptions: {
@@ -49,19 +49,14 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
         port,
         warmup: {
           // 预热文件
-          clientFiles: [
-            './index.html',
-          ],
+          clientFiles: ['./index.html'],
         },
       },
     }
 
-    const mergedCommonConfig = mergeConfig(
-      await getCommonConfig(),
-      applicationConfig,
-    )
+    const mergedCommonConfig = mergeConfig(await getCommonConfig(), appConfig)
     return mergeConfig(mergedCommonConfig, vite)
   })
 }
 
-export { defineApplicationConfig }
+export { defineAppConfig as defineApplicationConfig }

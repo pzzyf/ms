@@ -113,7 +113,7 @@ interface ImportmapPluginOptions {
    * ]
    * ```
    */
-  importmap?: Array<{ name: string, range?: string }>
+  importmap?: Array<{ name: string; range?: string }>
   /**
    * 手动配置 ImportMap
    * @description 自定义 ImportMap 配置
@@ -179,7 +179,7 @@ interface CommonPluginOptions {
  * 应用插件配置选项
  * @description 用于配置应用构建时的插件选项
  */
-interface ApplicationPluginOptions extends CommonPluginOptions {
+interface AppPluginOptions extends CommonPluginOptions {
   /**
    * 是否开启压缩归档
    * @default false
@@ -293,15 +293,15 @@ interface LibraryPluginOptions extends CommonPluginOptions {
 /**
  * 应用配置选项类型
  */
-type ApplicationOptions = ApplicationPluginOptions
+type AppOptions = AppPluginOptions
 
 /**
  * 应用配置定义函数类型
  * @description 用于定义应用构建配置
  */
-type DefineApplicationOptions = (config?: ConfigEnv) => Promise<{
+type DefineAppOptions = (config?: ConfigEnv) => Promise<{
   /** 应用插件配置 */
-  application?: ApplicationOptions
+  application?: AppOptions
   /** Vite 配置 */
   vite?: UserConfig
 }>
@@ -310,16 +310,16 @@ type DefineApplicationOptions = (config?: ConfigEnv) => Promise<{
  * 配置定义类型
  * @description 应用或库的配置定义
  */
-type DefineConfig = DefineApplicationOptions
+type DefineConfig = DefineAppOptions
 
 type MsViteConfig = Promise<UserConfig> | UserConfig | UserConfigFnPromise
 
 export type {
-  ApplicationPluginOptions,
+  AppPluginOptions as ApplicationPluginOptions,
   ArchiverPluginOptions,
   CommonPluginOptions,
   ConditionPlugin,
-  DefineApplicationOptions,
+  DefineAppOptions as DefineApplicationOptions,
   DefineConfig,
   IImportMap,
   ImportmapPluginOptions,

@@ -6,9 +6,15 @@ function usePreferences() {
 
   const appPreferences = computed(() => preferences.app)
 
-  const authPanelRight = computed(() => appPreferences.value.authPageLayout === 'panel-right')
-  const authPanelLeft = computed(() => appPreferences.value.authPageLayout === 'panel-left')
-  const authPanelCenter = computed(() => appPreferences.value.authPageLayout === 'panel-center')
+  const authPanelRight = computed(
+    () => appPreferences.value.authPageLayout === 'panel-right',
+  )
+  const authPanelLeft = computed(
+    () => appPreferences.value.authPageLayout === 'panel-left',
+  )
+  const authPanelCenter = computed(
+    () => appPreferences.value.authPageLayout === 'panel-center',
+  )
 
   return {
     authPanelRight,

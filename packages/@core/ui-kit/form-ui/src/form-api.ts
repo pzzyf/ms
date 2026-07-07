@@ -1,13 +1,18 @@
 import type { Recordable } from '@ms-core/typings'
 import type { FormContext, GenericObject } from 'vee-validate'
 
-import type { MsFormProps } from './types'
+import type { MsFormProps as MsFormProperties } from './types'
 
 import { Store } from '@ms-core/shared/store'
-import { bindMethods, isFunction, mergeWithArrayOverride, StateHandler } from '@ms-core/shared/utils'
+import {
+  bindMethods,
+  isFunction,
+  mergeWithArrayOverride,
+  StateHandler,
+} from '@ms-core/shared/utils'
 import { toRaw } from 'vue'
 
-function getDefaultState(): MsFormProps {
+function getDefaultState(): MsFormProperties {
   return {
     actionWrapperClass: '',
     collapsed: false,
@@ -32,19 +37,19 @@ function getDefaultState(): MsFormProps {
 }
 
 class FormApi {
+  private latestSubmissionValues: null | Recordable<any> = null
+  private prevState: null | MsFormProperties = null
   public form: FormContext<GenericObject> | null = null
   isMounted = false
-  public state: null | MsFormProps = null
+  public state: null | MsFormProperties = null
   stateHandler: StateHandler
-  public store: Store<MsFormProps>
-  private prevState: null | MsFormProps = null
-  private latestSubmissionValues: null | Recordable<any> = null
+  public store: Store<MsFormProperties>
 
-  constructor(options: MsFormProps = {}) {
+  constructor(options: MsFormProperties = {}) {
     const storeState = { ...options }
     const defaultState = getDefaultState()
 
-    this.store = new Store<MsFormProps>({
+    this.store = new Store<MsFormProperties>({
       ...defaultState,
       ...storeState,
     })
@@ -71,14 +76,12 @@ class FormApi {
 
   private updateState() {
     const currentSchema = this.state?.schema ?? []
-    const prevSchema = this.prevState?.schema ?? []
+    const previousSchema = this.prevState?.schema ?? []
     // 进行了删除schema操作
-    if (currentSchema.length < prevSchema.length) {
-      const currentFields = new Set(
-        currentSchema.map(item => item.fieldName),
-      )
-      const deletedSchema = prevSchema.filter(
-        item => !currentFields.has(item.fieldName),
+    if (currentSchema.length < previousSchema.length) {
+      const currentFields = new Set(currentSchema.map((item) => item.fieldName))
+      const deletedSchema = previousSchema.filter(
+        (item) => !currentFields.has(item.fieldName),
       )
       for (const schema of deletedSchema) {
         this.form?.setFieldValue?.(schema.fieldName, undefined)
@@ -92,17 +95,18 @@ class FormApi {
   }
 
   setState(
-    stateOrFn:
-      | ((prev: MsFormProps) => Partial<MsFormProps>)
-      | Partial<MsFormProps>,
+    stateOrFunction:
+      | ((previous: MsFormProperties) => Partial<MsFormProperties>)
+      | Partial<MsFormProperties>,
   ) {
-    if (isFunction(stateOrFn)) {
-      this.store.setState((prev) => {
-        return mergeWithArrayOverride(stateOrFn(prev), prev)
+    if (isFunction(stateOrFunction)) {
+      this.store.setState((previous) => {
+        return mergeWithArrayOverride(stateOrFunction(previous), previous)
       })
-    }
-    else {
-      this.store.setState(prev => mergeWithArrayOverride(stateOrFn, prev))
+    } else {
+      this.store.setState((previous) =>
+        mergeWithArrayOverride(stateOrFunction, previous),
+      )
     }
   }
 
@@ -115,16 +119,15 @@ class FormApi {
 
     try {
       return structuredClone(values) as TValues
-    }
-    catch {
+    } catch {
       return { ...values } as TValues
     }
   }
 
   validate(
-    ...args: Parameters<FormContext<GenericObject>['validate']>
+    ...arguments_: Parameters<FormContext<GenericObject>['validate']>
   ): ReturnType<FormContext<GenericObject>['validate']> {
-    return this.getForm().validate(...args)
+    return this.getForm().validate(...arguments_)
   }
 
   unmount() {

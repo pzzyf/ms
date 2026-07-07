@@ -8,10 +8,6 @@ class PreferenceManager {
   private isInitialized = false
   private state
 
-  constructor() {
-    this.state = reactive({ ...defaultPreferences })
-  }
-
   initPreferences = async (namespace: string) => {
     if (this.isInitialized) {
       return
@@ -32,11 +28,17 @@ class PreferenceManager {
     Object.assign(this.state, mergedState)
   }
 
+  constructor() {
+    this.state = reactive({ ...defaultPreferences })
+  }
+
   private async saveToCache(namespace: string) {
     try {
-      localStorage.setItem(`${namespace}-preferences`, JSON.stringify(this.state))
-    }
-    catch (error) {
+      localStorage.setItem(
+        `${namespace}-preferences`,
+        JSON.stringify(this.state),
+      )
+    } catch (error) {
       console.error('Failed to save preferences to cache:', error)
     }
   }

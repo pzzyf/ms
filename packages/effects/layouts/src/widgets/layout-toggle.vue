@@ -14,8 +14,7 @@ defineOptions({
 const { authPanelRight, authPanelLeft, authPanelCenter } = usePreferences()
 
 function handleUpdate(value: string | undefined): any {
-  if (!value)
-    return
+  if (!value) return
   updatePreferences({
     app: {
       authPageLayout: value as AuthPageLayoutType,
@@ -43,7 +42,11 @@ const menus = computed((): MsDropdownMenuItem[] => [
 </script>
 
 <template>
-  <MsDropdownRadioMenu :menus="menus" :model-value="preferences.app.authPageLayout" @update:model-value="handleUpdate">
+  <MsDropdownRadioMenu
+    :menus="menus"
+    :model-value="preferences.app.authPageLayout"
+    @update:model-value="handleUpdate"
+  >
     <MsIconButton>
       <PanelRight v-if="authPanelRight" class="size-4" />
       <PanelLeft v-if="authPanelLeft" class="size-4" />

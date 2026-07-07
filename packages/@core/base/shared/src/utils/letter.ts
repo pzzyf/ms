@@ -13,8 +13,7 @@ function capitalizeFirstLetter(string: string): string {
  * @returns 首字母小写的字符串
  */
 function toLowerCaseFirstLetter(str: string): string {
-  if (!str)
-    return str // 如果字符串为空，直接返回
+  if (!str) return str // 如果字符串为空，直接返回
   return str.charAt(0).toLowerCase() + str.slice(1)
 }
 
@@ -30,8 +29,8 @@ function toCamelCase(key: string, parentKey: string): string {
   return parentKey + key.charAt(0).toUpperCase() + key.slice(1)
 }
 
-function kebabToCamelCase(str: string): string {
-  return str
+function kebabToCamelCase(string_: string): string {
+  return string_
     .split('-')
     .filter(Boolean)
     .map((word, index) =>

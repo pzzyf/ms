@@ -46,14 +46,13 @@ export function verifyAccessToken(
     ) as unknown as UserPayload
 
     const username = decoded.username
-    const user = MOCK_USERS.find(item => item.username === username)
+    const user = MOCK_USERS.find((item) => item.username === username)
     if (!user) {
       return null
     }
     const { password: _pwd, ...userinfo } = user
     return userinfo
-  }
-  catch {
+  } catch {
     return null
   }
 }
@@ -65,15 +64,14 @@ export function verifyRefreshToken(
     const decoded = jwt.verify(token, REFRESH_TOKEN_SECRET) as UserPayload
     const username = decoded.username
     const user = MOCK_USERS.find(
-      item => item.username === username,
+      (item) => item.username === username,
     ) as UserInfo
     if (!user) {
       return null
     }
     const { password: _pwd, ...userinfo } = user
     return userinfo
-  }
-  catch {
+  } catch {
     return null
   }
 }

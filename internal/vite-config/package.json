@@ -1,19 +1,19 @@
 {
   "name": "@ms/vite-config",
-  "type": "module",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "stub": "pnpm exec tsdown"
+  },
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./src/index.ts",
       "default": "./dist/index.mjs"
     }
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "stub": "pnpm exec tsdown"
   },
   "dependencies": {
     "@ms/node-utils": "workspace:*",
@@ -30,6 +30,7 @@
     "@vitejs/plugin-vue-jsx": "catalog:",
     "dotenv": "catalog:",
     "sass-embedded": "catalog:",
+    "tsdown": "catalog:",
     "unplugin-dts": "catalog:",
     "vite": "catalog:"
   }

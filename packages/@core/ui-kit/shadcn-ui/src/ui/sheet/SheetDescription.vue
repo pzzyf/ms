@@ -5,7 +5,9 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { DialogDescription } from 'reka-ui'
 
-const props = defineProps<DialogDescriptionProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  DialogDescriptionProps & { class?: HTMLAttributes['class'] }
+>()
 
 const delegatedProps = reactiveOmit(props, 'class')
 </script>
@@ -16,6 +18,6 @@ const delegatedProps = reactiveOmit(props, 'class')
     :class="cn('text-muted-foreground text-sm', props.class)"
     v-bind="delegatedProps"
   >
-    <slot />
+    <slot></slot>
   </DialogDescription>
 </template>

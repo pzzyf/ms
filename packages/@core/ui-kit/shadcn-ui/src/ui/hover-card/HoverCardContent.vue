@@ -3,11 +3,7 @@ import type { HoverCardContentProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
-import {
-  HoverCardContent,
-  HoverCardPortal,
-  useForwardProps,
-} from 'reka-ui'
+import { HoverCardContent, HoverCardPortal, useForwardProps } from 'reka-ui'
 
 defineOptions({
   inheritAttrs: false,
@@ -20,9 +16,9 @@ const props = withDefaults(
   },
 )
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class')
 
-const forwardedProps = useForwardProps(delegatedProps)
+const forwardedProps = useForwardProps(delegatedProperties)
 </script>
 
 <template>
@@ -37,7 +33,7 @@ const forwardedProps = useForwardProps(delegatedProps)
         )
       "
     >
-      <slot />
+      <slot></slot>
     </HoverCardContent>
   </HoverCardPortal>
 </template>

@@ -4,14 +4,14 @@ import { usePreferences } from '@ms/preferences'
 import AuthenticationFormView from './form.vue'
 import Toolbar from './toolbar.vue'
 
-interface Props {
+interface Properties {
   appName?: string
   logo?: string
   toolbar?: boolean
   toolbarList?: ToolbarType[]
 }
 
-withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Properties>(), {
   toolbar: true,
   toolbarList: () => ['layout'],
 })
@@ -28,7 +28,7 @@ const { authPanelCenter } = usePreferences()
     </template>
 
     <div v-if="authPanelCenter" class="relative flex-center w-full">
-      <div class="login-background absolute top-0 left-0 size-full" />
+      <div class="login-background absolute top-0 left-0 size-full"></div>
       <AuthenticationFormView
         class="w-full rounded-3xl pb-20 shadow-float shadow-primary/5 md:w-2/3 md:bg-background lg:w-1/2 xl:w-[36%]"
         data-side="bottom"

@@ -1,7 +1,7 @@
 {
   "name": "@ms-core/shared",
-  "type": "module",
   "version": "1.0.0",
+  "type": "module",
   "exports": {
     "./utils": {
       "types": "./src/utils/index.ts",

@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const findUser = MOCK_USERS.find(
-    item => item.username === username && item.password === password,
+    (item) => item.username === username && item.password === password,
   )
 
   if (!findUser) {

@@ -3,28 +3,24 @@ import type { GenericObject } from 'vee-validate'
 
 import type {
   FormCommonConfig,
-  FormRenderProps,
+  FormRenderProps as FormRenderProperties,
   FormSchema,
 } from '../types'
 
 import { Form } from '@ms-core/shadcn-ui'
 
-import {
-  cn,
-  isFunction,
-  mergeWithArrayOverride,
-} from '@ms-core/shared/utils'
+import { cn, isFunction, mergeWithArrayOverride } from '@ms-core/shared/utils'
 import { computed, useTemplateRef } from 'vue'
 
-import { provideComponentRefMap } from '../use-form-context'
-import { provideFormRenderProps } from './context'
+import { provideComponentReferenceMap } from '../use-form-context'
+import { provideFormRenderProperties } from './context'
 import { useExpandable } from './expandable'
 import FormField from './form-field.vue'
 
-interface Props extends FormRenderProps {}
+interface Properties extends FormRenderProperties {}
 
-const props = withDefaults(
-  defineProps<Props & { globalCommonConfig?: FormCommonConfig }>(),
+const properties = withDefaults(
+  defineProps<Properties & { globalCommonConfig?: FormCommonConfig }>(),
   {
     collapsedRows: 1,
     commonConfig: () => ({}),
@@ -40,35 +36,39 @@ const emits = defineEmits<{
 
 const wrapperClass = computed(() => {
   const cls = ['flex']
-  if (props.layout === 'inline') {
+  if (properties.layout === 'inline') {
     cls.push('flex-wrap gap-x-2')
+  } else {
+    cls.push(properties.compact ? 'gap-x-2' : 'gap-x-4', 'flex-col grid')
   }
-  else {
-    cls.push(props.compact ? 'gap-x-2' : 'gap-x-4', 'flex-col grid')
-  }
-  return cn(...cls, props.wrapperClass)
+  return cn(...cls, properties.wrapperClass)
 })
 
-provideFormRenderProps(props)
-provideComponentRefMap(new Map<string, unknown>())
+provideFormRenderProperties(properties)
+provideComponentReferenceMap(new Map<string, unknown>())
 
 const wrapperRef = useTemplateRef<HTMLElement>('wrapperRef')
-const { isCalculated, keepFormItemIndex } = useExpandable(props, wrapperRef)
+const { isCalculated, keepFormItemIndex } = useExpandable(
+  properties,
+  wrapperRef,
+)
 
-const formComponent = computed(() => (props.form ? 'form' : Form))
+const formComponent = computed(() => (properties.form ? 'form' : Form))
 
 const formComponentProps = computed(() => {
-  return props.form
+  return properties.form
     ? {
-        onSubmit: props.form.handleSubmit(val => emits('submit', val)),
+        onSubmit: properties.form.handleSubmit((value) =>
+          emits('submit', value),
+        ),
       }
     : {
-        onSubmit: (val: GenericObject) => emits('submit', val),
+        onSubmit: (value: GenericObject) => emits('submit', value),
       }
 })
 
 const formCollapsed = computed(() => {
-  return props.collapsed && isCalculated.value
+  return properties.collapsed && isCalculated.value
 })
 
 const computedSchema = computed(
@@ -78,27 +78,30 @@ const computedSchema = computed(
   })[] => {
     const {
       colon = false,
-      componentProps = {},
+      componentProps: componentProperties = {},
       controlClass = '',
       disabled,
       disabledOnChangeListener = true,
       disabledOnInputListener = true,
       emptyStateValue = undefined,
-      formFieldProps = {},
+      formFieldProps: formFieldProperties = {},
       formItemClass = '',
       hideLabel = false,
       hideRequiredMark = false,
       labelClass = '',
       labelWidth = 100,
-      modelPropName = '',
+      modelPropName: modelPropertyName = '',
       wrapperClass = '',
-    } = mergeWithArrayOverride(props.commonConfig, props.globalCommonConfig)
-    return (props.schema || []).map((schema, index) => {
+    } = mergeWithArrayOverride(
+      properties.commonConfig,
+      properties.globalCommonConfig,
+    )
+    return (properties.schema || []).map((schema, index) => {
       const keepIndex = keepFormItemIndex.value
 
-      const hidden
+      const isHidden =
         // 折叠状态 & 显示折叠按钮 & 当前索引大于保留索引
-        = props.showCollapseButton && !!formCollapsed.value && keepIndex
+        properties.showCollapseButton && !!formCollapsed.value && keepIndex
           ? keepIndex <= index
           : false
 
@@ -107,8 +110,7 @@ const computedSchema = computed(
       if (isFunction(schema.formItemClass)) {
         try {
           resolvedSchemaFormItemClass = schema.formItemClass()
-        }
-        catch (error) {
+        } catch (error) {
           console.error('Error calling formItemClass function:', error)
           resolvedSchemaFormItemClass = ''
         }
@@ -123,19 +125,19 @@ const computedSchema = computed(
         hideLabel,
         hideRequiredMark,
         labelWidth,
-        modelPropName,
+        modelPropName: modelPropertyName,
         wrapperClass,
         ...schema,
-        commonComponentProps: componentProps,
+        commonComponentProps: componentProperties,
         componentProps: schema.componentProps,
         controlClass: cn(controlClass, schema.controlClass),
         formFieldProps: {
-          ...formFieldProps,
+          ...formFieldProperties,
           ...schema.formFieldProps,
         },
         formItemClass: cn(
           'flex-shrink-0',
-          { hidden },
+          { hidden: isHidden },
           formItemClass,
           resolvedSchemaFormItemClass,
         ),
@@ -156,7 +158,7 @@ const computedSchema = computed(
           :rules="cSchema.rules"
         >
           <template #default="slotProps">
-            <slot v-bind="slotProps" :name="cSchema.fieldName" />
+            <slot v-bind="slotProps" :name="cSchema.fieldName"></slot>
           </template>
         </FormField>
       </template>

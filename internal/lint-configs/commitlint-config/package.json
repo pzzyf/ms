@@ -10,6 +10,7 @@
   "devDependencies": {
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
+    "@commitlint/types": "catalog:",
     "commitlint-plugin-function-rules": "catalog:"
   }
 }

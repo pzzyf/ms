@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "pinia": "catalog:",
-    "pinia-plugin-persistedstate": "catalog:"
+    "pinia-plugin-persistedstate": "catalog:",
+    "vue": "catalog:"
   }
 }

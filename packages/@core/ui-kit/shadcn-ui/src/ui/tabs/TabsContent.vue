@@ -5,7 +5,9 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { TabsContent } from 'reka-ui'
 
-const props = defineProps<TabsContentProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  TabsContentProps & { class?: HTMLAttributes['class'] }
+>()
 
 const delegatedProps = reactiveOmit(props, 'class')
 </script>
@@ -16,6 +18,6 @@ const delegatedProps = reactiveOmit(props, 'class')
     :class="cn('flex-1 outline-none', props.class)"
     v-bind="delegatedProps"
   >
-    <slot />
+    <slot></slot>
   </TabsContent>
 </template>

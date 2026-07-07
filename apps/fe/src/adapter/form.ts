@@ -1,7 +1,4 @@
-import type {
-  MsFormSchema as FormSchema,
-  MsFormProps,
-} from '@ms/common-ui'
+import type { MsFormSchema as FormSchema, MsFormProps } from '@ms/common-ui'
 
 import { setupMsForm, useMsForm as useForm, z } from '@ms/common-ui'
 

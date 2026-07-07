@@ -29,10 +29,10 @@ class RequestClient {
 
     // 实例化拦截器管理器
     const interceptorManager = new InterceptorManager(this.instance)
-    this.addRequestInterceptor
-      = interceptorManager.addRequestInterceptor.bind(interceptorManager)
-    this.addResponseInterceptor
-      = interceptorManager.addResponseInterceptor.bind(interceptorManager)
+    this.addRequestInterceptor =
+      interceptorManager.addRequestInterceptor.bind(interceptorManager)
+    this.addResponseInterceptor =
+      interceptorManager.addResponseInterceptor.bind(interceptorManager)
   }
 
   /**
@@ -94,8 +94,7 @@ class RequestClient {
         ...config,
       })
       return response as T
-    }
-    catch (error: any) {
+    } catch (error: any) {
       throw error.response ? error.response.data : error
     }
   }

@@ -21,15 +21,13 @@ export function viteNitroMockPlugin({
         return
       }
 
-      const pkg = await getPackage(mockServerPackage)
-      if (!pkg) {
-        consola.log(
-          `Package ${mockServerPackage} not found. Skip mock server.`,
-        )
+      const package_ = await getPackage(mockServerPackage)
+      if (!package_) {
+        consola.log(`Package ${mockServerPackage} not found. Skip mock server.`)
         return
       }
 
-      runNitroServer(pkg.dir, port, verbose)
+      runNitroServer(package_.dir, port, verbose)
 
       const _printUrls = server.printUrls
       server.printUrls = () => {
@@ -68,13 +66,13 @@ async function runNitroServer(rootDir: string, port: number, verbose: boolean) {
             if (diff.length === 0) {
               return
             }
-            verbose
-            && consola.info(
-              `Nitro config updated:\n${diff
-                .map(entry => `  ${entry.toString()}`)
-                .join('\n')}`,
-            )
-            await (diff.every(e => hmrKeyRe.test(e.key))
+            verbose &&
+              consola.info(
+                `Nitro config updated:\n${diff
+                  .map((entry) => `  ${entry.toString()}`)
+                  .join('\n')}`,
+              )
+            await (diff.every((e) => hmrKeyRe.test(e.key))
               ? nitro.updateConfig(newConfig.config)
               : reload())
           },

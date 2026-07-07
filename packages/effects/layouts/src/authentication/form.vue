@@ -12,7 +12,7 @@ defineProps<{
   <div
     class="relative flex-col-center bg-background px-6 py-10 lg:flex-initial lg:px-8 dark:bg-background-deep"
   >
-    <slot />
+    <slot></slot>
     <!-- Router View with Transition and KeepAlive -->
     <RouterView v-slot="{ Component, route }">
       <Transition appear mode="out-in" name="slide-right">

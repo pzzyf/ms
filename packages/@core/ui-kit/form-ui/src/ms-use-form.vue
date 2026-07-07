@@ -1,6 +1,6 @@
 <!-- eslint-disable no-console -->
 <script setup lang="ts">
-import type { ExtendedFormApi, MsFormProps } from './types'
+import type { ExtendedFormApi, MsFormProps as MsFormProperties } from './types'
 import { useForwardPriorityValues } from '@ms-core/composables'
 import {
   COMPONENT_BIND_EVENT_MAP,
@@ -9,11 +9,9 @@ import {
 } from './config'
 import { Form } from './form-render'
 
-import {
-  useFormInitial,
-} from './use-form-context'
+import { useFormInitial } from './use-form-context'
 
-interface Props extends MsFormProps {
+interface Properties extends MsFormProperties {
   formApi?: ExtendedFormApi
 }
 
@@ -21,15 +19,15 @@ defineOptions({
   name: 'MsUseForm',
 })
 
-const props = defineProps<Props>()
+const properties = defineProps<Properties>()
 
-const state = props.formApi?.useStore?.()
+const state = properties.formApi?.useStore?.()
 
-const forward = useForwardPriorityValues(props, state)
+const forward = useForwardPriorityValues(properties, state)
 
 const { form } = useFormInitial(forward)
 
-props.formApi?.mount(form)
+properties.formApi?.mount(form)
 </script>
 
 <template>
@@ -43,6 +41,4 @@ props.formApi?.mount(form)
   />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

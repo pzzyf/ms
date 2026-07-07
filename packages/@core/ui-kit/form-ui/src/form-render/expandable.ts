@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 
-import type { FormRenderProps } from '../types'
+import type { FormRenderProps as FormRenderProperties } from '../types'
 
 import {
   breakpointsTailwind,
@@ -10,14 +10,27 @@ import {
 
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
+function getRowStart(rowHeights: string[], itemTop: number) {
+  let cumulativeHeight = 0
+
+  for (const [index, rowHeight] of rowHeights.entries()) {
+    cumulativeHeight += Number(rowHeight.replace('px', ''))
+    if (itemTop < cumulativeHeight) {
+      return index + 1
+    }
+  }
+
+  return 0
+}
+
 /**
  * 动态计算行数
  */
 export function useExpandable(
-  props: FormRenderProps,
-  wrapperRef: Readonly<Ref<HTMLElement | null>>,
+  properties: FormRenderProperties,
+  wrapperReference: Readonly<Ref<HTMLElement | null>>,
 ) {
-  const isVisible = useElementVisibility(wrapperRef)
+  const isVisible = useElementVisibility(wrapperReference)
   const rowMapping = ref<Record<number, number>>({})
   // 是否已经计算过一次
   const isCalculated = ref(false)
@@ -25,7 +38,7 @@ export function useExpandable(
   const breakpoints = useBreakpoints(breakpointsTailwind)
 
   const keepFormItemIndex = computed(() => {
-    const rows = props.collapsedRows ?? 1
+    const rows = properties.collapsedRows ?? 1
     const mapping = rowMapping.value
     let maxItem = 0
     for (let index = 1; index <= rows; index++) {
@@ -37,34 +50,36 @@ export function useExpandable(
 
   watch(
     [
-      () => props.showCollapseButton,
+      () => properties.showCollapseButton,
       () => breakpoints.active().value,
-      () => props.schema?.length,
+      () => properties.schema?.length,
       () => isVisible.value,
     ],
-    async ([val]) => {
-      if (val) {
-        await nextTick()
-        rowMapping.value = {}
-        isCalculated.value = false
-        await calculateRowMapping()
+    async ([value]) => {
+      if (!value) {
+        return
       }
+
+      await nextTick()
+      rowMapping.value = {}
+      isCalculated.value = false
+      await calculateRowMapping()
     },
   )
 
   async function calculateRowMapping() {
-    if (!props.showCollapseButton) {
+    if (!properties.showCollapseButton) {
       return
     }
 
     await nextTick()
-    if (!wrapperRef.value) {
+    if (!wrapperReference.value) {
       return
     }
 
-    const formItems = [...wrapperRef.value.children]
+    const formItems = [...wrapperReference.value.children]
 
-    const container = wrapperRef.value
+    const container = wrapperReference.value
     const containerStyles = window.getComputedStyle(container)
     const rowHeights = containerStyles
       .getPropertyValue('grid-template-rows')
@@ -72,32 +87,23 @@ export function useExpandable(
 
     const containerRect = container?.getBoundingClientRect()
 
-    formItems.forEach((el) => {
-      const itemRect = el.getBoundingClientRect()
+    for (const element of formItems) {
+      const itemRect = element.getBoundingClientRect()
 
       // 计算元素在第几行
       const itemTop = itemRect.top - containerRect.top
-      let rowStart = 0
-      let cumulativeHeight = 0
-
-      for (const [i, rowHeight] of rowHeights.entries()) {
-        cumulativeHeight += Number.parseFloat(rowHeight)
-        if (itemTop < cumulativeHeight) {
-          rowStart = i + 1
-          break
-        }
-      }
-      if (rowStart > (props?.collapsedRows ?? 1)) {
-        return
+      const rowStart = getRowStart(rowHeights, itemTop)
+      if (rowStart > (properties?.collapsedRows ?? 1)) {
+        continue
       }
       rowMapping.value[rowStart] = (rowMapping.value[rowStart] ?? 0) + 1
       isCalculated.value = true
-    })
+    }
   }
 
   onMounted(() => {
     calculateRowMapping()
   })
 
-  return { isCalculated, keepFormItemIndex, wrapperRef }
+  return { isCalculated, keepFormItemIndex, wrapperRef: wrapperReference }
 }

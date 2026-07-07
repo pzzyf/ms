@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DropdownMenuProps } from './interface'
+import type { DropdownMenuProps as DropdownMenuProperties } from './interface'
 
 import {
   DropdownMenu,
@@ -9,9 +9,9 @@ import {
   DropdownMenuTrigger,
 } from '../../ui'
 
-interface Props extends DropdownMenuProps {}
+interface Properties extends DropdownMenuProperties {}
 
-withDefaults(defineProps<Props>(), {})
+withDefaults(defineProps<Properties>(), {})
 
 const modelValue = defineModel<string>()
 
@@ -23,7 +23,7 @@ function handleItemClick(value: string) {
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child class="flex items-center gap-1">
-      <slot />
+      <slot></slot>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="start">
       <DropdownMenuGroup>

@@ -16,31 +16,30 @@ export async function run(options: RunOptions) {
   const { packages } = await getPackages()
 
   // 只显示有对应命令的包
-  const selectPkgs = packages.filter((pkg) => {
-    return (pkg?.packageJson as Record<string, any>)?.scripts?.[command]
+  const selectPkgs = packages.filter((package_) => {
+    return (package_?.packageJson as Record<string, any>)?.scripts?.[command]
   })
 
-  let selectPkg: string | symbol
+  let selectPackage: string | symbol
 
   if (selectPkgs.length > 1) {
-    selectPkg = await select<string>({
+    selectPackage = await select<string>({
       message: `Select the app you need to run [${command}]:`,
-      options: selectPkgs.map(item => ({
+      options: selectPkgs.map((item) => ({
         label: item?.packageJson.name,
         value: item?.packageJson.name,
       })),
     })
 
-    if (isCancel(selectPkg) || !selectPkg) {
+    if (isCancel(selectPackage) || !selectPackage) {
       cancel('👋 Has cancelled')
       process.exit(0)
     }
-  }
-  else {
-    selectPkg = selectPkgs[0]?.packageJson?.name ?? ''
+  } else {
+    selectPackage = selectPkgs[0]?.packageJson?.name ?? ''
   }
 
-  execaCommand(`pnpm --filter=${selectPkg} run ${command}`, {
+  execaCommand(`pnpm --filter=${selectPackage} run ${command}`, {
     stdio: 'inherit',
   })
 }

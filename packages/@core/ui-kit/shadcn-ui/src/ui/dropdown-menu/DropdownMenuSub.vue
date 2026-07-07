@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import type { DropdownMenuSubEmits, DropdownMenuSubProps } from 'reka-ui'
-import {
-  DropdownMenuSub,
-  useForwardPropsEmits,
-} from 'reka-ui'
+import { DropdownMenuSub, useForwardPropsEmits } from 'reka-ui'
 
-const props = defineProps<DropdownMenuSubProps>()
+const properties = defineProps<DropdownMenuSubProps>()
 const emits = defineEmits<DropdownMenuSubEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(properties, emits)
 </script>
 
 <template>
-  <DropdownMenuSub v-slot="slotProps" data-slot="dropdown-menu-sub" v-bind="forwarded">
-    <slot v-bind="slotProps" />
+  <DropdownMenuSub
+    v-slot="slotProps"
+    data-slot="dropdown-menu-sub"
+    v-bind="forwarded"
+  >
+    <slot v-bind="slotProps"></slot>
   </DropdownMenuSub>
 </template>

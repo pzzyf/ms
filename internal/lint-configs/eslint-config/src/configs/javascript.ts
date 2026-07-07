@@ -1,9 +1,9 @@
-import type { Linter } from "eslint";
-import js from '@eslint/js';
-import pluginUnusedImports from 'eslint-plugin-unused-imports';
-import globals from 'globals';
+import type { Linter } from 'eslint'
+import js from '@eslint/js'
+import pluginUnusedImports from 'eslint-plugin-unused-imports'
+import globals from 'globals'
 
-export async function javascript(): Promise<Linter.Config[]>{
+export async function javascript(): Promise<Linter.Config[]> {
   return [
     {
       languageOptions: {
@@ -31,8 +31,9 @@ export async function javascript(): Promise<Linter.Config[]>{
       plugins: {
         'unused-imports': pluginUnusedImports,
       },
-      rules:{
+      rules: {
         ...js.configs.recommended.rules,
+        'no-unused-vars': 'off',
         'unused-imports/no-unused-imports': 'error',
         'unused-imports/no-unused-vars': [
           'error',
@@ -44,7 +45,7 @@ export async function javascript(): Promise<Linter.Config[]>{
           },
         ],
         'no-var': 'error',
-      }
-    }
+      },
+    },
   ]
 }

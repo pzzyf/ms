@@ -1,6 +1,12 @@
 {
   "name": "@ms/turbo-run",
   "version": "1.0.0",
+  "scripts": {
+    "stub": "pnpm exec tsdown"
+  },
+  "bin": {
+    "turbo-run": "./bin/turbo-run.mjs"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -8,14 +14,12 @@
     },
     "./package.json": "./package.json"
   },
-  "bin": {
-    "turbo-run": "./bin/turbo-run.mjs"
-  },
-  "scripts": {
-    "stub": "pnpm exec tsdown"
-  },
   "dependencies": {
     "@clack/prompts": "catalog:",
+    "@ms/node-utils": "workspace:*",
     "cac": "catalog:"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:"
   }
 }

@@ -31,7 +31,7 @@ async function viteInjectAppLoadingPlugin(
     transformIndexHtml: {
       handler(html) {
         const re = /<body\s*>/
-        html = html.replace(re, `<body>${loadingHtml}`)
+        html = html.replace(re, () => `<body>${loadingHtml}`)
         return html
       },
       order: 'pre',

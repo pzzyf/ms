@@ -8,21 +8,32 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { PaginationFirst, useForwardProps } from 'reka-ui'
 
-const props = withDefaults(defineProps<PaginationFirstProps & {
-  size?: ButtonVariants['size']
-  class?: HTMLAttributes['class']
-}>(), {
-  size: 'default',
-})
+const props = withDefaults(
+  defineProps<
+    PaginationFirstProps & {
+      size?: ButtonVariants['size']
+      class?: HTMLAttributes['class']
+    }
+  >(),
+  {
+    size: 'default',
+  },
+)
 
-const delegatedProps = reactiveOmit(props, 'class', 'size')
-const forwarded = useForwardProps(delegatedProps)
+const delegatedProperties = reactiveOmit(props, 'class', 'size')
+const forwarded = useForwardProps(delegatedProperties)
 </script>
 
 <template>
   <PaginationFirst
     data-slot="pagination-first"
-    :class="cn(buttonVariants({ variant: 'ghost', size }), 'gap-1 px-2.5 sm:pr-2.5', props.class)"
+    :class="
+      cn(
+        buttonVariants({ variant: 'ghost', size }),
+        'gap-1 px-2.5 sm:pr-2.5',
+        props.class,
+      )
+    "
     v-bind="forwarded"
   >
     <slot>

@@ -9,10 +9,7 @@ const logo = computed(() => preferences.logo.source)
 </script>
 
 <template>
-  <AuthPageLayout
-    :app-name="appName"
-    :logo="logo"
-  />
+  <AuthPageLayout :app-name="appName" :logo="logo" />
 </template>
 
 <style scoped></style>

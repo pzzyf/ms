@@ -31,6 +31,7 @@
     "eslint-plugin-yml": "catalog:",
     "globals": "catalog:",
     "jsonc-eslint-parser": "catalog:",
+    "tsdown": "catalog:",
     "vue-eslint-parser": "catalog:",
     "yaml-eslint-parser": "catalog:"
   }

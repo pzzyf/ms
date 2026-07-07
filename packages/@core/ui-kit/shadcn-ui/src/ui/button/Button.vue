@@ -6,13 +6,13 @@ import { cn } from '@ms-core/shared/utils'
 import { Primitive } from 'reka-ui'
 import { buttonVariants } from '.'
 
-interface Props extends PrimitiveProps {
+interface Properties extends PrimitiveProps {
   variant?: ButtonVariants['variant']
   size?: ButtonVariants['size']
   class?: HTMLAttributes['class']
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Properties>(), {
   as: 'button',
 })
 </script>
@@ -26,6 +26,6 @@ const props = withDefaults(defineProps<Props>(), {
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
   >
-    <slot />
+    <slot></slot>
   </Primitive>
 </template>

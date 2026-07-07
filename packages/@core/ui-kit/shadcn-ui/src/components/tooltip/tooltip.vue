@@ -12,14 +12,14 @@ import {
   TooltipTrigger,
 } from '../../ui'
 
-interface Props {
+interface Properties {
   contentClass?: ClassType
   contentStyle?: StyleValue
   delayDuration?: number
   side?: TooltipContentProps['side']
 }
 
-withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Properties>(), {
   delayDuration: 0,
   side: 'right',
 })
@@ -29,7 +29,7 @@ withDefaults(defineProps<Props>(), {
   <TooltipProvider :delay-duration="delayDuration">
     <Tooltip>
       <TooltipTrigger as-child tabindex="-1">
-        <slot name="trigger" />
+        <slot name="trigger"></slot>
       </TooltipTrigger>
       <TooltipContent
         :class="contentClass"
@@ -37,7 +37,7 @@ withDefaults(defineProps<Props>(), {
         :style="contentStyle"
         class="side-content rounded-md bg-accent text-popover-foreground"
       >
-        <slot />
+        <slot></slot>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>

@@ -6,15 +6,26 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { NumberFieldDecrement, useForwardProps } from 'reka-ui'
 
-const props = defineProps<NumberFieldDecrementProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  NumberFieldDecrementProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class')
 
-const forwarded = useForwardProps(delegatedProps)
+const forwarded = useForwardProps(delegatedProperties)
 </script>
 
 <template>
-  <NumberFieldDecrement data-slot="decrement" v-bind="forwarded" :class="cn('absolute top-1/2 -translate-y-1/2 left-0 p-3 disabled:cursor-not-allowed disabled:opacity-20', props.class)">
+  <NumberFieldDecrement
+    data-slot="decrement"
+    v-bind="forwarded"
+    :class="
+      cn(
+        'absolute top-1/2 -translate-y-1/2 left-0 p-3 disabled:cursor-not-allowed disabled:opacity-20',
+        props.class,
+      )
+    "
+  >
     <slot>
       <MinusIcon class="h-4 w-4" />
     </slot>

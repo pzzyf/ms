@@ -1,7 +1,7 @@
 import type { PluginOption } from 'vite'
 
 import type {
-  ApplicationPluginOptions,
+  ApplicationPluginOptions as AppPluginOptions,
   CommonPluginOptions,
   ConditionPlugin,
 } from '../typing'
@@ -9,7 +9,7 @@ import type {
 import tailwindcss from '@tailwindcss/vite'
 import viteVue from '@vitejs/plugin-vue'
 import viteVueJsx from '@vitejs/plugin-vue-jsx'
-import viteDtsPlugin from 'unplugin-dts/vite'
+
 import { viteInjectAppLoadingPlugin } from './inject-app-loading'
 import { viteMetadataPlugin } from './inject-metadata'
 import { viteNitroMockPlugin } from './nitro-mock'
@@ -21,10 +21,12 @@ import { viteNitroMockPlugin } from './nitro-mock'
 async function loadConditionPlugins(conditionPlugins: ConditionPlugin[]) {
   const plugins: PluginOption[] = []
   for (const conditionPlugin of conditionPlugins) {
-    if (conditionPlugin.condition) {
-      const realPlugins = await conditionPlugin.plugins()
-      plugins.push(...realPlugins)
+    if (!conditionPlugin.condition) {
+      continue
     }
+
+    const realPlugins = await conditionPlugin.plugins()
+    plugins.push(...realPlugins)
   }
   return plugins.flat()
 }
@@ -60,13 +62,11 @@ async function loadCommonPlugins(
 /**
  * 根据条件获取应用类型的vite插件
  */
-async function loadApplicationPlugins(options: ApplicationPluginOptions): Promise<PluginOption[]> {
-  const {
-    injectAppLoading,
-    nitroMock,
-    nitroMockOptions,
-    ...commonOptions
-  } = options
+async function loadAppPlugins(
+  options: AppPluginOptions,
+): Promise<PluginOption[]> {
+  const { injectAppLoading, nitroMock, nitroMockOptions, ...commonOptions } =
+    options
 
   const commonPlugins = await loadCommonPlugins(commonOptions)
 
@@ -85,7 +85,6 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
   ])
 }
 
-export {
-  loadApplicationPlugins,
-  viteDtsPlugin,
-}
+export { loadAppPlugins as loadApplicationPlugins }
+
+export { default as viteDtsPlugin } from 'unplugin-dts/vite'

@@ -34,52 +34,49 @@ function resolveZodDefaultValue(value: unknown) {
 export function getBaseRules<
   ChildType extends ZodObject | ZodTypeAny = ZodTypeAny,
 >(schema: ChildType | ZodTypeAny): ChildType | null {
-  if (!schema || isString(schema))
-    return null
+  let currentSchema = schema
 
-  const def = getZodDef(schema)
-  if (def.innerType)
-    return getBaseRules(def.innerType as ChildType)
+  while (currentSchema && !isString(currentSchema)) {
+    const def = getZodDef(currentSchema)
+    const nextSchema = def.innerType ?? def.schema ?? def.in
 
-  if (def.schema)
-    return getBaseRules(def.schema as ChildType)
+    if (!nextSchema) {
+      return currentSchema as ChildType
+    }
 
-  if (def.in)
-    return getBaseRules(def.in as ChildType)
+    currentSchema = nextSchema as ChildType
+  }
 
-  return schema as ChildType
+  return null
 }
 
 /**
  * Search for a "ZodDefault" in the Zod stack and return its value.
  */
 export function getDefaultValueInZodStack(schema: ZodTypeAny): any {
-  if (!schema || isString(schema)) {
-    return
-  }
-  const typedSchema = schema as unknown as ZodDefault<ZodNumber | ZodString>
-  const def = getZodDef(typedSchema)
+  let currentSchema = schema
 
-  if (def.typeName === 'ZodDefault' || def.type === 'default') {
-    return resolveZodDefaultValue(def.defaultValue)
-  }
+  while (currentSchema && !isString(currentSchema)) {
+    const typedSchema = currentSchema as unknown as ZodDefault<
+      ZodNumber | ZodString
+    >
+    const def = getZodDef(typedSchema)
 
-  if (def.innerType) {
-    return getDefaultValueInZodStack(def.innerType)
-  }
-  if (def.schema) {
-    return getDefaultValueInZodStack(def.schema)
-  }
-  if (def.in) {
-    return getDefaultValueInZodStack(def.in)
-  }
+    if (def.typeName === 'ZodDefault' || def.type === 'default') {
+      return resolveZodDefaultValue(def.defaultValue)
+    }
 
-  return undefined
+    const nextSchema = def.innerType ?? def.schema ?? def.in
+    if (!nextSchema) {
+      return undefined
+    }
+    currentSchema = nextSchema
+  }
 }
 
-export function isEventObjectLike(obj: any) {
-  if (!obj || !isObject(obj)) {
+export function isEventObjectLike(object: any) {
+  if (!object || !isObject(object)) {
     return false
   }
-  return Reflect.has(obj, 'target') && Reflect.has(obj, 'stopPropagation')
+  return Reflect.has(object, 'target') && Reflect.has(object, 'stopPropagation')
 }

@@ -10,30 +10,29 @@ import type { FormApi } from './form-api'
 
 export type FormLayout = 'horizontal' | 'inline' | 'vertical'
 
-export type BaseFormComponentType
-  = | 'DefaultButton'
-    | 'PrimaryButton'
-    | 'MsCheckbox'
-    | 'MsInput'
-    | 'MsInputPassword'
-    | 'MsPinInput'
-    | 'MsSelect'
-    | (Record<never, never> & string)
+export type BaseFormComponentType =
+  | 'DefaultButton'
+  | 'PrimaryButton'
+  | 'MsCheckbox'
+  | 'MsInput'
+  | 'MsInputPassword'
+  | 'MsPinInput'
+  | 'MsSelect'
+  | (Record<never, never> & string)
 
 type Breakpoints = '2xl:' | '3xl:' | '' | 'lg:' | 'md:' | 'sm:' | 'xl:'
 
 type GridCols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13
 
-export type WrapperClassType
-  = | `${Breakpoints}grid-cols-${GridCols}`
-    | (Record<never, never> & string)
+export type WrapperClassType =
+  `${Breakpoints}grid-cols-${GridCols}` | (Record<never, never> & string)
 
-export type FormItemClassType
-  = | `${Breakpoints}cols-end-${'auto' | GridCols}`
-    | `${Breakpoints}cols-span-${'auto' | 'full' | GridCols}`
-    | `${Breakpoints}cols-start-${'auto' | GridCols}`
-    | (Record<never, never> & string)
-    | WrapperClassType
+export type FormItemClassType =
+  | `${Breakpoints}cols-end-${'auto' | GridCols}`
+  | `${Breakpoints}cols-span-${'auto' | 'full' | GridCols}`
+  | `${Breakpoints}cols-start-${'auto' | GridCols}`
+  | (Record<never, never> & string)
+  | WrapperClassType
 
 export type FormFieldOptions = Partial<
   FieldOptions & {
@@ -54,12 +53,12 @@ export interface FormShape {
   rules?: ZodTypeAny
 }
 
-export type MaybeComponentPropKey
-  = | 'options'
-    | 'placeholder'
-    | 'title'
-    | keyof HtmlHTMLAttributes
-    | (Record<never, never> & string)
+export type MaybeComponentPropKey =
+  | 'options'
+  | 'placeholder'
+  | 'title'
+  | keyof HtmlHTMLAttributes
+  | (Record<never, never> & string)
 
 export type MaybeComponentProps = { [K in MaybeComponentPropKey]?: any }
 
@@ -67,12 +66,12 @@ export type FormActions = FormContext<GenericObject>
 
 export type CustomRenderType = (() => Component | string) | string
 
-export type FormSchemaRuleType
-  = | 'required'
-    | 'selectRequired'
-    | null
-    | (Record<never, never> & string)
-    | ZodTypeAny
+export type FormSchemaRuleType =
+  | 'required'
+  | 'selectRequired'
+  | null
+  | (Record<never, never> & string)
+  | ZodTypeAny
 
 type FormItemDependenciesCondition<T = boolean | PromiseLike<boolean>> = (
   value: Partial<Record<string, any>>,
@@ -84,7 +83,7 @@ type FormItemDependenciesConditionWithRules = (
   actions: FormActions,
 ) => FormSchemaRuleType | PromiseLike<FormSchemaRuleType>
 
-type FormItemDependenciesConditionWithProps = (
+type FormItemDependenciesConditionWithProperties = (
   value: Partial<Record<string, any>>,
   actions: FormActions,
 ) => MaybeComponentProps | PromiseLike<MaybeComponentProps>
@@ -94,7 +93,7 @@ export interface FormItemDependencies {
    * 组件参数
    * @returns 组件参数
    */
-  componentProps?: FormItemDependenciesConditionWithProps
+  componentProps?: FormItemDependenciesConditionWithProperties
   /**
    * 是否禁用
    * @returns 是否禁用
@@ -129,11 +128,11 @@ export interface FormItemDependencies {
   triggerFields: string[]
 }
 
-type ComponentProps
-  = | ((
-    value: Partial<Record<string, any>>,
-    actions: FormActions,
-  ) => MaybeComponentProps)
+type ComponentProperties =
+  | ((
+      value: Partial<Record<string, any>>,
+      actions: FormActions,
+    ) => MaybeComponentProps)
   | MaybeComponentProps
 
 export interface FormCommonConfig {
@@ -144,7 +143,7 @@ export interface FormCommonConfig {
   /**
    * 所有表单项的props
    */
-  componentProps?: ComponentProps
+  componentProps?: ComponentProperties
   /**
    * 所有表单项的控件样式
    */
@@ -225,10 +224,7 @@ export type FieldMappingTime = [
   string,
   [string, string],
   (
-    | ((value: any, fieldName: string) => any)
-    | [string, string]
-    | null
-    | string
+    ((value: any, fieldName: string) => any) | [string, string] | null | string
   )?,
 ][]
 
@@ -244,7 +240,7 @@ export interface FormSchema<
   /** 组件 */
   component: Component | T
   /** 组件参数 */
-  componentProps?: ComponentProps
+  componentProps?: ComponentProperties
   /** 默认值 */
   defaultValue?: any
   /** 依赖 */
@@ -350,9 +346,9 @@ export interface ActionButtonOptions extends MsButtonProps {
 export interface MsFormProps<
   T extends BaseFormComponentType = BaseFormComponentType,
 > extends Omit<
-    FormRenderProps<T>,
+  FormRenderProps<T>,
   'componentBindEventMap' | 'componentMap' | 'form'
-  > {
+> {
   /**
    * 操作按钮是否反转（提交按钮前置）
    */
@@ -452,13 +448,13 @@ export interface MsFormAdapterOptions<
   defineRules?: {
     required?: (
       value: any,
-      params: any,
-      ctx: Record<string, any>,
+      parameters: any,
+      context: Record<string, any>,
     ) => boolean | string
     selectRequired?: (
       value: any,
-      params: any,
-      ctx: Record<string, any>,
+      parameters: any,
+      context: Record<string, any>,
     ) => boolean | string
   }
 }

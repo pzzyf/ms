@@ -3,11 +3,7 @@ import type { PopoverContentEmits, PopoverContentProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
-import {
-  PopoverContent,
-  PopoverPortal,
-  useForwardPropsEmits,
-} from 'reka-ui'
+import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'reka-ui'
 
 defineOptions({
   inheritAttrs: false,
@@ -22,9 +18,9 @@ const props = withDefaults(
 )
 const emits = defineEmits<PopoverContentEmits>()
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const forwarded = useForwardPropsEmits(delegatedProperties, emits)
 </script>
 
 <template>
@@ -39,7 +35,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         )
       "
     >
-      <slot />
+      <slot></slot>
     </PopoverContent>
   </PopoverPortal>
 </template>

@@ -5,13 +5,15 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { PaginationRoot, useForwardPropsEmits } from 'reka-ui'
 
-const props = defineProps<PaginationRootProps & {
-  class?: HTMLAttributes['class']
-}>()
+const props = defineProps<
+  PaginationRootProps & {
+    class?: HTMLAttributes['class']
+  }
+>()
 const emits = defineEmits<PaginationRootEmits>()
 
-const delegatedProps = reactiveOmit(props, 'class')
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const delegatedProperties = reactiveOmit(props, 'class')
+const forwarded = useForwardPropsEmits(delegatedProperties, emits)
 </script>
 
 <template>
@@ -21,6 +23,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     v-bind="forwarded"
     :class="cn('mx-auto flex w-full justify-center', props.class)"
   >
-    <slot v-bind="slotProps" />
+    <slot v-bind="slotProps"></slot>
   </PaginationRoot>
 </template>

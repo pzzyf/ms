@@ -1,9 +1,11 @@
-let mockTimeZone: null | string = null
+const timeZoneState: { mockTimeZone: null | string } = {
+  mockTimeZone: null,
+}
 
 export function setTimezone(timeZone: string) {
-  mockTimeZone = timeZone
+  timeZoneState.mockTimeZone = timeZone
 }
 
 export function getTimezone() {
-  return mockTimeZone
+  return timeZoneState.mockTimeZone
 }

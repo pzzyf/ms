@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 
 import { initSetupMsForm } from './adapter/form'
 import App from './App.vue'
-import { router } from './router/index.js'
+import { setupRouter } from './router/index.js'
 import '@ms/styles'
 
 async function bootstrap(namespace: string) {
@@ -20,7 +20,7 @@ async function bootstrap(namespace: string) {
   // 配置 pinia-store
   await initStores(app, { namespace })
 
-  app.use(router)
+  app.use(setupRouter())
 
   app.mount('#app')
 }

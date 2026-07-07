@@ -25,8 +25,8 @@ interface MsDropdownMenuItem {
   value: string
 }
 
-interface DropdownMenuProps {
+interface DropdownMenuProperties {
   menus: MsDropdownMenuItem[]
 }
 
-export type { DropdownMenuProps, MsDropdownMenuItem }
+export type { DropdownMenuProperties as DropdownMenuProps, MsDropdownMenuItem }

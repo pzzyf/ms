@@ -1,9 +1,9 @@
 {
   "name": "@ms/tsconfig",
-  "type": "module",
   "version": "1.0.0",
   "private": true,
   "license": "ISC",
+  "type": "module",
   "files": [
     "base.json",
     "library.json",

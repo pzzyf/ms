@@ -31,11 +31,7 @@ const formSchema = computed((): MsFormSchema[] => {
       fieldName: 'selectAccount',
       label: '快速选择账号',
       rules: markRaw(
-        z
-          .string()
-          .min(1, { message: '快速选择账号' })
-          .optional()
-          .default('ms'),
+        z.string().min(1, { message: '快速选择账号' }).optional().default('ms'),
       ),
     },
     {
@@ -45,16 +41,18 @@ const formSchema = computed((): MsFormSchema[] => {
       },
       dependencies: {
         trigger(values, form) {
-          if (values.selectAccount) {
-            const findUser = MOCK_USER_OPTIONS.find(
-              item => item.value === values.selectAccount,
-            )
-            if (findUser) {
-              form.setValues({
-                password: '123456',
-                username: findUser.value,
-              })
-            }
+          if (!values.selectAccount) {
+            return
+          }
+
+          const findUser = MOCK_USER_OPTIONS.find(
+            (item) => item.value === values.selectAccount,
+          )
+          if (findUser) {
+            form.setValues({
+              password: '123456',
+              username: findUser.value,
+            })
           }
         },
         triggerFields: ['selectAccount'],
@@ -79,9 +77,11 @@ const authStore = useAuthStore()
 </script>
 
 <template>
-  <AuthenticationLogin :form-schema="formSchema" :loading="authStore.loginLoading" @submit="authStore.authLogin" />
+  <AuthenticationLogin
+    :form-schema="formSchema"
+    :loading="authStore.loginLoading"
+    @submit="authStore.authLogin"
+  />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

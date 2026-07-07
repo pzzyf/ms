@@ -1,11 +1,9 @@
 import type { DefineConfig, MsViteConfig } from '../typing'
 
-import { defineApplicationConfig } from './application'
+import { defineApplicationConfig as defineAppConfig } from './application'
 
-function defineConfig(
-  userConfigPromise?: DefineConfig,
-): MsViteConfig {
-  return defineApplicationConfig(userConfigPromise)
+function defineConfig(userConfigPromise?: DefineConfig): MsViteConfig {
+  return defineAppConfig(userConfigPromise)
 }
 
 export { defineConfig }

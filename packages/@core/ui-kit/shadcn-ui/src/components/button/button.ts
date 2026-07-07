@@ -27,10 +27,7 @@ export type CustomRenderType = (() => Component | string) | string
 
 export type ValueType = boolean | number | string
 
-export interface MsButtonGroupProps extends Pick<
-  MsButtonProps,
-  'disabled'
-> {
+export interface MsButtonGroupProps extends Pick<MsButtonProps, 'disabled'> {
   /** 单选模式下允许清除选中 */
   allowClear?: boolean
   /** 值改变前的回调 */
@@ -47,7 +44,7 @@ export interface MsButtonGroupProps extends Pick<
   /** 是否允许多选 */
   multiple?: boolean
   /** 选项 */
-  options?: { [key: string]: any, label: CustomRenderType, value: ValueType }[]
+  options?: { [key: string]: any; label: CustomRenderType; value: ValueType }[]
   /** 显示图标 */
   showIcon?: boolean
   /** 尺寸 */

@@ -5,11 +5,13 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { AccordionItem, useForwardProps } from 'reka-ui'
 
-const props = defineProps<AccordionItemProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  AccordionItemProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class')
 
-const forwardedProps = useForwardProps(delegatedProps)
+const forwardedProps = useForwardProps(delegatedProperties)
 </script>
 
 <template>
@@ -19,6 +21,6 @@ const forwardedProps = useForwardProps(delegatedProps)
     v-bind="forwardedProps"
     :class="cn('border-b last:border-b-0', props.class)"
   >
-    <slot v-bind="slotProps" />
+    <slot v-bind="slotProps"></slot>
   </AccordionItem>
 </template>

@@ -4,12 +4,11 @@ import type { HTMLAttributes } from 'vue'
 import { ChevronDownIcon } from '@lucide/vue'
 import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
-import {
-  AccordionHeader,
-  AccordionTrigger,
-} from 'reka-ui'
+import { AccordionHeader, AccordionTrigger } from 'reka-ui'
 
-const props = defineProps<AccordionTriggerProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  AccordionTriggerProps & { class?: HTMLAttributes['class'] }
+>()
 
 const delegatedProps = reactiveOmit(props, 'class')
 </script>
@@ -26,9 +25,11 @@ const delegatedProps = reactiveOmit(props, 'class')
         )
       "
     >
-      <slot />
+      <slot></slot>
       <slot name="icon">
-        <ChevronDownIcon class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200" />
+        <ChevronDownIcon
+          class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200"
+        />
       </slot>
     </AccordionTrigger>
   </AccordionHeader>

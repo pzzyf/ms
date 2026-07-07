@@ -7,7 +7,7 @@ import { ref, useSlots } from 'vue'
 import { Input } from '../../ui'
 import PasswordStrength from './password-strength.vue'
 
-interface Props {
+interface Properties {
   class?: any
   /**
    * 是否显示密码强度
@@ -19,7 +19,7 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const props = defineProps<Props>()
+const props = defineProps<Properties>()
 
 const modelValue = defineModel<string>()
 
@@ -39,7 +39,7 @@ const show = ref(false)
     <template v-if="passwordStrength">
       <PasswordStrength :password="modelValue" />
       <p v-if="slots.strengthText" class="mt-1.5 text-xs text-muted-foreground">
-        <slot name="strengthText" />
+        <slot name="strengthText"></slot>
       </p>
     </template>
     <div

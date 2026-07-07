@@ -1,4 +1,8 @@
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from 'vue-router'
 
 import { createRouterGuard } from './guard'
 
@@ -18,7 +22,10 @@ const router = createRouter({
   },
 })
 
-// 创建路由守卫
-createRouterGuard(router)
+function setupRouter() {
+  // 创建路由守卫
+  createRouterGuard(router)
+  return router
+}
 
-export { router }
+export { router, setupRouter }

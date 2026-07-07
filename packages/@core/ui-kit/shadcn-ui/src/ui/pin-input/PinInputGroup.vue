@@ -5,9 +5,11 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { Primitive, useForwardProps } from 'reka-ui'
 
-const props = defineProps<PrimitiveProps & { class?: HTMLAttributes['class'] }>()
-const delegatedProps = reactiveOmit(props, 'class')
-const forwardedProps = useForwardProps(delegatedProps)
+const props = defineProps<
+  PrimitiveProps & { class?: HTMLAttributes['class'] }
+>()
+const delegatedProperties = reactiveOmit(props, 'class')
+const forwardedProps = useForwardProps(delegatedProperties)
 </script>
 
 <template>
@@ -16,6 +18,6 @@ const forwardedProps = useForwardProps(delegatedProps)
     v-bind="forwardedProps"
     :class="cn('flex items-center', props.class)"
   >
-    <slot />
+    <slot></slot>
   </Primitive>
 </template>

@@ -12,12 +12,18 @@ function unmountGlobalLoading() {
       '[data-app-loading^="inject"]',
     )
 
-    loadingElement.addEventListener('transitionend', () => {
-      loadingElement.remove()
-      injectLoadingElements.forEach(el => el.remove())
-    }, {
-      once: true,
-    })
+    loadingElement.addEventListener(
+      'transitionend',
+      () => {
+        loadingElement.remove()
+        for (const element of injectLoadingElements) {
+          element.remove()
+        }
+      },
+      {
+        once: true,
+      },
+    )
   }
 }
 

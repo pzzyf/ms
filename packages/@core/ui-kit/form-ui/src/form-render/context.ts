@@ -1,21 +1,21 @@
-import type { FormRenderProps } from '../types'
+import type { FormRenderProps as FormRenderProperties } from '../types'
 
 import { createContext } from '@ms-core/shadcn-ui'
 
 import { computed } from 'vue'
 
-export const [injectRenderFormProps, provideFormRenderProps]
-  = createContext<FormRenderProps>('FormRenderProps')
+export const [injectRenderFormProperties, provideFormRenderProperties] =
+  createContext<FormRenderProperties>('FormRenderProps')
 
 export function useFormContext() {
-  const formRenderProps = injectRenderFormProps()
+  const formRenderProperties = injectRenderFormProperties()
 
-  const isVertical = computed(() => formRenderProps.layout === 'vertical')
+  const isVertical = computed(() => formRenderProperties.layout === 'vertical')
 
-  const componentMap = computed(() => formRenderProps.componentMap)
+  const componentMap = computed(() => formRenderProperties.componentMap)
 
   const componentBindEventMap = computed(
-    () => formRenderProps.componentBindEventMap,
+    () => formRenderProperties.componentBindEventMap,
   )
   return {
     componentBindEventMap,

@@ -3,6 +3,12 @@ export class StateHandler {
   private rejectCondition: (() => void) | null = null
   private resolveCondition: (() => void) | null = null
 
+  // 清理 resolve/reject 函数
+  private clearPromises() {
+    this.resolveCondition = null
+    this.rejectCondition = null
+  }
+
   isConditionTrue(): boolean {
     return this.condition
   }
@@ -35,17 +41,10 @@ export class StateHandler {
     return new Promise((resolve, reject) => {
       if (this.condition) {
         resolve() // 如果 condition 已经为 true，立即 resolve
-      }
-      else {
+      } else {
         this.resolveCondition = resolve
         this.rejectCondition = reject
       }
     })
-  }
-
-  // 清理 resolve/reject 函数
-  private clearPromises() {
-    this.resolveCondition = null
-    this.rejectCondition = null
   }
 }

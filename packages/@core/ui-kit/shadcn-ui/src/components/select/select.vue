@@ -9,14 +9,14 @@ import {
   SelectValue,
 } from '../../ui'
 
-interface Props {
+interface Properties {
   allowClear?: boolean
   class?: any
-  options?: Array<{ label: string, value: string }>
+  options?: Array<{ label: string; value: string }>
   placeholder?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Properties>(), {
   allowClear: false,
 })
 

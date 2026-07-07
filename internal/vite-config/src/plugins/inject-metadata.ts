@@ -33,7 +33,7 @@ async function resolveMonorepoDependencies() {
   const manifest = await readWorkspaceManifest(findMonorepoRoot())
   const catalog = manifest?.catalog || {}
 
-  const resultDevDependencies: Record<string, string | undefined> = {}
+  const resultDevelopmentDependencies: Record<string, string | undefined> = {}
   const resultDependencies: Record<string, string | undefined> = {}
   const pkgsMeta: Record<string, string> = {}
 
@@ -52,7 +52,7 @@ async function resolveMonorepoDependencies() {
       )
     }
     for (const [key, value] of Object.entries(devDependencies)) {
-      resultDevDependencies[key] = resolvePackageVersion(
+      resultDevelopmentDependencies[key] = resolvePackageVersion(
         pkgsMeta,
         key,
         value,
@@ -62,7 +62,7 @@ async function resolveMonorepoDependencies() {
   }
   return {
     dependencies: resultDependencies,
-    devDependencies: resultDevDependencies,
+    devDependencies: resultDevelopmentDependencies,
   }
 }
 
@@ -72,15 +72,15 @@ async function resolveMonorepoDependencies() {
 async function viteMetadataPlugin(
   root = process.cwd(),
 ): Promise<PluginOption | undefined> {
-  const { author, description, homepage, license, version }
-    = await readPackageJSON(root)
+  const { author, description, homepage, license, version } =
+    await readPackageJSON(root)
 
   const buildTime = dateUtil().format('YYYY-MM-DD HH:mm:ss')
 
   return {
     async config() {
-      const { dependencies, devDependencies }
-        = await resolveMonorepoDependencies()
+      const { dependencies, devDependencies } =
+        await resolveMonorepoDependencies()
 
       const isAuthorObject = typeof author === 'object'
       const authorName = isAuthorObject ? author.name : author
@@ -89,7 +89,7 @@ async function viteMetadataPlugin(
 
       return {
         define: {
-          '__MS_ADMIN_METADATA__': JSON.stringify({
+          __MS_ADMIN_METADATA__: JSON.stringify({
             authorEmail,
             authorName,
             authorUrl,

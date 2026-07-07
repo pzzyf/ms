@@ -10,8 +10,7 @@ export default defineComponent({
   props: {
     content: {
       default: undefined as
-      | PropType<(() => any) | Component | string>
-      | undefined,
+        PropType<(() => any) | Component | string> | undefined,
       type: [Object, String, Function],
     },
     renderBr: {
@@ -19,33 +18,30 @@ export default defineComponent({
       type: Boolean,
     },
   },
-  setup(props, { attrs, slots }) {
+  setup(properties, { attrs, slots }) {
     return () => {
-      if (!props.content) {
+      if (!properties.content) {
         return null
       }
-      const isComponent
-        = (isObject(props.content) || isFunction(props.content))
-          && props.content !== null
+      const isComponent =
+        (isObject(properties.content) || isFunction(properties.content)) &&
+        properties.content !== null
       if (!isComponent) {
-        if (props.renderBr && isString(props.content)) {
-          const lines = props.content.split('\n')
-          const result = []
-          for (const [i, line] of lines.entries()) {
-            result.push(h('p', { key: i }, line))
-          }
+        if (properties.renderBr && isString(properties.content)) {
+          const lines = properties.content.split('\n')
+          const result = Array.from(lines.entries(), ([index, line]) =>
+            h('p', { key: index }, line),
+          )
           return result
         }
-        else {
-          return props.content
-        }
+        return properties.content
       }
       return h(
-        props.content as never,
+        properties.content as never,
         {
           ...attrs,
           props: {
-            ...props,
+            ...properties,
             ...attrs,
           },
         },

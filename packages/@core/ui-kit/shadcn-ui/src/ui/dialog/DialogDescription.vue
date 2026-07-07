@@ -5,11 +5,13 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { DialogDescription, useForwardProps } from 'reka-ui'
 
-const props = defineProps<DialogDescriptionProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  DialogDescriptionProps & { class?: HTMLAttributes['class'] }
+>()
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class')
 
-const forwardedProps = useForwardProps(delegatedProps)
+const forwardedProps = useForwardProps(delegatedProperties)
 </script>
 
 <template>
@@ -18,6 +20,6 @@ const forwardedProps = useForwardProps(delegatedProps)
     v-bind="forwardedProps"
     :class="cn('text-muted-foreground text-sm', props.class)"
   >
-    <slot />
+    <slot></slot>
   </DialogDescription>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MsButtonProps } from './button'
+import type { MsButtonProps as MsButtonProperties } from './button'
 
 import { LoaderCircle } from '@ms-core/icons'
 
@@ -10,9 +10,9 @@ import { computed } from 'vue'
 
 import { buttonVariants } from '../../ui'
 
-interface Props extends MsButtonProps {}
+interface Properties extends MsButtonProperties {}
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Properties>(), {
   as: 'button',
   class: '',
   disabled: false,
@@ -37,6 +37,6 @@ const isDisabled = computed(() => {
       v-if="loading"
       class="text-md mr-2 size-4 shrink-0 animate-spin"
     />
-    <slot />
+    <slot></slot>
   </Primitive>
 </template>

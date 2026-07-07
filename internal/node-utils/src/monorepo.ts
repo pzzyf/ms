@@ -4,8 +4,7 @@ import process from 'node:process'
 
 import * as manypkg from '@manypkg/get-packages'
 
-const { getPackages: getPackagesFunc }
-  = manypkg
+const { getPackages: getPackagesFunction } = manypkg
 
 /**
  * 查找大仓的根目录
@@ -34,15 +33,15 @@ function findMonorepoRoot(cwd: string = process.cwd()) {
 async function getPackages() {
   const root = findMonorepoRoot()
 
-  return await getPackagesFunc(root)
+  return await getPackagesFunction(root)
 }
 
 /**
  * 获取大仓指定的包
  */
-async function getPackage(pkgName: string) {
+async function getPackage(packageName: string) {
   const { packages } = await getPackages()
-  return packages.find(pkg => pkg.packageJson.name === pkgName)
+  return packages.find((package_) => package_.packageJson.name === packageName)
 }
 
 export { findMonorepoRoot, getPackage, getPackages }

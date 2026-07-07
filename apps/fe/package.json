@@ -1,17 +1,17 @@
 {
   "name": "app",
-  "type": "module",
   "version": "0.0.0",
   "private": true,
-  "imports": {
-    "#/*": "./src/*"
-  },
+  "type": "module",
   "scripts": {
     "build": "pnpm vite build --mode production",
     "build:analyze": "pnpm vite build --mode analyze",
     "dev": "pnpm vite --mode development",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "imports": {
+    "#/*": "./src/*"
   },
   "dependencies": {
     "@ms/common-ui": "workspace:*",

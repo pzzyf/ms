@@ -6,24 +6,24 @@ const CLASS_NAME_RELATIVE = 'spinner-parent--relative'
 
 const LOADING_INSTANCE_KEY = Symbol('loading')
 
-interface LoadingDirectiveParams {
+interface LoadingDirectiveParameters {
   loading: boolean | string
 }
 
 const loadingDirective: Directive = {
-  mounted(el, binding) {
+  mounted(element, binding) {
     const instance = h({}, binding)
-    render(instance, el)
+    render(instance, element)
 
-    el.classList.add(CLASS_NAME_RELATIVE)
-    el[LOADING_INSTANCE_KEY] = instance
+    element.classList.add(CLASS_NAME_RELATIVE)
+    element[LOADING_INSTANCE_KEY] = instance
   },
-  unmounted(el) {
-    const instance = el[LOADING_INSTANCE_KEY]
-    el.classList.remove(CLASS_NAME_RELATIVE)
-    render(null, el)
+  unmounted(element) {
+    const instance = element[LOADING_INSTANCE_KEY]
+    element.classList.remove(CLASS_NAME_RELATIVE)
+    render(null, element)
     instance.el.remove()
-    el[LOADING_INSTANCE_KEY] = null
+    element[LOADING_INSTANCE_KEY] = null
   },
 }
 
@@ -33,18 +33,21 @@ const loadingDirective: Directive = {
  * @param params
  */
 
-function registerLoadingDirective(app: App, params: LoadingDirectiveParams) {
+function registerLoadingDirective(
+  app: App,
+  parameters: LoadingDirectiveParameters,
+) {
   const style = document.createElement('style')
   style.innerHTML = `
     ${CLASS_NAME_RELATIVE} {
       position: relative !important;
     }
   `
-  document.head.appendChild(style)
+  document.head.append(style)
 
-  if (params?.loading !== false) {
+  if (parameters?.loading !== false) {
     app.directive(
-      isString(params?.loading) ? params.loading : 'loading',
+      isString(parameters?.loading) ? parameters.loading : 'loading',
       loadingDirective,
     )
   }

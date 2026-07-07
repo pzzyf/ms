@@ -6,5 +6,9 @@
       "types": "./src/index.ts",
       "import": "./src/index.ts"
     }
+  },
+  "dependencies": {
+    "vue": "catalog:",
+    "vue-router": "catalog:"
   }
 }

@@ -14,12 +14,14 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const props = defineProps<AlertDialogContentProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  AlertDialogContentProps & { class?: HTMLAttributes['class'] }
+>()
 const emits = defineEmits<AlertDialogContentEmits>()
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class')
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const forwarded = useForwardPropsEmits(delegatedProperties, emits)
 </script>
 
 <template>
@@ -38,7 +40,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         )
       "
     >
-      <slot />
+      <slot></slot>
     </AlertDialogContent>
   </AlertDialogPortal>
 </template>

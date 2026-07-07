@@ -40,7 +40,6 @@ const coreRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-
 ]
 
 export { coreRoutes }

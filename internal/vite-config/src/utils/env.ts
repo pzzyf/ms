@@ -1,4 +1,4 @@
-import type { ApplicationPluginOptions } from '../typing'
+import type { ApplicationPluginOptions as AppPluginOptions } from '../typing'
 
 import { existsSync } from 'node:fs'
 import fs from 'node:fs/promises'
@@ -18,14 +18,11 @@ function getNumber(value: string | undefined, fallback: number) {
 /**
  * 获取当前环境下生效的配置文件名
  */
-function getConfFiles() {
+function getConfigFiles() {
   const script = process.env.npm_lifecycle_script as string
   const reg = /--mode ([\d_a-z]+)/
   const result = reg.exec(script)
-  let mode = 'production'
-  if (result) {
-    mode = result[1] as string
-  }
+  const mode = result ? (result[1] as string) : 'production'
   return ['.env', '.env.local', `.env.${mode}`, `.env.${mode}.local`]
 }
 
@@ -34,51 +31,47 @@ function getConfFiles() {
  * @param match prefix
  * @param confFiles ext
  */
-async function loadEnv<T = Record<string, string>>(
+async function loadEnvironment<T = Record<string, string>>(
   match = 'VITE_GLOB_',
-  confFiles = getConfFiles(),
+  confFiles = getConfigFiles(),
 ) {
-  let envConfig = {}
+  let environmentConfig = {}
 
-  for (const confFile of confFiles) {
+  for (const configFile of confFiles) {
     try {
-      const confFilePath = join(process.cwd(), confFile)
-      if (existsSync(confFilePath)) {
-        const envPath = await fs.readFile(confFilePath, {
+      const configFilePath = join(process.cwd(), configFile)
+      if (existsSync(configFilePath)) {
+        const environmentPath = await fs.readFile(configFilePath, {
           encoding: 'utf8',
         })
-        const env = dotenv.parse(envPath)
-        envConfig = { ...envConfig, ...env }
+        const environment = dotenv.parse(environmentPath)
+        environmentConfig = { ...environmentConfig, ...environment }
       }
-    }
-    catch (error) {
-      console.error(`Error while parsing ${confFile}`, error)
+    } catch (error) {
+      console.error(`Error while parsing ${configFile}`, error)
     }
   }
   const reg = new RegExp(`^(${match})`)
-  Object.keys(envConfig).forEach((key) => {
+  for (const key of Object.keys(environmentConfig)) {
     if (!reg.test(key)) {
-      Reflect.deleteProperty(envConfig, key)
+      Reflect.deleteProperty(environmentConfig, key)
     }
-  })
-  return envConfig as T
+  }
+  return environmentConfig as T
 }
 
-async function loadAndConvertEnv(
+async function loadAndConvertEnvironment(
   match = 'VITE_',
-  confFiles = getConfFiles(),
+  configFiles = getConfigFiles(),
 ): Promise<
-  Partial<ApplicationPluginOptions> & {
+  Partial<AppPluginOptions> & {
     base: string
     port: number
   }
 > {
-  const envConfig = await loadEnv(match, confFiles)
+  const environmentConfig = await loadEnvironment(match, configFiles)
 
-  const {
-    VITE_BASE,
-    VITE_PORT,
-  } = envConfig
+  const { VITE_BASE, VITE_PORT } = environmentConfig
 
   return {
     base: getString(VITE_BASE, '/'),
@@ -86,4 +79,7 @@ async function loadAndConvertEnv(
   }
 }
 
-export { loadAndConvertEnv, loadEnv }
+export {
+  loadAndConvertEnvironment as loadAndConvertEnv,
+  loadEnvironment as loadEnv,
+}

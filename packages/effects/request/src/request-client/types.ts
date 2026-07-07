@@ -1,7 +1,11 @@
-import type { AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios'
+import type {
+  AxiosRequestConfig,
+  AxiosResponse,
+  CreateAxiosDefaults,
+  InternalAxiosRequestConfig,
+} from 'axios'
 
 interface ExtendOptions<T = any> {
-
   paramsSerializer?:
     | 'brackets'
     | 'comma'

@@ -18,8 +18,8 @@ export function usePageResponseSuccess<T = any>(
   { message = 'ok' } = {},
 ) {
   const pageData = pagination(
-    Number.parseInt(`${page}`),
-    Number.parseInt(`${pageSize}`),
+    Number.parseInt(String(page)),
+    Number.parseInt(String(pageSize)),
     list,
   )
 
@@ -55,7 +55,7 @@ export function unAuthorizedResponse(event: H3Event<EventHandlerRequest>) {
 }
 
 export function sleep(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 export function pagination<T = any>(
@@ -63,8 +63,8 @@ export function pagination<T = any>(
   pageSize: number,
   array: T[],
 ): T[] {
-  const offset = (pageNo - 1) * Number(pageSize)
-  return offset + Number(pageSize) >= array.length
+  const offset = (pageNo - 1) * pageSize
+  return offset + pageSize >= array.length
     ? array.slice(offset)
-    : array.slice(offset, offset + Number(pageSize))
+    : array.slice(offset, offset + pageSize)
 }

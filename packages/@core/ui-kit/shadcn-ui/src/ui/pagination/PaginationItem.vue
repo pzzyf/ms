@@ -7,13 +7,18 @@ import { cn } from '@ms-core/shared/utils'
 import { reactiveOmit } from '@vueuse/core'
 import { PaginationListItem } from 'reka-ui'
 
-const props = withDefaults(defineProps<PaginationListItemProps & {
-  size?: ButtonVariants['size']
-  class?: HTMLAttributes['class']
-  isActive?: boolean
-}>(), {
-  size: 'icon',
-})
+const props = withDefaults(
+  defineProps<
+    PaginationListItemProps & {
+      size?: ButtonVariants['size']
+      class?: HTMLAttributes['class']
+      isActive?: boolean
+    }
+  >(),
+  {
+    size: 'icon',
+  },
+)
 
 const delegatedProps = reactiveOmit(props, 'class', 'size', 'isActive', 'value')
 </script>
@@ -23,13 +28,16 @@ const delegatedProps = reactiveOmit(props, 'class', 'size', 'isActive', 'value')
     data-slot="pagination-item"
     :value="value"
     v-bind="delegatedProps"
-    :class="cn(
-      buttonVariants({
-        variant: isActive ? 'outline' : 'ghost',
-        size,
-      }),
-      props.class)"
+    :class="
+      cn(
+        buttonVariants({
+          variant: isActive ? 'outline' : 'ghost',
+          size,
+        }),
+        props.class,
+      )
+    "
   >
-    <slot />
+    <slot></slot>
   </PaginationListItem>
 </template>
