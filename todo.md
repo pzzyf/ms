@@ -26,7 +26,7 @@
       - ~~updatePreferences~~
     - ~~tailwindcss~~
     - ~~eslint~~
-    - prettier
+    - ~~prettier~~  
     - theme
     - skills
     - ~~auth/login (ing)~~
@@ -42,3 +42,4 @@
     - ~~mockPlugin~~
     - ~~api auth/login~~
     - layout
+    - vsh script
