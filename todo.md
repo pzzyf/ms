@@ -1,6 +1,6 @@
 # TODO
 
-- eslint-config
+- ~~eslint-config~~
   - ~~ignores：学习文件匹配~~
   - ~~javascript：掌握 languageOptions/plugins/rules~~
   - ~~typescript：学习 parser 和规则覆盖~~
@@ -25,7 +25,8 @@
     - ~~preference~~
       - ~~updatePreferences~~
     - ~~tailwindcss~~
-    - lint/format
+    - ~~eslint~~
+    - prettier
     - theme
     - skills
     - ~~auth/login (ing)~~

@@ -73,6 +73,8 @@ catalog:
   pinia-plugin-persistedstate: ^4.7.1
   pkg-types: ^2.3.1
   pnpm-workspace-yaml: ^1.6.0
+  prettier: ^3.9.4
+  prettier-plugin-tailwindcss: ^0.8.0
   reka-ui: ^2.9.10
   sass-embedded: ^1.100.0
   tailwind-merge: ^3.6.0
