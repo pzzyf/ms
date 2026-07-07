@@ -2,7 +2,9 @@ pre-commit:
   parallel: true
   commands:
     lint:
-      run: pnpm lint
+      glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx,vue,json,json5,jsonc,yml,yaml}"
+      run: pnpm exec eslint --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
     checkType:
       run: pnpm check:type
 

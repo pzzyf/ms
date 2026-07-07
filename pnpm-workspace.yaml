@@ -1,5 +1,5 @@
 publicHoistPattern:
-  - "@commitlint/*"
+  - '@commitlint/*'
 packages:
   - apps/*
   - internal/*
@@ -11,28 +11,30 @@ packages:
   - packages/@core/ui-kit/*
   - packages/effects/*
 catalog:
-  "@antfu/eslint-config": ^9.0.0
-  "@clack/prompts": ^1.4.0
-  "@commitlint/cli": ^21.0.1
-  "@commitlint/config-conventional": ^21.0.1
-  "@eslint/js": ^10.0.1
-  "@internationalized/date": ^3.12.2
-  "@lucide/vue": ^1.18.0
-  "@manypkg/get-packages": ^3.1.0
-  "@pnpm/workspace.read-manifest": ^1000.3.1
-  "@tailwindcss/vite": ^4.3.0
-  "@tanstack/vue-store": ^0.11.0
-  "@types/eslint": ^9.6.1
-  "@types/node": ^25.9.1
-  "@types/nprogress": ^0.2.3
-  "@typescript-eslint/eslint-plugin": ^8.62.1
-  "@typescript-eslint/parser": ^8.62.1
-  "@vee-validate/zod": ^4.15.1
-  "@vitejs/plugin-vue": ^6.0.6
-  "@vitejs/plugin-vue-jsx": ^5.1.5
-  "@vue/shared": ^3.5.35
-  "@vue/tsconfig": ^0.9.1
-  "@vueuse/core": ^14.3.0
+  '@antfu/eslint-config': ^9.0.0
+  '@clack/prompts': ^1.4.0
+  '@commitlint/cli': ^21.0.1
+  '@commitlint/config-conventional': ^21.0.1
+  '@eslint-community/eslint-plugin-eslint-comments': ^4.7.2
+  '@eslint/js': ^10.0.1
+  '@internationalized/date': ^3.12.2
+  '@lucide/vue': ^1.18.0
+  '@manypkg/get-packages': ^3.1.0
+  '@pnpm/workspace.read-manifest': ^1000.3.1
+  '@tailwindcss/vite': ^4.3.0
+  '@tanstack/vue-store': ^0.11.0
+  '@types/eslint': ^9.6.1
+  '@types/node': ^25.9.1
+  '@types/nprogress': ^0.2.3
+  '@typescript-eslint/eslint-plugin': ^8.62.1
+  '@typescript-eslint/parser': ^8.62.1
+  '@vee-validate/zod': ^4.15.1
+  '@vitejs/plugin-vue': ^6.0.6
+  '@vitejs/plugin-vue-jsx': ^5.1.5
+  '@vitest/eslint-plugin': ^1.6.21
+  '@vue/shared': ^3.5.35
+  '@vue/tsconfig': ^0.9.1
+  '@vueuse/core': ^14.3.0
   axios: ^1.18.1
   cac: ^7.0.0
   chalk: ^5.6.2
@@ -44,14 +46,24 @@ catalog:
   defu: ^6.1.7
   dotenv: ^17.4.2
   es-toolkit: ^1.48.1
-  eslint: ^10.3.0
+  eslint: ^10.6.0
+  eslint-plugin-import-x: ^4.17.1
+  eslint-plugin-jsdoc: ^63.0.12
+  eslint-plugin-jsonc: ^3.3.0
+  eslint-plugin-n: ^18.2.1
+  eslint-plugin-no-only-tests: ^3.4.0
+  eslint-plugin-prettier: ^5.5.6
+  eslint-plugin-unicorn: ^71.1.0
   eslint-plugin-unused-imports: ^4.4.1
+  eslint-plugin-vue: ^10.9.2
+  eslint-plugin-yml: ^3.6.0
   execa: ^9.6.1
   get-port: ^7.2.0
   globals: ^17.7.0
   h3: ^1.15.4
   happy-dom: ^20.9.0
   is-ci: ^4.1.0
+  jsonc-eslint-parser: ^3.1.0
   jsonwebtoken: ^9.0.3
   lefthook: ^2.1.8
   nitropack: ^2.13.4
@@ -73,7 +85,9 @@ catalog:
   vite-plugin-pwa: ^0.20.0
   vitest: ^4.1.7
   vue: ^3.5.34
+  vue-eslint-parser: ^10.4.1
   vue-router: ^5.1.0
   vue-tsc: ^3.2.8
+  yaml-eslint-parser: ^2.0.0
   zod: ^4.4.3
   zod-defaults: ^0.2.3

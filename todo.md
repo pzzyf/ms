@@ -1,13 +1,13 @@
 # TODO
 
 - eslint-config
-  - ignores.ts：学习文件匹配
-  - javascript.ts：掌握 languageOptions/plugins/rules
-  - typescript.ts：学习 parser 和规则覆盖
-  - vue.ts：学习 Vue 嵌套 parser
-  - disableds → import → node → test：学习局部配置
-  - jsonc → yaml → pnpm：学习非 JS 文件解析
-  - prettier → perfectionist → unicorn → regexp → comments → jsdoc
+  - ~~ignores：学习文件匹配~~
+  - ~~javascript：掌握 languageOptions/plugins/rules~~
+  - ~~typescript：学习 parser 和规则覆盖~~
+  - ~~vue：学习 Vue 嵌套 parser~~
+  - ~~disableds → import → node → test：学习局部配置~~
+  - ~~jsonc → yaml → pnpm：学习非 JS 文件解析~~
+  - ~~prettier → perfectionist → unicorn → regexp → comments → jsdoc~~
   - command → turbo
   - custom-config.ts
 - <s>turbo-run</s>
