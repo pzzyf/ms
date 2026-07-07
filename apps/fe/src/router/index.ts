@@ -22,10 +22,7 @@ const router = createRouter({
   },
 })
 
-function setupRouter() {
-  // 创建路由守卫
-  createRouterGuard(router)
-  return router
-}
+// 创建路由守卫
+createRouterGuard(router)
 
-export { router, setupRouter }
+export { router }

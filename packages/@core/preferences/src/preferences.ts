@@ -8,6 +8,10 @@ class PreferenceManager {
   private isInitialized = false
   private state
 
+  constructor() {
+    this.state = reactive({ ...defaultPreferences })
+  }
+
   initPreferences = async (namespace: string) => {
     if (this.isInitialized) {
       return
@@ -26,10 +30,6 @@ class PreferenceManager {
   updatePreferences = (update: any) => {
     const mergedState = merge({}, update, markRaw(this.state))
     Object.assign(this.state, mergedState)
-  }
-
-  constructor() {
-    this.state = reactive({ ...defaultPreferences })
   }
 
   private async saveToCache(namespace: string) {

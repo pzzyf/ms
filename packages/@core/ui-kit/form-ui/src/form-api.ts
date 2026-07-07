@@ -37,13 +37,13 @@ function getDefaultState(): MsFormProperties {
 }
 
 class FormApi {
-  private latestSubmissionValues: null | Recordable<any> = null
-  private prevState: null | MsFormProperties = null
   public form: FormContext<GenericObject> | null = null
   isMounted = false
   public state: null | MsFormProperties = null
   stateHandler: StateHandler
   public store: Store<MsFormProperties>
+  private prevState: null | MsFormProperties = null
+  private latestSubmissionValues: null | Recordable<any> = null
 
   constructor(options: MsFormProperties = {}) {
     const storeState = { ...options }
