@@ -1,7 +1,7 @@
 <script setup>
 defineOptions({
   name: 'BasicLayout',
-})
+});
 </script>
 
 <template>

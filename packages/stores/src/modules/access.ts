@@ -1,33 +1,33 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
-type AccessToken = string | null
+type AccessToken = string | null;
 
 interface AccessState {
   /**
    * 权限码
    */
-  accessCodes: string[]
+  accessCodes: string[];
   /**
    * 登录 accessToken
    */
-  accessToken: AccessToken
-  loginExpired: boolean
-  isAccessChecked: boolean
+  accessToken: AccessToken;
+  loginExpired: boolean;
+  isAccessChecked: boolean;
 }
 
 const useAccessStore = defineStore('core-access', {
   actions: {
     setAccessToken(token: AccessToken) {
-      this.accessToken = token
+      this.accessToken = token;
     },
     setAccessCodes(codes: string[]) {
-      this.accessCodes = codes
+      this.accessCodes = codes;
     },
     setLoginExpired(loginExpired: boolean) {
-      this.loginExpired = loginExpired
+      this.loginExpired = loginExpired;
     },
     setIsAccessChecked(isAccessChecked: boolean) {
-      this.isAccessChecked = isAccessChecked
+      this.isAccessChecked = isAccessChecked;
     },
   },
   state: (): AccessState => ({
@@ -36,6 +36,6 @@ const useAccessStore = defineStore('core-access', {
     loginExpired: false,
     isAccessChecked: false,
   }),
-})
+});
 
-export { useAccessStore }
+export { useAccessStore };

@@ -1,39 +1,39 @@
 <script setup lang="ts">
-import type { toggleVariants } from '@ms-core/shadcn-ui/ui/toggle'
-import type { VariantProps } from 'class-variance-authority'
-import type { ToggleGroupRootEmits, ToggleGroupRootProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { ToggleGroupRoot, useForwardPropsEmits } from 'reka-ui'
-import { provide } from 'vue'
+import type { toggleVariants } from '@ms-core/shadcn-ui/ui/toggle';
+import type { VariantProps } from 'class-variance-authority';
+import type { ToggleGroupRootEmits, ToggleGroupRootProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { ToggleGroupRoot, useForwardPropsEmits } from 'reka-ui';
+import { provide } from 'vue';
 
-type ToggleGroupVariants = VariantProps<typeof toggleVariants>
+type ToggleGroupVariants = VariantProps<typeof toggleVariants>;
 
 const props = withDefaults(
   defineProps<
     ToggleGroupRootProps & {
-      class?: HTMLAttributes['class']
-      variant?: ToggleGroupVariants['variant']
-      size?: ToggleGroupVariants['size']
-      spacing?: number
+      class?: HTMLAttributes['class'];
+      variant?: ToggleGroupVariants['variant'];
+      size?: ToggleGroupVariants['size'];
+      spacing?: number;
     }
   >(),
   {
     spacing: 0,
   },
-)
+);
 
-const emits = defineEmits<ToggleGroupRootEmits>()
+const emits = defineEmits<ToggleGroupRootEmits>();
 
 provide('toggleGroup', {
   variant: props.variant,
   size: props.size,
   spacing: props.spacing,
-})
+});
 
-const delegatedProperties = reactiveOmit(props, 'class', 'size', 'variant')
-const forwarded = useForwardPropsEmits(delegatedProperties, emits)
+const delegatedProperties = reactiveOmit(props, 'class', 'size', 'variant');
+const forwarded = useForwardPropsEmits(delegatedProperties, emits);
 </script>
 
 <template>

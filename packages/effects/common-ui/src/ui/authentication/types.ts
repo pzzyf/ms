@@ -2,69 +2,69 @@ interface AuthenticationProperties {
   /**
    * @zh_CN 验证码登录路径
    */
-  codeLoginPath?: string
+  codeLoginPath?: string;
   /**
    * @zh_CN 忘记密码路径
    */
-  forgetPasswordPath?: string
+  forgetPasswordPath?: string;
 
   /**
    * @zh_CN 是否处于加载处理状态
    */
-  loading?: boolean
+  loading?: boolean;
 
   /**
    * @zh_CN 二维码登录路径
    */
-  qrCodeLoginPath?: string
+  qrCodeLoginPath?: string;
 
   /**
    * @zh_CN 注册路径
    */
-  registerPath?: string
+  registerPath?: string;
 
   /**
    * @zh_CN 是否显示验证码登录
    */
-  showCodeLogin?: boolean
+  showCodeLogin?: boolean;
   /**
    * @zh_CN 是否显示忘记密码
    */
-  showForgetPassword?: boolean
+  showForgetPassword?: boolean;
 
   /**
    * @zh_CN 是否显示二维码登录
    */
-  showQrcodeLogin?: boolean
+  showQrcodeLogin?: boolean;
 
   /**
    * @zh_CN 是否显示注册按钮
    */
-  showRegister?: boolean
+  showRegister?: boolean;
 
   /**
    * @zh_CN 是否显示记住账号
    */
-  showRememberMe?: boolean
+  showRememberMe?: boolean;
 
   /**
    * @zh_CN 是否显示第三方登录
    */
-  showThirdPartyLogin?: boolean
+  showThirdPartyLogin?: boolean;
 
   /**
    * @zh_CN 登录框子标题
    */
-  subTitle?: string
+  subTitle?: string;
 
   /**
    * @zh_CN 登录框标题
    */
-  title?: string
+  title?: string;
   /**
    * @zh_CN 提交按钮文本
    */
-  submitButtonText?: string
+  submitButtonText?: string;
 }
 
-export type { AuthenticationProperties as AuthenticationProps }
+export type { AuthenticationProperties as AuthenticationProps };

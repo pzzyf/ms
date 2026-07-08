@@ -1,14 +1,14 @@
-import type { AxiosInstance, AxiosResponse } from 'axios'
-import type { RequestClientConfig, RequestClientOptions } from './types'
-import { bindMethods, merge } from '@ms/utils'
+import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { RequestClientConfig, RequestClientOptions } from './types';
+import { bindMethods, merge } from '@ms/utils';
 
-import axios from 'axios'
-import { InterceptorManager } from './modules/interceptor'
+import axios from 'axios';
+import { InterceptorManager } from './modules/interceptor';
 
 class RequestClient {
-  public addRequestInterceptor: InterceptorManager['addRequestInterceptor']
-  public addResponseInterceptor: InterceptorManager['addResponseInterceptor']
-  public readonly instance: AxiosInstance
+  public addRequestInterceptor: InterceptorManager['addRequestInterceptor'];
+  public addResponseInterceptor: InterceptorManager['addResponseInterceptor'];
+  public readonly instance: AxiosInstance;
 
   constructor(options: RequestClientOptions = {}) {
     // 合并默认配置和传入的配置
@@ -19,20 +19,20 @@ class RequestClient {
       responseReturn: 'raw',
       // 默认超时时间
       timeout: 10_000,
-    }
-    const { ...axiosConfig } = options
-    const requestConfig = merge(axiosConfig, defaultConfig)
+    };
+    const { ...axiosConfig } = options;
+    const requestConfig = merge(axiosConfig, defaultConfig);
 
-    this.instance = axios.create(requestConfig)
+    this.instance = axios.create(requestConfig);
 
-    bindMethods(this)
+    bindMethods(this);
 
     // 实例化拦截器管理器
-    const interceptorManager = new InterceptorManager(this.instance)
+    const interceptorManager = new InterceptorManager(this.instance);
     this.addRequestInterceptor =
-      interceptorManager.addRequestInterceptor.bind(interceptorManager)
+      interceptorManager.addRequestInterceptor.bind(interceptorManager);
     this.addResponseInterceptor =
-      interceptorManager.addResponseInterceptor.bind(interceptorManager)
+      interceptorManager.addResponseInterceptor.bind(interceptorManager);
   }
 
   /**
@@ -42,21 +42,21 @@ class RequestClient {
     url: string,
     config?: RequestClientConfig,
   ): Promise<T> {
-    return this.request<T>(url, { ...config, method: 'DELETE' })
+    return this.request<T>(url, { ...config, method: 'DELETE' });
   }
 
   /**
    * GET请求方法
    */
   public get<T = any>(url: string, config?: RequestClientConfig): Promise<T> {
-    return this.request<T>(url, { ...config, method: 'GET' })
+    return this.request<T>(url, { ...config, method: 'GET' });
   }
 
   /**
    * 获取基础URL
    */
   public getBaseUrl() {
-    return this.instance.defaults.baseURL
+    return this.instance.defaults.baseURL;
   }
 
   /**
@@ -67,7 +67,7 @@ class RequestClient {
     data?: any,
     config?: RequestClientConfig,
   ): Promise<T> {
-    return this.request<T>(url, { ...config, data, method: 'POST' })
+    return this.request<T>(url, { ...config, data, method: 'POST' });
   }
 
   /**
@@ -78,7 +78,7 @@ class RequestClient {
     data?: any,
     config?: RequestClientConfig,
   ): Promise<T> {
-    return this.request<T>(url, { ...config, data, method: 'PUT' })
+    return this.request<T>(url, { ...config, data, method: 'PUT' });
   }
 
   /**
@@ -92,12 +92,12 @@ class RequestClient {
       const response: AxiosResponse<T> = await this.instance({
         url,
         ...config,
-      })
-      return response as T
+      });
+      return response as T;
     } catch (error: any) {
-      throw error.response ? error.response.data : error
+      throw error.response ? error.response.data : error;
     }
   }
 }
 
-export { RequestClient }
+export { RequestClient };

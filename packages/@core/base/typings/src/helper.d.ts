@@ -1,20 +1,20 @@
-import type { ComputedRef, MaybeRef } from 'vue'
+import type { ComputedRef, MaybeRef } from 'vue';
 
 /**
  * 深层递归所有属性为可选
  */
 type DeepPartial<T> = T extends object
   ? {
-      [P in keyof T]?: DeepPartial<T[P]>
+      [P in keyof T]?: DeepPartial<T[P]>;
     }
-  : T
+  : T;
 
 /**
  * 深层递归所有属性为只读
  */
 type DeepReadonly<T> = {
-  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P]
-}
+  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
+};
 
 /**
  * 任意类型的异步函数
@@ -22,72 +22,72 @@ type DeepReadonly<T> = {
 
 type AnyPromiseFunction<T extends any[] = any[], R = void> = (
   ...argument: T
-) => PromiseLike<R>
+) => PromiseLike<R>;
 
 /**
  * 任意类型的普通函数
  */
 type AnyNormalFunction<T extends any[] = any[], R = void> = (
   ...argument: T
-) => R
+) => R;
 
 /**
  * 任意类型的函数
  */
 type AnyFunction<T extends any[] = any[], R = void> =
-  AnyNormalFunction<T, R> | AnyPromiseFunction<T, R>
+  AnyNormalFunction<T, R> | AnyPromiseFunction<T, R>;
 
 /**
  *  T | null 包装
  */
-type Nullable<T> = null | T
+type Nullable<T> = null | T;
 
 /**
  * T | Not null 包装
  */
-type NonNullable<T> = T extends null | undefined ? never : T
+type NonNullable<T> = T extends null | undefined ? never : T;
 
 /**
  * 字符串类型对象
  */
-type Recordable<T> = Record<string, T>
+type Recordable<T> = Record<string, T>;
 
 /**
  * 字符串类型对象（只读）
  */
 interface ReadonlyRecordable<T = any> {
-  readonly [key: string]: T
+  readonly [key: string]: T;
 }
 
 /**
  * setTimeout 返回值类型
  */
-type TimeoutHandle = ReturnType<typeof setTimeout>
+type TimeoutHandle = ReturnType<typeof setTimeout>;
 
 /**
  * setInterval 返回值类型
  */
-type IntervalHandle = ReturnType<typeof setInterval>
+type IntervalHandle = ReturnType<typeof setInterval>;
 
 /**
  * 也许它是一个计算的 ref，或者一个 getter 函数
  *
  */
-type MaybeReadonlyReference<T> = (() => T) | ComputedRef<T>
+type MaybeReadonlyReference<T> = (() => T) | ComputedRef<T>;
 
 /**
  * 也许它是一个 ref，或者一个普通值，或者一个 getter 函数
  *
  */
-type MaybeComputedReference<T> = MaybeReadonlyReference<T> | MaybeRef<T>
+type MaybeComputedReference<T> = MaybeReadonlyReference<T> | MaybeRef<T>;
 
 type Merge<O extends object, T extends object> = {
   [K in keyof O | keyof T]: K extends keyof T
     ? T[K]
     : K extends keyof O
       ? O[K]
-      : never
-}
+      : never;
+};
 
 /**
  * T = [
@@ -106,11 +106,11 @@ type MergeAll<
   R extends object = Record<string, any>,
 > = T extends [infer F extends object, ...infer Rest extends object[]]
   ? MergeAll<Rest, Merge<R, F>>
-  : R
+  : R;
 
-type EmitType = (name: Name, ...arguments_: any[]) => void
+type EmitType = (name: Name, ...arguments_: any[]) => void;
 
-type MaybePromise<T> = Promise<T> | T
+type MaybePromise<T> = Promise<T> | T;
 
 export type {
   AnyFunction,
@@ -130,4 +130,4 @@ export type {
   ReadonlyRecordable,
   Recordable,
   TimeoutHandle,
-}
+};

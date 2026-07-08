@@ -2,25 +2,25 @@
 import type {
   DropdownMenuCheckboxItemEmits,
   DropdownMenuCheckboxItemProps,
-} from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { CheckIcon } from '@lucide/vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
+} from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { CheckIcon } from '@lucide/vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
 import {
   DropdownMenuCheckboxItem,
   DropdownMenuItemIndicator,
   useForwardPropsEmits,
-} from 'reka-ui'
+} from 'reka-ui';
 
 const props = defineProps<
   DropdownMenuCheckboxItemProps & { class?: HTMLAttributes['class'] }
->()
-const emits = defineEmits<DropdownMenuCheckboxItemEmits>()
+>();
+const emits = defineEmits<DropdownMenuCheckboxItemEmits>();
 
-const delegatedProperties = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class');
 
-const forwarded = useForwardPropsEmits(delegatedProperties, emits)
+const forwarded = useForwardPropsEmits(delegatedProperties, emits);
 </script>
 
 <template>

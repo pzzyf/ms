@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import type { ButtonVariants } from '@ms-core/shadcn-ui/ui/button'
-import type { PaginationPrevProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { ChevronLeftIcon } from '@lucide/vue'
-import { buttonVariants } from '@ms-core/shadcn-ui/ui/button'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { PaginationPrev, useForwardProps } from 'reka-ui'
+import type { ButtonVariants } from '@ms-core/shadcn-ui/ui/button';
+import type { PaginationPrevProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { ChevronLeftIcon } from '@lucide/vue';
+import { buttonVariants } from '@ms-core/shadcn-ui/ui/button';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { PaginationPrev, useForwardProps } from 'reka-ui';
 
 const props = withDefaults(
   defineProps<
     PaginationPrevProps & {
-      size?: ButtonVariants['size']
-      class?: HTMLAttributes['class']
+      size?: ButtonVariants['size'];
+      class?: HTMLAttributes['class'];
     }
   >(),
   {
     size: 'default',
   },
-)
+);
 
-const delegatedProperties = reactiveOmit(props, 'class', 'size')
-const forwarded = useForwardProps(delegatedProperties)
+const delegatedProperties = reactiveOmit(props, 'class', 'size');
+const forwarded = useForwardProps(delegatedProperties);
 </script>
 
 <template>

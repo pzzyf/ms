@@ -1,1 +1,1 @@
-export { default } from '@ms/commitlint-config'
+export { default } from '@ms/commitlint-config';

@@ -1,6 +1,6 @@
-import type { MsFormSchema as FormSchema, MsFormProps } from '@ms/common-ui'
+import type { MsFormSchema as FormSchema, MsFormProps } from '@ms/common-ui';
 
-import { setupMsForm, useMsForm as useForm, z } from '@ms/common-ui'
+import { setupMsForm, useMsForm as useForm, z } from '@ms/common-ui';
 
 async function initSetupMsForm() {
   setupMsForm({
@@ -16,12 +16,12 @@ async function initSetupMsForm() {
         Upload: 'fileList',
       },
     },
-  })
+  });
 }
 
-const useMsForm = useForm
+const useMsForm = useForm;
 
-export { initSetupMsForm, useMsForm, z }
+export { initSetupMsForm, useMsForm, z };
 
-export type MsFormSchema = FormSchema
-export type { MsFormProps }
+export type MsFormSchema = FormSchema;
+export type { MsFormProps };

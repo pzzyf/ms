@@ -2,20 +2,20 @@
 import type {
   DropdownMenuSubContentEmits,
   DropdownMenuSubContentProps,
-} from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { DropdownMenuSubContent, useForwardPropsEmits } from 'reka-ui'
+} from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { DropdownMenuSubContent, useForwardPropsEmits } from 'reka-ui';
 
 const props = defineProps<
   DropdownMenuSubContentProps & { class?: HTMLAttributes['class'] }
->()
-const emits = defineEmits<DropdownMenuSubContentEmits>()
+>();
+const emits = defineEmits<DropdownMenuSubContentEmits>();
 
-const delegatedProperties = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class');
 
-const forwarded = useForwardPropsEmits(delegatedProperties, emits)
+const forwarded = useForwardPropsEmits(delegatedProperties, emits);
 </script>
 
 <template>

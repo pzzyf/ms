@@ -6,7 +6,7 @@ const allowedScopes = [
   'dev',
   'deploy',
   'other',
-]
+];
 
 /**
  * @type {import('cz-git').UserConfig}
@@ -22,10 +22,10 @@ const userConfig = {
       'always',
       (parsed) => {
         if (!parsed.scope || allowedScopes.includes(parsed.scope)) {
-          return [true]
+          return [true];
         }
 
-        return [false, `scope must be one of ${allowedScopes.join(', ')}`]
+        return [false, `scope must be one of ${allowedScopes.join(', ')}`];
       },
     ],
     'header-max-length': [2, 'always', 108],
@@ -53,6 +53,6 @@ const userConfig = {
       ],
     ],
   },
-}
+};
 
-export default userConfig
+export default userConfig;

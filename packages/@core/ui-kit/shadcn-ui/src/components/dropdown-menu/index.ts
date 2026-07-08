@@ -1,3 +1,3 @@
-export { default as MsDropdownRadioMenu } from './dropdown-radio-menu.vue'
+export { default as MsDropdownRadioMenu } from './dropdown-radio-menu.vue';
 
-export type * from './interface'
+export type * from './interface';

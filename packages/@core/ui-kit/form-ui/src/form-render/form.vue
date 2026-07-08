@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { GenericObject } from 'vee-validate'
+import type { GenericObject } from 'vee-validate';
 
 import type {
   FormCommonConfig,
   FormRenderProps as FormRenderProperties,
   FormSchema,
-} from '../types'
+} from '../types';
 
-import { Form } from '@ms-core/shadcn-ui'
+import { Form } from '@ms-core/shadcn-ui';
 
-import { cn, isFunction, mergeWithArrayOverride } from '@ms-core/shared/utils'
-import { computed, useTemplateRef } from 'vue'
+import { cn, isFunction, mergeWithArrayOverride } from '@ms-core/shared/utils';
+import { computed, useTemplateRef } from 'vue';
 
-import { provideComponentReferenceMap } from '../use-form-context'
-import { provideFormRenderProperties } from './context'
-import { useExpandable } from './expandable'
-import FormField from './form-field.vue'
+import { provideComponentReferenceMap } from '../use-form-context';
+import { provideFormRenderProperties } from './context';
+import { useExpandable } from './expandable';
+import FormField from './form-field.vue';
 
 interface Properties extends FormRenderProperties {}
 
@@ -28,32 +28,32 @@ const properties = withDefaults(
     showCollapseButton: false,
     wrapperClass: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3',
   },
-)
+);
 
 const emits = defineEmits<{
-  submit: [event: any]
-}>()
+  submit: [event: any];
+}>();
 
 const wrapperClass = computed(() => {
-  const cls = ['flex']
+  const cls = ['flex'];
   if (properties.layout === 'inline') {
-    cls.push('flex-wrap gap-x-2')
+    cls.push('flex-wrap gap-x-2');
   } else {
-    cls.push(properties.compact ? 'gap-x-2' : 'gap-x-4', 'flex-col grid')
+    cls.push(properties.compact ? 'gap-x-2' : 'gap-x-4', 'flex-col grid');
   }
-  return cn(...cls, properties.wrapperClass)
-})
+  return cn(...cls, properties.wrapperClass);
+});
 
-provideFormRenderProperties(properties)
-provideComponentReferenceMap(new Map<string, unknown>())
+provideFormRenderProperties(properties);
+provideComponentReferenceMap(new Map<string, unknown>());
 
-const wrapperRef = useTemplateRef<HTMLElement>('wrapperRef')
+const wrapperRef = useTemplateRef<HTMLElement>('wrapperRef');
 const { isCalculated, keepFormItemIndex } = useExpandable(
   properties,
   wrapperRef,
-)
+);
 
-const formComponent = computed(() => (properties.form ? 'form' : Form))
+const formComponent = computed(() => (properties.form ? 'form' : Form));
 
 const formComponentProps = computed(() => {
   return properties.form
@@ -64,17 +64,17 @@ const formComponentProps = computed(() => {
       }
     : {
         onSubmit: (value: GenericObject) => emits('submit', value),
-      }
-})
+      };
+});
 
 const formCollapsed = computed(() => {
-  return properties.collapsed && isCalculated.value
-})
+  return properties.collapsed && isCalculated.value;
+});
 
 const computedSchema = computed(
   (): (Omit<FormSchema, 'formFieldProps'> & {
-    commonComponentProps: Record<string, any>
-    formFieldProps: Record<string, any>
+    commonComponentProps: Record<string, any>;
+    formFieldProps: Record<string, any>;
   })[] => {
     const {
       colon = false,
@@ -95,24 +95,24 @@ const computedSchema = computed(
     } = mergeWithArrayOverride(
       properties.commonConfig,
       properties.globalCommonConfig,
-    )
+    );
     return (properties.schema || []).map((schema, index) => {
-      const keepIndex = keepFormItemIndex.value
+      const keepIndex = keepFormItemIndex.value;
 
       const isHidden =
         // 折叠状态 & 显示折叠按钮 & 当前索引大于保留索引
         properties.showCollapseButton && !!formCollapsed.value && keepIndex
           ? keepIndex <= index
-          : false
+          : false;
 
       // 处理函数形式的formItemClass
-      let resolvedSchemaFormItemClass = schema.formItemClass
+      let resolvedSchemaFormItemClass = schema.formItemClass;
       if (isFunction(schema.formItemClass)) {
         try {
-          resolvedSchemaFormItemClass = schema.formItemClass()
+          resolvedSchemaFormItemClass = schema.formItemClass();
         } catch (error) {
-          console.error('Error calling formItemClass function:', error)
-          resolvedSchemaFormItemClass = ''
+          console.error('Error calling formItemClass function:', error);
+          resolvedSchemaFormItemClass = '';
         }
       }
 
@@ -142,10 +142,10 @@ const computedSchema = computed(
           resolvedSchemaFormItemClass,
         ),
         labelClass: cn(labelClass, schema.labelClass),
-      }
-    })
+      };
+    });
   },
-)
+);
 </script>
 
 <template>

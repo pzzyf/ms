@@ -1,52 +1,52 @@
-import type { AsTag } from 'reka-ui'
+import type { AsTag } from 'reka-ui';
 
-import type { Component } from 'vue'
+import type { Component } from 'vue';
 
-import type { ButtonVariants } from '../../ui'
+import type { ButtonVariants } from '../../ui';
 
 export interface MsButtonProps {
   /**
    * The element or component this component should render as. Can be overwrite by `asChild`
    * @defaultValue "div"
    */
-  as?: AsTag | Component
+  as?: AsTag | Component;
   /**
    * Change the default rendered element for the one passed as a child, merging their props and behavior.
    *
    * Read our [Composition](https://www.reka-ui.com/docs/guides/composition) guide for more details.
    */
-  asChild?: boolean
-  class?: any
-  disabled?: boolean
-  loading?: boolean
-  size?: ButtonVariants['size']
-  variant?: ButtonVariants['variant']
+  asChild?: boolean;
+  class?: any;
+  disabled?: boolean;
+  loading?: boolean;
+  size?: ButtonVariants['size'];
+  variant?: ButtonVariants['variant'];
 }
 
-export type CustomRenderType = (() => Component | string) | string
+export type CustomRenderType = (() => Component | string) | string;
 
-export type ValueType = boolean | number | string
+export type ValueType = boolean | number | string;
 
 export interface MsButtonGroupProps extends Pick<MsButtonProps, 'disabled'> {
   /** 单选模式下允许清除选中 */
-  allowClear?: boolean
+  allowClear?: boolean;
   /** 值改变前的回调 */
   beforeChange?: (
     value: ValueType,
     isChecked: boolean,
-  ) => boolean | PromiseLike<boolean | undefined> | undefined
+  ) => boolean | PromiseLike<boolean | undefined> | undefined;
   /** 按钮样式 */
-  btnClass?: any
+  btnClass?: any;
   /** 按钮间隔距离 */
-  gap?: number
+  gap?: number;
   /** 多选模式下限制最多选择的数量。0表示不限制 */
-  maxCount?: number
+  maxCount?: number;
   /** 是否允许多选 */
-  multiple?: boolean
+  multiple?: boolean;
   /** 选项 */
-  options?: { [key: string]: any; label: CustomRenderType; value: ValueType }[]
+  options?: { [key: string]: any; label: CustomRenderType; value: ValueType }[];
   /** 显示图标 */
-  showIcon?: boolean
+  showIcon?: boolean;
   /** 尺寸 */
-  size?: 'large' | 'middle' | 'small'
+  size?: 'large' | 'middle' | 'small';
 }

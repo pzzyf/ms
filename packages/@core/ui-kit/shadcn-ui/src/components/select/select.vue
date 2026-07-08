@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { CircleX } from '@ms-core/icons'
+import { CircleX } from '@ms-core/icons';
 
 import {
   Select,
@@ -7,23 +7,23 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../ui'
+} from '../../ui';
 
 interface Properties {
-  allowClear?: boolean
-  class?: any
-  options?: Array<{ label: string; value: string }>
-  placeholder?: string
+  allowClear?: boolean;
+  class?: any;
+  options?: Array<{ label: string; value: string }>;
+  placeholder?: string;
 }
 
 const props = withDefaults(defineProps<Properties>(), {
   allowClear: false,
-})
+});
 
-const modelValue = defineModel<string>()
+const modelValue = defineModel<string>();
 
 function handleClear() {
-  modelValue.value = undefined
+  modelValue.value = undefined;
 }
 </script>
 

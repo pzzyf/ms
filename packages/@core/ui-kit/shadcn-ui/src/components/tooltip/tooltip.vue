@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import type { ClassType } from '@ms-core/typings'
+import type { ClassType } from '@ms-core/typings';
 
-import type { TooltipContentProps } from 'reka-ui'
+import type { TooltipContentProps } from 'reka-ui';
 
-import type { StyleValue } from 'vue'
+import type { StyleValue } from 'vue';
 
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../ui'
+} from '../../ui';
 
 interface Properties {
-  contentClass?: ClassType
-  contentStyle?: StyleValue
-  delayDuration?: number
-  side?: TooltipContentProps['side']
+  contentClass?: ClassType;
+  contentStyle?: StyleValue;
+  delayDuration?: number;
+  side?: TooltipContentProps['side'];
 }
 
 withDefaults(defineProps<Properties>(), {
   delayDuration: 0,
   side: 'right',
-})
+});
 </script>
 
 <template>
@@ -35,7 +35,7 @@ withDefaults(defineProps<Properties>(), {
         :class="contentClass"
         :side="side"
         :style="contentStyle"
-        class="side-content rounded-md bg-accent text-popover-foreground"
+        class="side-content bg-accent text-popover-foreground rounded-md"
       >
         <slot></slot>
       </TooltipContent>

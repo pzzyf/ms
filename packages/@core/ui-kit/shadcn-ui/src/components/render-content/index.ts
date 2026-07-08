@@ -1,1 +1,1 @@
-export { default as MsRenderContent } from './render-content.vue'
+export { default as MsRenderContent } from './render-content.vue';

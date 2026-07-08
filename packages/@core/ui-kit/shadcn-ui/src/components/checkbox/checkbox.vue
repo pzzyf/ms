@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { CheckboxRootEmits, CheckboxRootProps } from 'reka-ui'
+import type { CheckboxRootEmits, CheckboxRootProps } from 'reka-ui';
 
-import { useForwardPropsEmits } from 'reka-ui'
+import { useForwardPropsEmits } from 'reka-ui';
 
-import { useId } from 'vue'
+import { useId } from 'vue';
 
-import { Checkbox } from '../../ui/checkbox'
+import { Checkbox } from '../../ui/checkbox';
 
 const properties = defineProps<
   CheckboxRootProps & { indeterminate?: boolean }
->()
+>();
 
-const emits = defineEmits<CheckboxRootEmits>()
+const emits = defineEmits<CheckboxRootEmits>();
 
-const checked = defineModel<boolean>()
+const checked = defineModel<boolean>();
 
-const forwarded = useForwardPropsEmits(properties, emits)
+const forwarded = useForwardPropsEmits(properties, emits);
 
-const id = useId()
+const id = useId();
 </script>
 
 <template>

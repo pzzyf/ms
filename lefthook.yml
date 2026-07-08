@@ -1,11 +1,18 @@
 pre-commit:
-  parallel: true
+  parallel: false
   commands:
+    format:
+      priority: 1
+      glob: '*.{js,cjs,mjs,ts,cts,mts,jsx,tsx,vue,json,json5,jsonc,yml,yaml,css,scss,less,html,md,mdx}'
+      run: pnpm exec prettier --write {staged_files}
+      stage_fixed: true
     lint:
-      glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx,vue,json,json5,jsonc,yml,yaml}"
+      priority: 2
+      glob: '*.{js,cjs,mjs,ts,cts,mts,jsx,tsx,vue,json,json5,jsonc,yml,yaml}'
       run: pnpm exec eslint --fix --no-warn-ignored {staged_files}
       stage_fixed: true
     checkType:
+      priority: 3
       run: pnpm check:type
 
 post-merge:

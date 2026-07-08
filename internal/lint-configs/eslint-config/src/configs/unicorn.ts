@@ -1,11 +1,11 @@
-import type { Linter } from 'eslint'
+import type { Linter } from 'eslint';
 
-import { interopDefault } from '../util'
+import { interopDefault } from '../util';
 
 export async function unicorn(): Promise<Linter.Config[]> {
   const [pluginUnicorn] = await Promise.all([
     interopDefault(import('eslint-plugin-unicorn')),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -46,5 +46,5 @@ export async function unicorn(): Promise<Linter.Config[]> {
         'unicorn/no-process-exit': 'off',
       },
     },
-  ]
+  ];
 }

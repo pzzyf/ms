@@ -4,6 +4,7 @@
   "license": "ISC",
   "scripts": {
     "dev": "turbo-run dev",
+    "format": "prettier . --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:unit": "vitest run --dom --passWithNoTests",
@@ -27,6 +28,7 @@
     "happy-dom": "catalog:",
     "is-ci": "catalog:",
     "lefthook": "catalog:",
+    "prettier": "catalog:",
     "tailwindcss": "catalog:",
     "tsdown": "catalog:",
     "turbo": "catalog:",

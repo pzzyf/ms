@@ -1,10 +1,10 @@
-import type { Component } from 'vue'
+import type { Component } from 'vue';
 
 import type {
   BaseFormComponentType,
   FormCommonConfig,
   MsFormAdapterOptions,
-} from './types'
+} from './types';
 
 import {
   MsButton,
@@ -12,15 +12,15 @@ import {
   Input as MsInput,
   MsInputPassword,
   MsSelect,
-} from '@ms-core/shadcn-ui'
+} from '@ms-core/shadcn-ui';
 
-import { globalShareState } from '@ms-core/shared/global-state'
-import { defineRule } from 'vee-validate'
-import { h } from 'vue'
+import { globalShareState } from '@ms-core/shared/global-state';
+import { defineRule } from 'vee-validate';
+import { h } from 'vue';
 
-const DEFAULT_MODEL_PROP_NAME = 'modelValue'
+const DEFAULT_MODEL_PROP_NAME = 'modelValue';
 
-export const DEFAULT_FORM_COMMON_CONFIG: FormCommonConfig = {}
+export const DEFAULT_FORM_COMMON_CONFIG: FormCommonConfig = {};
 
 export const COMPONENT_MAP: Record<string, Component> = {
   DefaultButton: h(MsButton, { size: 'sm', variant: 'outline' }),
@@ -29,55 +29,55 @@ export const COMPONENT_MAP: Record<string, Component> = {
   MsSelect,
   MsCheckbox,
   MsInputPassword,
-}
+};
 
 export const COMPONENT_BIND_EVENT_MAP: Partial<
   Record<BaseFormComponentType, string>
 > = {
   MsCheckbox: 'checked',
-}
+};
 
 export function setupMsForm<
   T extends BaseFormComponentType = BaseFormComponentType,
 >(options: MsFormAdapterOptions<T>) {
-  const { config, defineRules } = options
+  const { config, defineRules } = options;
 
   const {
     disabledOnChangeListener = true,
     disabledOnInputListener = true,
     emptyStateValue = undefined,
-  } = (config || {}) as FormCommonConfig
+  } = (config || {}) as FormCommonConfig;
 
   Object.assign(DEFAULT_FORM_COMMON_CONFIG, {
     disabledOnChangeListener,
     disabledOnInputListener,
     emptyStateValue,
-  })
+  });
 
   if (defineRules) {
     for (const key of Object.keys(defineRules)) {
-      defineRule(key, defineRules[key as never])
+      defineRule(key, defineRules[key as never]);
     }
   }
 
   const baseModelPropertyName =
-    config?.baseModelPropName ?? DEFAULT_MODEL_PROP_NAME
+    config?.baseModelPropName ?? DEFAULT_MODEL_PROP_NAME;
   const modelPropertyNameMap = config?.modelPropNameMap as
-    Record<BaseFormComponentType, string> | undefined
+    Record<BaseFormComponentType, string> | undefined;
 
-  const components = globalShareState.getComponents()
+  const components = globalShareState.getComponents();
 
   for (const component of Object.keys(components)) {
-    const key = component as BaseFormComponentType
-    COMPONENT_MAP[key] = components[component as never]
+    const key = component as BaseFormComponentType;
+    COMPONENT_MAP[key] = components[component as never];
 
     if (baseModelPropertyName !== DEFAULT_MODEL_PROP_NAME) {
-      COMPONENT_BIND_EVENT_MAP[key] = baseModelPropertyName
+      COMPONENT_BIND_EVENT_MAP[key] = baseModelPropertyName;
     }
 
     // 覆盖特殊组件的modelPropName
     if (modelPropertyNameMap && Object.hasOwn(modelPropertyNameMap, key)) {
-      COMPONENT_BIND_EVENT_MAP[key] = modelPropertyNameMap[key]
+      COMPONENT_BIND_EVENT_MAP[key] = modelPropertyNameMap[key];
     }
   }
 }

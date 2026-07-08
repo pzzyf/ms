@@ -1,12 +1,12 @@
-import type { Linter } from 'eslint'
+import type { Linter } from 'eslint';
 
-import { interopDefault } from '../util'
+import { interopDefault } from '../util';
 
 export async function jsonc(): Promise<Linter.Config[]> {
   const [pluginJsonc, parserJsonc] = await Promise.all([
     interopDefault(import('eslint-plugin-jsonc')),
     interopDefault(import('jsonc-eslint-parser')),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -49,7 +49,7 @@ export async function jsonc(): Promise<Linter.Config[]> {
     sortTsconfig(),
     sortPackageJson(),
     sortCspellJson(),
-  ]
+  ];
 }
 
 function sortPackageJson(): Linter.Config {
@@ -128,7 +128,7 @@ function sortPackageJson(): Linter.Config {
         },
       ],
     },
-  }
+  };
 }
 
 function sortCspellJson(): Linter.Config {
@@ -143,7 +143,7 @@ function sortCspellJson(): Linter.Config {
         },
       ],
     },
-  }
+  };
 }
 
 function sortTsconfig(): Linter.Config {
@@ -270,5 +270,5 @@ function sortTsconfig(): Linter.Config {
         },
       ],
     },
-  }
+  };
 }

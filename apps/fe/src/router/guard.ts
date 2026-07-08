@@ -1,10 +1,10 @@
-import type { Router } from 'vue-router'
-import { LOGIN_PATH } from '@ms/constants'
-import { preferences } from '@ms/preferences'
-import { useAccessStore, useUserStore } from '@ms/stores'
-import { startProgress, stopProgress } from '@ms/utils'
-import { coreRouteNames } from '#/router/routes'
-import { useAuthStore } from '#/store'
+import type { Router } from 'vue-router';
+import { LOGIN_PATH } from '@ms/constants';
+import { preferences } from '@ms/preferences';
+import { useAccessStore, useUserStore } from '@ms/stores';
+import { startProgress, stopProgress } from '@ms/utils';
+import { coreRouteNames } from '#/router/routes';
+import { useAuthStore } from '#/store';
 
 /**
  * 创建通用路由守卫
@@ -12,28 +12,28 @@ import { useAuthStore } from '#/store'
  */
 
 function commonGuard(router: Router) {
-  const loadedPaths = new Set<string>()
+  const loadedPaths = new Set<string>();
   router.beforeEach((to) => {
-    to.meta.loaded = loadedPaths.has(to.path)
+    to.meta.loaded = loadedPaths.has(to.path);
     if (!to.meta.loaded && preferences.transition.progress) {
-      startProgress()
+      startProgress();
     }
-    return true
-  })
+    return true;
+  });
 
   router.afterEach((to) => {
-    loadedPaths.add(to.path)
+    loadedPaths.add(to.path);
     if (preferences.transition.progress) {
-      stopProgress()
+      stopProgress();
     }
-  })
+  });
 }
 
 function setupAccessGuard(router: Router) {
   router.beforeEach(async (to) => {
-    const accessStore = useAccessStore()
-    const userStore = useUserStore()
-    const authStore = useAuthStore()
+    const accessStore = useAccessStore();
+    const userStore = useUserStore();
+    const authStore = useAuthStore();
 
     // 基本路由，这些路由不需要进入权限拦截
     if (coreRouteNames.includes(to.name as string)) {
@@ -42,16 +42,16 @@ function setupAccessGuard(router: Router) {
           (to.query?.redirect as string) ||
             userStore.userInfo?.homePath ||
             preferences.app.defaultHomePath,
-        )
+        );
       }
-      return true
+      return true;
     }
 
     // accessToken 检查
     if (!accessStore.accessToken) {
       // 明确声明忽略权限访问权限，则可以访问
       if (to.meta.ignoreAccess) {
-        return true
+        return true;
       }
 
       // 没有访问权限，跳转登录页面
@@ -65,30 +65,30 @@ function setupAccessGuard(router: Router) {
               : { redirect: encodeURIComponent(to.fullPath) },
           // 携带当前跳转的页面，登录后重新跳转该页面
           replace: true,
-        }
+        };
       }
-      return to
+      return to;
     }
 
     // 是否已经生成过动态路由
     if (accessStore.isAccessChecked) {
-      return true
+      return true;
     }
 
     // 生成路由表
     // 当前登录用户拥有的角色标识列表
-    const userInfo = userStore.userInfo || (await authStore.fetchUserInfo())
-    const userRoles = userInfo.roles ?? []
+    const userInfo = userStore.userInfo || (await authStore.fetchUserInfo());
+    const userRoles = userInfo.roles ?? [];
 
     if (userRoles) {
-      return true
+      return true;
     }
-  })
+  });
 }
 
 function createRouterGuard(router: Router) {
-  commonGuard(router)
-  setupAccessGuard(router)
+  commonGuard(router);
+  setupAccessGuard(router);
 }
 
-export { createRouterGuard }
+export { createRouterGuard };

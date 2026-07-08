@@ -1,13 +1,13 @@
-import type { PluginOption } from 'vite'
+import type { PluginOption } from 'vite';
 
-import type { NitroMockPluginOptions } from '../typing'
+import type { NitroMockPluginOptions } from '../typing';
 
-import { colors, consola, getPackage } from '@ms/node-utils'
+import { colors, consola, getPackage } from '@ms/node-utils';
 
-import getPort from 'get-port'
-import { build, createDevServer, createNitro, prepare } from 'nitropack'
+import getPort from 'get-port';
+import { build, createDevServer, createNitro, prepare } from 'nitropack';
 
-const hmrKeyRe = /^runtimeConfig\.|routeRules\./
+const hmrKeyRe = /^runtimeConfig\.|routeRules\./;
 
 export function viteNitroMockPlugin({
   mockServerPackage = '@ms/be-mock',
@@ -16,42 +16,44 @@ export function viteNitroMockPlugin({
 }: NitroMockPluginOptions = {}): PluginOption {
   return {
     async configureServer(server) {
-      const availablePort = await getPort({ port })
+      const availablePort = await getPort({ port });
       if (availablePort !== port) {
-        return
+        return;
       }
 
-      const package_ = await getPackage(mockServerPackage)
+      const package_ = await getPackage(mockServerPackage);
       if (!package_) {
-        consola.log(`Package ${mockServerPackage} not found. Skip mock server.`)
-        return
+        consola.log(
+          `Package ${mockServerPackage} not found. Skip mock server.`,
+        );
+        return;
       }
 
-      runNitroServer(package_.dir, port, verbose)
+      runNitroServer(package_.dir, port, verbose);
 
-      const _printUrls = server.printUrls
+      const _printUrls = server.printUrls;
       server.printUrls = () => {
-        _printUrls()
+        _printUrls();
 
         consola.log(
           `  ${colors.green('➜')}  ${colors.bold('Nitro Mock Server')}: ${colors.cyan(`http://localhost:${port}/api`)}`,
-        )
-      }
+        );
+      };
     },
     enforce: 'pre',
     name: 'vite:mock-server',
-  }
+  };
 }
 
 async function runNitroServer(rootDir: string, port: number, verbose: boolean) {
-  let nitro: any
+  let nitro: any;
   const reload = async () => {
     if (nitro) {
-      consola.info('Restarting dev server...')
+      consola.info('Restarting dev server...');
       if ('unwatch' in nitro.options._c12) {
-        await nitro.options._c12.unwatch()
+        await nitro.options._c12.unwatch();
       }
-      await nitro.close()
+      await nitro.close();
     }
     nitro = await createNitro(
       {
@@ -62,34 +64,34 @@ async function runNitroServer(rootDir: string, port: number, verbose: boolean) {
       {
         c12: {
           async onUpdate({ getDiff, newConfig }) {
-            const diff = getDiff()
+            const diff = getDiff();
             if (diff.length === 0) {
-              return
+              return;
             }
             verbose &&
               consola.info(
                 `Nitro config updated:\n${diff
                   .map((entry) => `  ${entry.toString()}`)
                   .join('\n')}`,
-              )
+              );
             await (diff.every((e) => hmrKeyRe.test(e.key))
               ? nitro.updateConfig(newConfig.config)
-              : reload())
+              : reload());
           },
         },
         watch: true,
       },
-    )
-    nitro.hooks.hookOnce('restart', reload)
+    );
+    nitro.hooks.hookOnce('restart', reload);
 
-    const server = createDevServer(nitro)
-    await server.listen(port, { showURL: false })
-    await prepare(nitro)
-    await build(nitro)
+    const server = createDevServer(nitro);
+    await server.listen(port, { showURL: false });
+    await prepare(nitro);
+    await build(nitro);
 
     if (verbose) {
-      consola.success(colors.bold(colors.green('Nitro Mock Server started.')))
+      consola.success(colors.bold(colors.green('Nitro Mock Server started.')));
     }
-  }
-  return await reload()
+  };
+  return await reload();
 }

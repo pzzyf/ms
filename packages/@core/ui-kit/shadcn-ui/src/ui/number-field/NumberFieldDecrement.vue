@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import type { NumberFieldDecrementProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { MinusIcon } from '@lucide/vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { NumberFieldDecrement, useForwardProps } from 'reka-ui'
+import type { NumberFieldDecrementProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { MinusIcon } from '@lucide/vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { NumberFieldDecrement, useForwardProps } from 'reka-ui';
 
 const props = defineProps<
   NumberFieldDecrementProps & { class?: HTMLAttributes['class'] }
->()
+>();
 
-const delegatedProperties = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class');
 
-const forwarded = useForwardProps(delegatedProperties)
+const forwarded = useForwardProps(delegatedProperties);
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const forwarded = useForwardProps(delegatedProperties)
     v-bind="forwarded"
     :class="
       cn(
-        'absolute top-1/2 -translate-y-1/2 left-0 p-3 disabled:cursor-not-allowed disabled:opacity-20',
+        'absolute top-1/2 left-0 -translate-y-1/2 p-3 disabled:cursor-not-allowed disabled:opacity-20',
         props.class,
       )
     "

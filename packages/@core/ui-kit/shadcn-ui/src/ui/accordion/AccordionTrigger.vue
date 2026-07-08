@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { AccordionTriggerProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { ChevronDownIcon } from '@lucide/vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { AccordionHeader, AccordionTrigger } from 'reka-ui'
+import type { AccordionTriggerProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { ChevronDownIcon } from '@lucide/vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { AccordionHeader, AccordionTrigger } from 'reka-ui';
 
 const props = defineProps<
   AccordionTriggerProps & { class?: HTMLAttributes['class'] }
->()
+>();
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>

@@ -1,16 +1,16 @@
 <script setup lang="ts">
 defineOptions({
   name: 'AuthenticationFormView',
-})
+});
 
 defineProps<{
-  dataSide?: 'bottom' | 'left' | 'right' | 'top'
-}>()
+  dataSide?: 'bottom' | 'left' | 'right' | 'top';
+}>();
 </script>
 
 <template>
   <div
-    class="relative flex-col-center bg-background px-6 py-10 lg:flex-initial lg:px-8 dark:bg-background-deep"
+    class="flex-col-center bg-background dark:bg-background-deep relative px-6 py-10 lg:flex-initial lg:px-8"
   >
     <slot></slot>
     <!-- Router View with Transition and KeepAlive -->

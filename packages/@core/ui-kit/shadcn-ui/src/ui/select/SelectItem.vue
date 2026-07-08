@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { SelectItemProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { CheckIcon } from '@lucide/vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
+import type { SelectItemProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { CheckIcon } from '@lucide/vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
 import {
   SelectItem,
   SelectItemIndicator,
   SelectItemText,
   useForwardProps,
-} from 'reka-ui'
+} from 'reka-ui';
 
 const props = defineProps<
   SelectItemProps & { class?: HTMLAttributes['class'] }
->()
+>();
 
-const delegatedProperties = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class');
 
-const forwardedProps = useForwardProps(delegatedProperties)
+const forwardedProps = useForwardProps(delegatedProperties);
 </script>
 
 <template>

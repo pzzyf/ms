@@ -3,28 +3,28 @@
  */
 
 function unmountGlobalLoading() {
-  const loadingElement = document.querySelector('#__app-loading__')
+  const loadingElement = document.querySelector('#__app-loading__');
 
   if (loadingElement) {
-    loadingElement.classList.add('hidden')
+    loadingElement.classList.add('hidden');
 
     const injectLoadingElements = document.querySelectorAll(
       '[data-app-loading^="inject"]',
-    )
+    );
 
     loadingElement.addEventListener(
       'transitionend',
       () => {
-        loadingElement.remove()
+        loadingElement.remove();
         for (const element of injectLoadingElements) {
-          element.remove()
+          element.remove();
         }
       },
       {
         once: true,
       },
-    )
+    );
   }
 }
 
-export { unmountGlobalLoading }
+export { unmountGlobalLoading };

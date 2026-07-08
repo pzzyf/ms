@@ -2,15 +2,15 @@ import type {
   FormItemDependencies,
   FormSchemaRuleType,
   MaybeComponentProps as MaybeComponentProperties,
-} from '../types'
+} from '../types';
 
-import { get, isBoolean, isFunction } from '@ms-core/shared/utils'
+import { get, isBoolean, isFunction } from '@ms-core/shared/utils';
 
-import { useFormValues } from 'vee-validate'
+import { useFormValues } from 'vee-validate';
 
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue';
 
-import { injectRenderFormProperties } from './context'
+import { injectRenderFormProperties } from './context';
 
 /**
  * 解析Nested Objects对应的字段值
@@ -23,63 +23,63 @@ function resolveValueByFieldName(
 ) {
   // vee-validate：[] 表示禁用嵌套
   if (fieldName.startsWith('[') && fieldName.endsWith(']')) {
-    const rawKey = fieldName.slice(1, -1)
-    return values[rawKey]
+    const rawKey = fieldName.slice(1, -1);
+    return values[rawKey];
   }
 
-  return get(values, fieldName)
+  return get(values, fieldName);
 }
 
 export default function useDependencies(
   getDependencies: () => FormItemDependencies | undefined,
 ) {
-  const values = useFormValues()
+  const values = useFormValues();
 
   if (!values) {
-    throw new Error('useDependencies should be used within <VbenForm>')
+    throw new Error('useDependencies should be used within <VbenForm>');
   }
 
-  const formRenderProperties = injectRenderFormProperties()
+  const formRenderProperties = injectRenderFormProperties();
 
   const getFormApi = () => {
-    const formApi = formRenderProperties.form
+    const formApi = formRenderProperties.form;
     if (!formApi) {
-      throw new Error('Function dependencies require a form instance')
+      throw new Error('Function dependencies require a form instance');
     }
-    return formApi
-  }
+    return formApi;
+  };
 
-  const isIf = ref(true)
-  const isDisabled = ref(false)
-  const isShow = ref(true)
-  const isRequired = ref(false)
-  const dynamicComponentProperties = ref<MaybeComponentProperties>({})
-  const dynamicRules = ref<FormSchemaRuleType>()
+  const isIf = ref(true);
+  const isDisabled = ref(false);
+  const isShow = ref(true);
+  const isRequired = ref(false);
+  const dynamicComponentProperties = ref<MaybeComponentProperties>({});
+  const dynamicRules = ref<FormSchemaRuleType>();
 
   const triggerFieldValues = computed(() => {
     // 该字段可能会被多个字段触发
-    const triggerFields = getDependencies()?.triggerFields ?? []
+    const triggerFields = getDependencies()?.triggerFields ?? [];
     return triggerFields.map((dependency) => {
-      return resolveValueByFieldName(values.value, dependency)
-    })
-  })
+      return resolveValueByFieldName(values.value, dependency);
+    });
+  });
 
   const resetConditionState = () => {
-    isDisabled.value = false
-    isIf.value = true
-    isShow.value = true
-    isRequired.value = false
-    dynamicRules.value = undefined
-    dynamicComponentProperties.value = {}
-  }
+    isDisabled.value = false;
+    isIf.value = true;
+    isShow.value = true;
+    isRequired.value = false;
+    dynamicRules.value = undefined;
+    dynamicComponentProperties.value = {};
+  };
 
   watch(
     [triggerFieldValues, getDependencies],
     async ([_values, dependencies]) => {
       if (!dependencies || !dependencies?.triggerFields?.length) {
-        return
+        return;
       }
-      resetConditionState()
+      resetConditionState();
       const {
         componentProps,
         disabled,
@@ -88,54 +88,54 @@ export default function useDependencies(
         rules,
         show,
         trigger,
-      } = dependencies
+      } = dependencies;
 
       // 1. 优先判断if，如果if为false，则不渲染dom，后续判断也不再执行
-      const formValues = values.value
+      const formValues = values.value;
 
       if (isFunction(whenIf)) {
-        isIf.value = !!(await whenIf(formValues, getFormApi()))
+        isIf.value = !!(await whenIf(formValues, getFormApi()));
         // 不渲染
-        if (!isIf.value) return
+        if (!isIf.value) return;
       } else if (isBoolean(whenIf)) {
-        isIf.value = whenIf
-        if (!isIf.value) return
+        isIf.value = whenIf;
+        if (!isIf.value) return;
       }
 
       // 2. 判断show，如果show为false，则隐藏
       if (isFunction(show)) {
-        isShow.value = !!(await show(formValues, getFormApi()))
+        isShow.value = !!(await show(formValues, getFormApi()));
       } else if (isBoolean(show)) {
-        isShow.value = show
+        isShow.value = show;
       }
 
       if (isFunction(componentProps)) {
         dynamicComponentProperties.value = await componentProps(
           formValues,
           getFormApi(),
-        )
+        );
       }
 
       if (isFunction(rules)) {
-        dynamicRules.value = await rules(formValues, getFormApi())
+        dynamicRules.value = await rules(formValues, getFormApi());
       }
 
       if (isFunction(disabled)) {
-        isDisabled.value = !!(await disabled(formValues, getFormApi()))
+        isDisabled.value = !!(await disabled(formValues, getFormApi()));
       } else if (isBoolean(disabled)) {
-        isDisabled.value = disabled
+        isDisabled.value = disabled;
       }
 
       if (isFunction(required)) {
-        isRequired.value = !!(await required(formValues, getFormApi()))
+        isRequired.value = !!(await required(formValues, getFormApi()));
       }
 
       if (isFunction(trigger)) {
-        await trigger(formValues, getFormApi())
+        await trigger(formValues, getFormApi());
       }
     },
     { deep: true, immediate: true },
-  )
+  );
 
   return {
     dynamicComponentProps: dynamicComponentProperties,
@@ -144,5 +144,5 @@ export default function useDependencies(
     isIf,
     isRequired,
     isShow,
-  }
+  };
 }

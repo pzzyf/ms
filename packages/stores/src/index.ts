@@ -1,2 +1,2 @@
-export * from './modules'
-export * from './setup'
+export * from './modules';
+export * from './setup';

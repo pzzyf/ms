@@ -1,4 +1,4 @@
-import type { Linter } from 'eslint'
+import type { Linter } from 'eslint';
 
 import {
   disableds,
@@ -15,12 +15,12 @@ import {
   comments,
   jsdoc,
   unicorn,
-} from './configs'
+} from './configs';
 
-type FlatConfig = Linter.Config
+type FlatConfig = Linter.Config;
 
 type FlatConfigPromise =
-  FlatConfig | FlatConfig[] | Promise<FlatConfig> | Promise<FlatConfig[]>
+  FlatConfig | FlatConfig[] | Promise<FlatConfig> | Promise<FlatConfig[]>;
 
 async function defineConfig(config: FlatConfig[] = []) {
   const configs: FlatConfigPromise[] = [
@@ -39,11 +39,11 @@ async function defineConfig(config: FlatConfig[] = []) {
     test(),
     yaml(),
     ...config,
-  ]
+  ];
 
-  const resolved = await Promise.all(configs)
+  const resolved = await Promise.all(configs);
 
-  return resolved.flat()
+  return resolved.flat();
 }
 
-export { defineConfig }
+export { defineConfig };

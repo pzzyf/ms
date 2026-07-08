@@ -3,8 +3,8 @@ import type {
   PluginOption,
   UserConfig,
   UserConfigFnPromise,
-} from 'vite'
-import type { Options as PwaPluginOptions } from 'vite-plugin-pwa'
+} from 'vite';
+import type { Options as PwaPluginOptions } from 'vite-plugin-pwa';
 
 /**
  * ImportMap 配置接口
@@ -25,11 +25,11 @@ import type { Options as PwaPluginOptions } from 'vite-plugin-pwa'
  */
 interface IImportMap {
   /** 模块导入映射 */
-  imports?: Record<string, string>
+  imports?: Record<string, string>;
   /** 作用域特定的导入映射 */
   scopes?: {
-    [scope: string]: Record<string, string>
-  }
+    [scope: string]: Record<string, string>;
+  };
 }
 
 /**
@@ -48,7 +48,7 @@ interface PrintPluginOptions {
    * }
    * ```
    */
-  infoMap?: Record<string, string | undefined>
+  infoMap?: Record<string, string | undefined>;
 }
 
 /**
@@ -59,19 +59,19 @@ interface NitroMockPluginOptions {
   /**
    * Mock 服务器包名
    */
-  mockServerPackage?: string
+  mockServerPackage?: string;
 
   /**
    * Mock 服务端口
    * @default 3000
    */
-  port?: number
+  port?: number;
 
   /**
    * 是否打印 Mock 日志
    * @default false
    */
-  verbose?: boolean
+  verbose?: boolean;
 }
 
 /**
@@ -83,12 +83,12 @@ interface ArchiverPluginOptions {
    * 输出文件名
    * @default 'dist'
    */
-  name?: string
+  name?: string;
   /**
    * 输出目录
    * @default '.'
    */
-  outputDir?: string
+  outputDir?: string;
 }
 
 /**
@@ -101,7 +101,7 @@ interface ImportmapPluginOptions {
    * @default 'jspm.io'
    * @description 支持 esm.sh 和 jspm.io 两种 CDN 供应商
    */
-  defaultProvider?: 'esm.sh' | 'jspm.io'
+  defaultProvider?: 'esm.sh' | 'jspm.io';
   /**
    * ImportMap 配置数组
    * @description 配置需要从 CDN 导入的包
@@ -113,12 +113,12 @@ interface ImportmapPluginOptions {
    * ]
    * ```
    */
-  importmap?: Array<{ name: string; range?: string }>
+  importmap?: Array<{ name: string; range?: string }>;
   /**
    * 手动配置 ImportMap
    * @description 自定义 ImportMap 配置
    */
-  inputMap?: IImportMap
+  inputMap?: IImportMap;
 }
 
 /**
@@ -130,12 +130,12 @@ interface ConditionPlugin {
    * 判断条件
    * @description 当条件为 true 时加载插件
    */
-  condition?: boolean
+  condition?: boolean;
   /**
    * 插件对象
    * @description 返回插件数组或 Promise
    */
-  plugins: () => PluginOption[] | PromiseLike<PluginOption[]>
+  plugins: () => PluginOption[] | PromiseLike<PluginOption[]>;
 }
 
 /**
@@ -147,32 +147,32 @@ interface CommonPluginOptions {
    * 是否开启开发工具
    * @default false
    */
-  devtools?: boolean
+  devtools?: boolean;
   /**
    * 环境变量
    * @description 自定义环境变量
    */
-  env?: Record<string, any>
+  env?: Record<string, any>;
   /**
    * 是否注入元数据
    * @default true
    */
-  injectMetadata?: boolean
+  injectMetadata?: boolean;
   /**
    * 是否为构建模式
    * @default false
    */
-  isBuild?: boolean
+  isBuild?: boolean;
   /**
    * 构建模式
    * @default 'development'
    */
-  mode?: string
+  mode?: string;
   /**
    * 是否开启依赖分析
    * @default false
    */
-  visualizer?: boolean
+  visualizer?: boolean;
 }
 
 /**
@@ -185,96 +185,96 @@ interface AppPluginOptions extends CommonPluginOptions {
    * @default false
    * @description 开启后会在打包目录生成 zip 文件
    */
-  archiver?: boolean
+  archiver?: boolean;
   /**
    * 压缩归档插件配置
    * @description 配置压缩归档的行为
    */
-  archiverPluginOptions?: ArchiverPluginOptions
+  archiverPluginOptions?: ArchiverPluginOptions;
   /**
    * 是否开启压缩
    * @default false
    * @description 支持 gzip 和 brotli 压缩
    */
-  compress?: boolean
+  compress?: boolean;
   /**
    * 压缩类型
    * @default ['gzip']
    * @description 可选的压缩类型
    */
-  compressTypes?: ('brotli' | 'gzip')[]
+  compressTypes?: ('brotli' | 'gzip')[];
   /**
    * 是否抽离配置文件
    * @default false
    * @description 在构建时抽离配置文件
    */
-  extraAppConfig?: boolean
+  extraAppConfig?: boolean;
   /**
    * 是否开启 HTML 插件
    * @default true
    */
-  html?: boolean
+  html?: boolean;
   /**
    * 是否开启国际化
    * @default false
    */
-  i18n?: boolean
+  i18n?: boolean;
   /**
    * 是否开启 ImportMap CDN
    * @default false
    */
-  importmap?: boolean
+  importmap?: boolean;
   /**
    * ImportMap 插件配置
    */
-  importmapOptions?: ImportmapPluginOptions
+  importmapOptions?: ImportmapPluginOptions;
   /**
    * 是否注入应用加载动画
    * @default true
    */
-  injectAppLoading?: boolean
+  injectAppLoading?: boolean;
   /**
    * 是否注入全局 SCSS
    * @default true
    */
-  injectGlobalScss?: boolean
+  injectGlobalScss?: boolean;
   /**
    * 是否注入版权信息
    * @default true
    */
-  license?: boolean
+  license?: boolean;
   /**
    * 是否开启 Nitro Mock
    * @default false
    */
-  nitroMock?: boolean
+  nitroMock?: boolean;
   /**
    * Nitro Mock 插件配置
    */
-  nitroMockOptions?: NitroMockPluginOptions
+  nitroMockOptions?: NitroMockPluginOptions;
   /**
    * 是否开启控制台打印
    * @default false
    */
-  print?: boolean
+  print?: boolean;
   /**
    * 打印插件配置
    */
-  printInfoMap?: PrintPluginOptions['infoMap']
+  printInfoMap?: PrintPluginOptions['infoMap'];
   /**
    * 是否开启 PWA
    * @default false
    */
-  pwa?: boolean
+  pwa?: boolean;
   /**
    * PWA 插件配置
    */
-  pwaOptions?: Partial<PwaPluginOptions>
+  pwaOptions?: Partial<PwaPluginOptions>;
   /**
    * 是否开启 VXE Table 懒加载
    * @default false
    */
-  vxeTableLazyImport?: boolean
+  vxeTableLazyImport?: boolean;
 }
 
 /**
@@ -287,13 +287,13 @@ interface LibraryPluginOptions extends CommonPluginOptions {
    * @default true
    * @description 生成 TypeScript 类型声明文件
    */
-  dts?: boolean
+  dts?: boolean;
 }
 
 /**
  * 应用配置选项类型
  */
-type AppOptions = AppPluginOptions
+type AppOptions = AppPluginOptions;
 
 /**
  * 应用配置定义函数类型
@@ -301,18 +301,18 @@ type AppOptions = AppPluginOptions
  */
 type DefineAppOptions = (config?: ConfigEnv) => Promise<{
   /** 应用插件配置 */
-  application?: AppOptions
+  application?: AppOptions;
   /** Vite 配置 */
-  vite?: UserConfig
-}>
+  vite?: UserConfig;
+}>;
 
 /**
  * 配置定义类型
  * @description 应用或库的配置定义
  */
-type DefineConfig = DefineAppOptions
+type DefineConfig = DefineAppOptions;
 
-type MsViteConfig = Promise<UserConfig> | UserConfig | UserConfigFnPromise
+type MsViteConfig = Promise<UserConfig> | UserConfig | UserConfigFnPromise;
 
 export type {
   AppPluginOptions as ApplicationPluginOptions,
@@ -327,4 +327,4 @@ export type {
   MsViteConfig,
   NitroMockPluginOptions,
   PrintPluginOptions,
-}
+};

@@ -1,8 +1,8 @@
-import { preferencesManager } from './preferences'
+import { preferencesManager } from './preferences';
 
 export const { getPreferences, initPreferences, updatePreferences } =
-  preferencesManager
+  preferencesManager;
 
-export * from './use-preferences'
+export * from './use-preferences';
 
-export const preferences = getPreferences()
+export const preferences = getPreferences();

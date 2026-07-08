@@ -1,15 +1,15 @@
 export interface UserInfo {
-  id: number
-  password: string
-  realName: string
-  roles: string[]
-  username: string
-  homePath?: string
+  id: number;
+  password: string;
+  realName: string;
+  roles: string[];
+  username: string;
+  homePath?: string;
 }
 
 export interface TimezoneOption {
-  offset: number
-  timezone: string
+  offset: number;
+  timezone: string;
 }
 
 export const MOCK_USERS: UserInfo[] = [
@@ -36,7 +36,7 @@ export const MOCK_USERS: UserInfo[] = [
     username: 'jack',
     homePath: '/analytics',
   },
-]
+];
 
 export const MOCK_CODES = [
   // super
@@ -54,7 +54,7 @@ export const MOCK_CODES = [
     codes: ['AC_1000001', 'AC_1000002'],
     username: 'jack',
   },
-]
+];
 
 const dashboardMenus = [
   {
@@ -85,7 +85,7 @@ const dashboardMenus = [
       },
     ],
   },
-]
+];
 
 function createDemosMenus(role: 'admin' | 'super' | 'user') {
   const roleWithMenus = {
@@ -116,7 +116,7 @@ function createDemosMenus(role: 'admin' | 'super' | 'user') {
       name: 'AccessUserVisibleDemo',
       path: '/demos/access/user-visible',
     },
-  }
+  };
 
   return [
     {
@@ -173,7 +173,7 @@ function createDemosMenus(role: 'admin' | 'super' | 'user') {
         },
       ],
     },
-  ]
+  ];
 }
 
 export const MOCK_MENUS = [
@@ -189,7 +189,7 @@ export const MOCK_MENUS = [
     menus: [...dashboardMenus, ...createDemosMenus('user')],
     username: 'jack',
   },
-]
+];
 
 export const MOCK_MENU_LIST = [
   {
@@ -310,17 +310,17 @@ export const MOCK_MENU_LIST = [
       },
     ],
   },
-]
+];
 
 export function getMenuIds(menus: any[]) {
-  const ids: number[] = []
+  const ids: number[] = [];
   for (const item of menus) {
-    ids.push(item.id)
+    ids.push(item.id);
     if (item.children && item.children.length > 0) {
-      ids.push(...getMenuIds(item.children))
+      ids.push(...getMenuIds(item.children));
     }
   }
-  return ids
+  return ids;
 }
 
 /**
@@ -347,4 +347,4 @@ export const TIME_ZONE_OPTIONS: TimezoneOption[] = [
     offset: 9,
     timezone: 'Asia/Seoul',
   },
-]
+];

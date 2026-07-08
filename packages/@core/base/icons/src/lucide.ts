@@ -1,1 +1,1 @@
-export * from '@lucide/vue'
+export * from '@lucide/vue';

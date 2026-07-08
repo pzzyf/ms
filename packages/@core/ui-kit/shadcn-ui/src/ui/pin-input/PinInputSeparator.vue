@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { PrimitiveProps } from 'reka-ui'
-import { MinusIcon } from '@lucide/vue'
-import { Primitive, useForwardProps } from 'reka-ui'
+import type { PrimitiveProps } from 'reka-ui';
+import { MinusIcon } from '@lucide/vue';
+import { Primitive, useForwardProps } from 'reka-ui';
 
-const properties = defineProps<PrimitiveProps>()
-const forwardedProps = useForwardProps(properties)
+const properties = defineProps<PrimitiveProps>();
+const forwardedProps = useForwardProps(properties);
 </script>
 
 <template>

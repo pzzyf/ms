@@ -1,13 +1,13 @@
-import type { EventHandlerRequest, H3Event } from 'h3'
+import type { EventHandlerRequest, H3Event } from 'h3';
 
-import { deleteCookie, getCookie, setCookie } from 'h3'
+import { deleteCookie, getCookie, setCookie } from 'h3';
 
 export function clearRefreshTokenCookie(event: H3Event<EventHandlerRequest>) {
   deleteCookie(event, 'jwt', {
     httpOnly: true,
     sameSite: 'none',
     secure: true,
-  })
+  });
 }
 
 export function setRefreshTokenCookie(
@@ -19,10 +19,10 @@ export function setRefreshTokenCookie(
     maxAge: 24 * 60 * 60, // unit: seconds
     sameSite: 'none',
     secure: true,
-  })
+  });
 }
 
 export function getRefreshTokenFromCookie(event: H3Event<EventHandlerRequest>) {
-  const refreshToken = getCookie(event, 'jwt')
-  return refreshToken
+  const refreshToken = getCookie(event, 'jwt');
+  return refreshToken;
 }

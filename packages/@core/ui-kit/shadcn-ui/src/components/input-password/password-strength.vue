@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 const properties = withDefaults(defineProps<{ password?: string }>(), {
   password: '',
-})
+});
 
 const strengthList: string[] = [
   '',
@@ -12,38 +12,38 @@ const strengthList: string[] = [
   '#EFBD47',
   '#55D18780',
   '#55D187',
-]
+];
 
 const currentStrength = computed(() => {
-  return checkPasswordStrength(properties.password)
-})
+  return checkPasswordStrength(properties.password);
+});
 
 const currentColor = computed(() => {
-  return strengthList[currentStrength.value]
-})
+  return strengthList[currentStrength.value];
+});
 
 /**
  * Check the strength of a password
  */
 function checkPasswordStrength(password: string) {
-  let strength = 0
+  let strength = 0;
 
   // Check length
-  if (password.length >= 8) strength++
+  if (password.length >= 8) strength++;
 
   // Check for lowercase letters
-  if (/[a-z]/.test(password)) strength++
+  if (/[a-z]/.test(password)) strength++;
 
   // Check for uppercase letters
-  if (/[A-Z]/.test(password)) strength++
+  if (/[A-Z]/.test(password)) strength++;
 
   // Check for numbers
-  if (/\d/.test(password)) strength++
+  if (/\d/.test(password)) strength++;
 
   // Check for special characters
-  if (/[^\da-z]/i.test(password)) strength++
+  if (/[^\da-z]/i.test(password)) strength++;
 
-  return strength
+  return strength;
 }
 </script>
 
@@ -51,7 +51,7 @@ function checkPasswordStrength(password: string) {
   <div class="relative mt-2 flex items-center justify-between">
     <template v-for="index in 5" :key="index">
       <div
-        class="relative mr-1 h-1.5 w-1/5 rounded-sm bg-heavy last:mr-0 dark:bg-input-background"
+        class="bg-heavy dark:bg-input-background relative mr-1 h-1.5 w-1/5 rounded-sm last:mr-0"
       >
         <span
           :style="{

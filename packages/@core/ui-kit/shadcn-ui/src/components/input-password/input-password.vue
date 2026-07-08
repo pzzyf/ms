@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { Eye, EyeOff } from '@ms-core/icons'
+import { Eye, EyeOff } from '@ms-core/icons';
 
-import { cn } from '@ms-core/shared/utils'
-import { ref, useSlots } from 'vue'
+import { cn } from '@ms-core/shared/utils';
+import { ref, useSlots } from 'vue';
 
-import { Input } from '../../ui'
-import PasswordStrength from './password-strength.vue'
+import { Input } from '../../ui';
+import PasswordStrength from './password-strength.vue';
 
 interface Properties {
-  class?: any
+  class?: any;
   /**
    * 是否显示密码强度
    */
-  passwordStrength?: boolean
+  passwordStrength?: boolean;
 }
 
 defineOptions({
   inheritAttrs: false,
-})
+});
 
-const props = defineProps<Properties>()
+const props = defineProps<Properties>();
 
-const modelValue = defineModel<string>()
+const modelValue = defineModel<string>();
 
-const slots = useSlots()
+const slots = useSlots();
 
-const show = ref(false)
+const show = ref(false);
 </script>
 
 <template>
@@ -38,7 +38,7 @@ const show = ref(false)
     />
     <template v-if="passwordStrength">
       <PasswordStrength :password="modelValue" />
-      <p v-if="slots.strengthText" class="mt-1.5 text-xs text-muted-foreground">
+      <p v-if="slots.strengthText" class="text-muted-foreground mt-1.5 text-xs">
         <slot name="strengthText"></slot>
       </p>
     </template>
@@ -47,7 +47,7 @@ const show = ref(false)
         'top-3': !!passwordStrength,
         'top-1/2 -translate-y-1/2 items-center': !passwordStrength,
       }"
-      class="absolute inset-y-0 right-0 flex cursor-pointer pr-3 text-lg leading-5 text-foreground/60 hover:text-foreground"
+      class="text-foreground/60 hover:text-foreground absolute inset-y-0 right-0 flex cursor-pointer pr-3 text-lg leading-5"
       @click="show = !show"
     >
       <Eye v-if="show" class="size-4" />

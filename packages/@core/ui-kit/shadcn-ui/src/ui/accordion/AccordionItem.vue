@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { AccordionItemProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { AccordionItem, useForwardProps } from 'reka-ui'
+import type { AccordionItemProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { AccordionItem, useForwardProps } from 'reka-ui';
 
 const props = defineProps<
   AccordionItemProps & { class?: HTMLAttributes['class'] }
->()
+>();
 
-const delegatedProperties = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class');
 
-const forwardedProps = useForwardProps(delegatedProperties)
+const forwardedProps = useForwardProps(delegatedProperties);
 </script>
 
 <template>

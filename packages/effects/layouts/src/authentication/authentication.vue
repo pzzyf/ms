@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { ToolbarType } from './types'
-import { usePreferences } from '@ms/preferences'
-import AuthenticationFormView from './form.vue'
-import Toolbar from './toolbar.vue'
+import type { ToolbarType } from './types';
+import { usePreferences } from '@ms/preferences';
+import AuthenticationFormView from './form.vue';
+import Toolbar from './toolbar.vue';
 
 interface Properties {
-  appName?: string
-  logo?: string
-  toolbar?: boolean
-  toolbarList?: ToolbarType[]
+  appName?: string;
+  logo?: string;
+  toolbar?: boolean;
+  toolbarList?: ToolbarType[];
 }
 
 withDefaults(defineProps<Properties>(), {
   toolbar: true,
   toolbarList: () => ['layout'],
-})
+});
 
-const { authPanelCenter } = usePreferences()
+const { authPanelCenter } = usePreferences();
 </script>
 
 <template>
@@ -27,10 +27,10 @@ const { authPanelCenter } = usePreferences()
       </slot>
     </template>
 
-    <div v-if="authPanelCenter" class="relative flex-center w-full">
+    <div v-if="authPanelCenter" class="flex-center relative w-full">
       <div class="login-background absolute top-0 left-0 size-full"></div>
       <AuthenticationFormView
-        class="w-full rounded-3xl pb-20 shadow-float shadow-primary/5 md:w-2/3 md:bg-background lg:w-1/2 xl:w-[36%]"
+        class="shadow-float shadow-primary/5 md:bg-background w-full rounded-3xl pb-20 md:w-2/3 lg:w-1/2 xl:w-[36%]"
         data-side="bottom"
       />
     </div>

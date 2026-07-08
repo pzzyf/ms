@@ -1,21 +1,21 @@
 <script setup lang="ts" generic="Type extends 'text' | 'number' = 'text'">
-import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { PinInputRoot, useForwardPropsEmits } from 'reka-ui'
+import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { PinInputRoot, useForwardPropsEmits } from 'reka-ui';
 
 const props = withDefaults(
   defineProps<PinInputRootProps<Type> & { class?: HTMLAttributes['class'] }>(),
   {
     otp: true,
   },
-)
-const emits = defineEmits<PinInputRootEmits<Type>>()
+);
+const emits = defineEmits<PinInputRootEmits<Type>>();
 
-const delegatedProperties = reactiveOmit(props, 'class')
+const delegatedProperties = reactiveOmit(props, 'class');
 
-const forwarded = useForwardPropsEmits(delegatedProperties, emits)
+const forwarded = useForwardPropsEmits(delegatedProperties, emits);
 </script>
 
 <template>
@@ -25,7 +25,7 @@ const forwarded = useForwardPropsEmits(delegatedProperties, emits)
     v-bind="forwarded"
     :class="
       cn(
-        'flex items-center gap-2 has-disabled:opacity-50 disabled:cursor-not-allowed',
+        'flex items-center gap-2 disabled:cursor-not-allowed has-disabled:opacity-50',
         props.class,
       )
     "

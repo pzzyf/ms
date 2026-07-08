@@ -1,2 +1,2 @@
-export * from './config'
-export type * from './typing'
+export * from './config';
+export type * from './typing';

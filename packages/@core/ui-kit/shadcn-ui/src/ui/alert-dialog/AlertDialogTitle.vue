@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { AlertDialogTitleProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { AlertDialogTitle } from 'reka-ui'
+import type { AlertDialogTitleProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { AlertDialogTitle } from 'reka-ui';
 
 const props = defineProps<
   AlertDialogTitleProps & { class?: HTMLAttributes['class'] }
->()
+>();
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>

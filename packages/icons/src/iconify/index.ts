@@ -1,1 +1,1 @@
-export * from '@ms-core/icons'
+export * from '@ms-core/icons';

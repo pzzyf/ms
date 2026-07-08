@@ -1,20 +1,20 @@
-import type { BasicUserInfo } from '@ms-core/typings'
+import type { BasicUserInfo } from '@ms-core/typings';
 
 /** 用户信息 */
 interface UserInfo extends BasicUserInfo {
   /**
    * 用户描述
    */
-  desc: string
+  desc: string;
   /**
    * 首页地址
    */
-  homePath: string
+  homePath: string;
 
   /**
    * accessToken
    */
-  token: string
+  token: string;
 }
 
-export type { UserInfo }
+export type { UserInfo };

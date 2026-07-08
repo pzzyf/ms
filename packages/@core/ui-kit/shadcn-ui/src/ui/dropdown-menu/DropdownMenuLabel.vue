@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { DropdownMenuLabelProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { DropdownMenuLabel, useForwardProps } from 'reka-ui'
+import type { DropdownMenuLabelProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { DropdownMenuLabel, useForwardProps } from 'reka-ui';
 
 const props = defineProps<
   DropdownMenuLabelProps & { class?: HTMLAttributes['class']; inset?: boolean }
->()
+>();
 
-const delegatedProperties = reactiveOmit(props, 'class', 'inset')
-const forwardedProps = useForwardProps(delegatedProperties)
+const delegatedProperties = reactiveOmit(props, 'class', 'inset');
+const forwardedProps = useForwardProps(delegatedProperties);
 </script>
 
 <template>

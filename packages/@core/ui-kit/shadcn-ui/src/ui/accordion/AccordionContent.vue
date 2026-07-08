@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { AccordionContentProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { AccordionContent } from 'reka-ui'
+import type { AccordionContentProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { AccordionContent } from 'reka-ui';
 
 const props = defineProps<
   AccordionContentProps & { class?: HTMLAttributes['class'] }
->()
+>();
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>

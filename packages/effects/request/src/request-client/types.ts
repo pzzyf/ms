@@ -3,7 +3,7 @@ import type {
   AxiosResponse,
   CreateAxiosDefaults,
   InternalAxiosRequestConfig,
-} from 'axios'
+} from 'axios';
 
 interface ExtendOptions<T = any> {
   paramsSerializer?:
@@ -11,7 +11,7 @@ interface ExtendOptions<T = any> {
     | 'comma'
     | 'indices'
     | 'repeat'
-    | AxiosRequestConfig<T>['paramsSerializer']
+    | AxiosRequestConfig<T>['paramsSerializer'];
 
   /**
    * 响应数据的返回方式。
@@ -19,31 +19,31 @@ interface ExtendOptions<T = any> {
    * - body: 返回响应数据的BODY部分（只会根据status检查请求是否成功，忽略对code的判断，这种情况下应由调用方检查请求是否成功）。
    * - data: 解构响应的BODY数据，只返回其中的data节点数据（会检查status和code是否为成功状态）。
    */
-  responseReturn?: 'body' | 'data' | 'raw'
+  responseReturn?: 'body' | 'data' | 'raw';
 }
 
-type RequestClientConfig<T = any> = AxiosRequestConfig<T> & ExtendOptions<T>
+type RequestClientConfig<T = any> = AxiosRequestConfig<T> & ExtendOptions<T>;
 
 type RequestResponse<T = any> = AxiosResponse<T> & {
-  config: RequestClientConfig<T>
-}
+  config: RequestClientConfig<T>;
+};
 
-type RequestClientOptions = CreateAxiosDefaults & ExtendOptions
+type RequestClientOptions = CreateAxiosDefaults & ExtendOptions;
 
 interface RequestInterceptorConfig {
   fulfilled?: (
     config: ExtendOptions & InternalAxiosRequestConfig,
   ) =>
     | (ExtendOptions & InternalAxiosRequestConfig<any>)
-    | Promise<ExtendOptions & InternalAxiosRequestConfig<any>>
-  rejected?: (error: any) => any
+    | Promise<ExtendOptions & InternalAxiosRequestConfig<any>>;
+  rejected?: (error: any) => any;
 }
 
 interface ResponseInterceptorConfig<T = any> {
   fulfilled?: (
     response: RequestResponse<T>,
-  ) => Promise<RequestResponse> | RequestResponse
-  rejected?: (error: any) => any
+  ) => Promise<RequestResponse> | RequestResponse;
+  rejected?: (error: any) => any;
 }
 
 export type {
@@ -51,4 +51,4 @@ export type {
   RequestClientOptions,
   RequestInterceptorConfig,
   ResponseInterceptorConfig,
-}
+};

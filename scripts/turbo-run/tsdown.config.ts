@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsdown'
+import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   clean: true,
@@ -8,4 +8,4 @@ export default defineConfig({
   outExtensions: () => ({
     dts: '.d.ts',
   }),
-})
+});

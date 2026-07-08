@@ -1,31 +1,33 @@
 <script setup lang="ts">
-import type { ToolbarType } from './types'
-import { preferences } from '@ms/preferences'
-import { computed } from 'vue'
+import type { ToolbarType } from './types';
+import { preferences } from '@ms/preferences';
+import { computed } from 'vue';
 
 import {
   AuthenticationColorToggle,
   AuthenticationLanguageToggle,
   AuthenticationLayoutToggle,
   AuthenticationThemeToggle,
-} from '../widgets'
+} from '../widgets';
 
 interface Properties {
-  toolbarList?: ToolbarType[]
+  toolbarList?: ToolbarType[];
 }
 
 defineOptions({
   name: 'AuthenticationToolbar',
-})
+});
 
 const properties = withDefaults(defineProps<Properties>(), {
   toolbarList: () => ['color', 'language', 'layout', 'theme'],
-})
+});
 
-const showColor = computed(() => properties.toolbarList.includes('color'))
-const showLanguage = computed(() => properties.toolbarList.includes('language'))
-const showLayout = computed(() => properties.toolbarList.includes('layout'))
-const showTheme = computed(() => properties.toolbarList.includes('theme'))
+const showColor = computed(() => properties.toolbarList.includes('color'));
+const showLanguage = computed(() =>
+  properties.toolbarList.includes('language'),
+);
+const showLayout = computed(() => properties.toolbarList.includes('layout'));
+const showTheme = computed(() => properties.toolbarList.includes('theme'));
 </script>
 
 <template>
@@ -33,7 +35,7 @@ const showTheme = computed(() => properties.toolbarList.includes('theme'))
     :class="{
       'rounded-3xl px-3 py-1': toolbarList.length > 1,
     }"
-    class="absolute top-4 right-2 z-10 flex-center"
+    class="flex-center absolute top-4 right-2 z-10"
   >
     <div class="hidden md:flex">
       <AuthenticationColorToggle v-if="showColor" />

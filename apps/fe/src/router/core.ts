@@ -1,8 +1,8 @@
-import type { RouteRecordRaw } from 'vue-router'
-import { preferences } from '@ms/preferences'
+import type { RouteRecordRaw } from 'vue-router';
+import { preferences } from '@ms/preferences';
 
-const BasicLayout = () => import('#/layouts/basic.vue')
-const AuthPageLayout = () => import('#/layouts/auth.vue')
+const BasicLayout = () => import('#/layouts/basic.vue');
+const AuthPageLayout = () => import('#/layouts/auth.vue');
 
 /** 基本路由，这些路由是必须存在的 */
 const coreRoutes: RouteRecordRaw[] = [
@@ -40,6 +40,6 @@ const coreRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-]
+];
 
-export { coreRoutes }
+export { coreRoutes };

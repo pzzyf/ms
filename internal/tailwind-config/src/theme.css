@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @source '../../../packages/';
 @source '../../../app';
@@ -244,7 +244,6 @@
     @apply size-full;
   }
 
-
   body {
     min-height: 100vh;
   }
@@ -256,7 +255,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 @utility flex-col-center {
   display: flex;

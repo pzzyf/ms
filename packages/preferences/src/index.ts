@@ -1,1 +1,1 @@
-export * from '@ms-core/preferences'
+export * from '@ms-core/preferences';

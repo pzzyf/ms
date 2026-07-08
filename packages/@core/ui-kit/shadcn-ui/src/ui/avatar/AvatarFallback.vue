@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { AvatarFallbackProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { AvatarFallback } from 'reka-ui'
+import type { AvatarFallbackProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { AvatarFallback } from 'reka-ui';
 
 const props = defineProps<
   AvatarFallbackProps & { class?: HTMLAttributes['class'] }
->()
+>();
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>

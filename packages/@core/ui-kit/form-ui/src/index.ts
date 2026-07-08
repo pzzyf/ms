@@ -1,12 +1,12 @@
-export { setupMsForm } from './config'
+export { setupMsForm } from './config';
 
 export type {
   BaseFormComponentType,
   ExtendedFormApi,
   MsFormProps,
   FormSchema as MsFormSchema,
-} from './types'
+} from './types';
 
-export * from './use-ms-form'
+export * from './use-ms-form';
 
-export * as z from 'zod'
+export * as z from 'zod';

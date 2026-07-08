@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { MsButtonProps as MsButtonProperties } from './button'
+import type { MsButtonProps as MsButtonProperties } from './button';
 
-import { LoaderCircle } from '@ms-core/icons'
+import { LoaderCircle } from '@ms-core/icons';
 
-import { cn } from '@ms-core/shared/utils'
-import { Primitive } from 'reka-ui'
+import { cn } from '@ms-core/shared/utils';
+import { Primitive } from 'reka-ui';
 
-import { computed } from 'vue'
+import { computed } from 'vue';
 
-import { buttonVariants } from '../../ui'
+import { buttonVariants } from '../../ui';
 
 interface Properties extends MsButtonProperties {}
 
@@ -19,11 +19,11 @@ const props = withDefaults(defineProps<Properties>(), {
   loading: false,
   size: 'default',
   variant: 'default',
-})
+});
 
 const isDisabled = computed(() => {
-  return props.disabled || props.loading
-})
+  return props.disabled || props.loading;
+});
 </script>
 
 <template>

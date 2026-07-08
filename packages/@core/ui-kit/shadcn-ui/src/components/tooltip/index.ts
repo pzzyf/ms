@@ -1,1 +1,1 @@
-export { default as MsTooltip } from './tooltip.vue'
+export { default as MsTooltip } from './tooltip.vue';

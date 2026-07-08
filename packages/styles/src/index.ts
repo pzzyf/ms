@@ -1,1 +1,1 @@
-import '@ms-core/design'
+import '@ms-core/design';

@@ -1,4 +1,4 @@
-import { defineConfig } from '@ms/vite-config'
+import { defineConfig } from '@ms/vite-config';
 
 export default defineConfig(async () => {
   return {
@@ -16,5 +16,5 @@ export default defineConfig(async () => {
         },
       },
     },
-  }
-})
+  };
+});

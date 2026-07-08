@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsdown'
+import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   clean: true,
@@ -18,4 +18,4 @@ export default defineConfig({
     from: 'src/plugins/inject-app-loading/default-loading.html',
     to: 'dist',
   },
-})
+});

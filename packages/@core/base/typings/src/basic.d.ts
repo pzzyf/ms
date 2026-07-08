@@ -1,31 +1,31 @@
 interface BasicOption {
-  label: string
-  value: string
+  label: string;
+  value: string;
 }
 
 interface BasicUserInfo {
   /**
    * 头像
    */
-  avatar: string
+  avatar: string;
   /**
    * 用户昵称
    */
-  realName: string
+  realName: string;
   /**
    * 用户角色
    */
-  roles?: string[]
+  roles?: string[];
   /**
    * 用户id
    */
-  userId: string
+  userId: string;
   /**
    * 用户名
    */
-  username: string
+  username: string;
 }
 
-type ClassType = Array<object | string> | object | string
+type ClassType = Array<object | string> | object | string;
 
-export type { BasicOption, BasicUserInfo, ClassType }
+export type { BasicOption, BasicUserInfo, ClassType };

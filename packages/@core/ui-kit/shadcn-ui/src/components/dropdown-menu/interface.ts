@@ -1,32 +1,32 @@
-import type { Component } from 'vue'
+import type { Component } from 'vue';
 
 interface MsDropdownMenuItem {
-  disabled?: boolean
+  disabled?: boolean;
   /**
    * @zh_CN 点击事件处理
    * @param data
    */
-  handler?: (data: any) => void
+  handler?: (data: any) => void;
   /**
    * @zh_CN 图标
    */
-  icon?: Component
+  icon?: Component;
   /**
    * @zh_CN 标题
    */
-  label: string
+  label: string;
   /**
    * @zh_CN 是否是分割线
    */
-  separator?: boolean
+  separator?: boolean;
   /**
    * @zh_CN 唯一标识
    */
-  value: string
+  value: string;
 }
 
 interface DropdownMenuProperties {
-  menus: MsDropdownMenuItem[]
+  menus: MsDropdownMenuItem[];
 }
 
-export type { DropdownMenuProperties as DropdownMenuProps, MsDropdownMenuItem }
+export type { DropdownMenuProperties as DropdownMenuProps, MsDropdownMenuItem };

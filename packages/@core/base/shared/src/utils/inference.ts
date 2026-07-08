@@ -4,7 +4,7 @@
  * @returns 如果值是布尔值，返回true，否则返回false。
  */
 function isBoolean(value: unknown): value is boolean {
-  return typeof value === 'boolean'
+  return typeof value === 'boolean';
 }
 
 function getFirstNonNullOrUndefined<T>(
@@ -12,12 +12,12 @@ function getFirstNonNullOrUndefined<T>(
 ): T | undefined {
   for (const value of values) {
     if (value !== undefined && value !== null) {
-      return value
+      return value;
     }
   }
-  return undefined
+  return undefined;
 }
 
-export { getFirstNonNullOrUndefined, isBoolean }
+export { getFirstNonNullOrUndefined, isBoolean };
 
-export { isFunction, isString, isObject } from '@vue/shared'
+export { isFunction, isString, isObject } from '@vue/shared';

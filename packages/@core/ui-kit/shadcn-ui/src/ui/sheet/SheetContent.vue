@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import type { DialogContentEmits, DialogContentProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { XIcon } from '@lucide/vue'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
+import type { DialogContentEmits, DialogContentProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { XIcon } from '@lucide/vue';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
 import {
   DialogClose,
   DialogContent,
   DialogPortal,
   useForwardPropsEmits,
-} from 'reka-ui'
-import SheetOverlay from './SheetOverlay.vue'
+} from 'reka-ui';
+import SheetOverlay from './SheetOverlay.vue';
 
 interface SheetContentProperties extends DialogContentProps {
-  class?: HTMLAttributes['class']
-  side?: 'top' | 'right' | 'bottom' | 'left'
+  class?: HTMLAttributes['class'];
+  side?: 'top' | 'right' | 'bottom' | 'left';
 }
 
 defineOptions({
   inheritAttrs: false,
-})
+});
 
 const props = withDefaults(defineProps<SheetContentProperties>(), {
   side: 'right',
-})
-const emits = defineEmits<DialogContentEmits>()
+});
+const emits = defineEmits<DialogContentEmits>();
 
-const delegatedProperties = reactiveOmit(props, 'class', 'side')
+const delegatedProperties = reactiveOmit(props, 'class', 'side');
 
-const forwarded = useForwardPropsEmits(delegatedProperties, emits)
+const forwarded = useForwardPropsEmits(delegatedProperties, emits);
 </script>
 
 <template>

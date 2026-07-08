@@ -4,21 +4,21 @@
  */
 
 interface ComponentsState {
-  [key: string]: any
+  [key: string]: any;
 }
 
 interface MessageState {
-  copyPreferencesSuccess?: (title: string, content?: string) => void
+  copyPreferencesSuccess?: (title: string, content?: string) => void;
 }
 
 export interface IGlobalSharedState {
-  components: ComponentsState
-  message: MessageState
+  components: ComponentsState;
+  message: MessageState;
 }
 
 class GlobalShareState {
-  #components: ComponentsState = {}
-  #message: MessageState = {}
+  #components: ComponentsState = {};
+  #message: MessageState = {};
 
   /**
    * 定义框架内部各个场景的消息提示
@@ -26,20 +26,20 @@ class GlobalShareState {
   public defineMessage({ copyPreferencesSuccess }: MessageState) {
     this.#message = {
       copyPreferencesSuccess,
-    }
+    };
   }
 
   public getComponents(): ComponentsState {
-    return this.#components
+    return this.#components;
   }
 
   public getMessage(): MessageState {
-    return this.#message
+    return this.#message;
   }
 
   public setComponents(value: ComponentsState) {
-    this.#components = value
+    this.#components = value;
   }
 }
 
-export const globalShareState = new GlobalShareState()
+export const globalShareState = new GlobalShareState();

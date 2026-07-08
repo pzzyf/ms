@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { ZodType } from 'zod'
+import type { ZodType } from 'zod';
 
 import type {
   FormSchema,
   MaybeComponentProps as MaybeComponentProperties,
-} from '../types'
+} from '../types';
 
-import { CircleAlert } from '@ms-core/icons'
+import { CircleAlert } from '@ms-core/icons';
 
 import {
   FormControl,
@@ -16,11 +16,11 @@ import {
   FormMessage,
   MsRenderContent,
   MsTooltip,
-} from '@ms-core/shadcn-ui'
-import { cn, isFunction, isObject, isString } from '@ms-core/shared/utils'
-import { toTypedSchema } from '@vee-validate/zod'
+} from '@ms-core/shadcn-ui';
+import { cn, isFunction, isObject, isString } from '@ms-core/shared/utils';
+import { toTypedSchema } from '@vee-validate/zod';
 
-import { useFieldError, useFormValues } from 'vee-validate'
+import { useFieldError, useFormValues } from 'vee-validate';
 import {
   computed,
   nextTick,
@@ -28,13 +28,13 @@ import {
   toRaw,
   useTemplateRef,
   watch,
-} from 'vue'
+} from 'vue';
 
-import { injectComponentReferenceMap } from '../use-form-context'
-import { injectRenderFormProperties, useFormContext } from './context'
-import useDependencies from './dependencies'
-import FormLabel from './form-label.vue'
-import { isEventObjectLike } from './helper'
+import { injectComponentReferenceMap } from '../use-form-context';
+import { injectRenderFormProperties, useFormContext } from './context';
+import useDependencies from './dependencies';
+import FormLabel from './form-label.vue';
+import { isEventObjectLike } from './helper';
 
 interface Properties extends FormSchema {}
 
@@ -60,29 +60,29 @@ const {
   rules,
 } = defineProps<
   Properties & {
-    commonComponentProps: MaybeComponentProperties
+    commonComponentProps: MaybeComponentProperties;
   }
->()
+>();
 
-const { componentBindEventMap, componentMap, isVertical } = useFormContext()
-const formRenderProperties = injectRenderFormProperties()
-const values = useFormValues()
-const errors = useFieldError(fieldName)
-const fieldComponentRef = useTemplateRef<HTMLInputElement>('fieldComponentRef')
-const formApi = formRenderProperties.form
-const compact = computed(() => formRenderProperties.compact)
-const isInValid = computed(() => errors.value?.length > 0)
+const { componentBindEventMap, componentMap, isVertical } = useFormContext();
+const formRenderProperties = injectRenderFormProperties();
+const values = useFormValues();
+const errors = useFieldError(fieldName);
+const fieldComponentRef = useTemplateRef<HTMLInputElement>('fieldComponentRef');
+const formApi = formRenderProperties.form;
+const compact = computed(() => formRenderProperties.compact);
+const isInValid = computed(() => errors.value?.length > 0);
 
 const FieldComponent = computed(() => {
   const finalComponent = isString(component)
     ? componentMap.value[component]
-    : component
+    : component;
   if (!finalComponent) {
     // 组件未注册
-    console.warn(`Component ${component} is not registered`)
+    console.warn(`Component ${component} is not registered`);
   }
-  return finalComponent
-})
+  return finalComponent;
+});
 
 const {
   dynamicComponentProps,
@@ -91,149 +91,149 @@ const {
   isIf,
   isRequired,
   isShow,
-} = useDependencies(() => dependencies)
+} = useDependencies(() => dependencies);
 
 const labelStyle = computed(() => {
   return labelClass?.includes('w-') || isVertical.value
     ? {}
     : {
         width: `${labelWidth}px`,
-      }
-})
+      };
+});
 
 const currentRules = computed(() => {
-  return toRaw(dynamicRules.value || rules)
-})
+  return toRaw(dynamicRules.value || rules);
+});
 
 const visible = computed(() => {
-  return !hide && isIf.value && isShow.value
-})
+  return !hide && isIf.value && isShow.value;
+});
 
 const shouldRequired = computed(() => {
   if (!visible.value) {
-    return false
+    return false;
   }
 
   if (!currentRules.value) {
-    return isRequired.value
+    return isRequired.value;
   }
 
   if (isRequired.value) {
-    return true
+    return true;
   }
 
   if (isString(currentRules.value)) {
-    return ['required', 'selectRequired'].includes(currentRules.value)
+    return ['required', 'selectRequired'].includes(currentRules.value);
   }
 
-  let isOptional = currentRules?.value?.isOptional?.()
+  let isOptional = currentRules?.value?.isOptional?.();
 
   // 如果有设置默认值，则不是必填，需要特殊处理
   const ruleDef = currentRules?.value?._def as
     | {
-        innerType?: { isOptional?: () => boolean }
-        type?: string
-        typeName?: string
+        innerType?: { isOptional?: () => boolean };
+        type?: string;
+        typeName?: string;
       }
-    | undefined
-  const typeName = ruleDef?.typeName ?? ruleDef?.type
+    | undefined;
+  const typeName = ruleDef?.typeName ?? ruleDef?.type;
   if (typeName === 'ZodDefault' || typeName === 'default') {
-    const innerType = ruleDef?.innerType
+    const innerType = ruleDef?.innerType;
     if (innerType) {
-      isOptional = innerType.isOptional?.() ?? false
+      isOptional = innerType.isOptional?.() ?? false;
     }
   }
 
-  return !isOptional
-})
+  return !isOptional;
+});
 
 const fieldRules = computed(() => {
   if (!visible.value) {
-    return null
+    return null;
   }
 
-  let rules = currentRules.value
+  let rules = currentRules.value;
   if (!rules) {
-    return isRequired.value ? 'required' : null
+    return isRequired.value ? 'required' : null;
   }
 
   if (isString(rules)) {
-    return rules
+    return rules;
   }
 
-  const isOptional = !shouldRequired.value
+  const isOptional = !shouldRequired.value;
   if (!isOptional) {
-    const unwrappedRules = (rules as any)?.unwrap?.()
+    const unwrappedRules = (rules as any)?.unwrap?.();
     if (unwrappedRules) {
-      rules = unwrappedRules
+      rules = unwrappedRules;
     }
   }
-  return toTypedSchema(rules as ZodType)
-})
+  return toTypedSchema(rules as ZodType);
+});
 
 const computedProperties = computed(() => {
   const finalComponentProperties = isFunction(componentProps)
     ? componentProps(values.value, formApi!)
-    : componentProps
+    : componentProps;
 
   return {
     ...commonComponentProps,
     ...finalComponentProperties,
     ...dynamicComponentProps.value,
-  }
-})
+  };
+});
 
 watch(
   () => computedProperties.value?.autofocus,
   (value) => {
     if (value === true) {
       nextTick(() => {
-        autofocus()
-      })
+        autofocus();
+      });
     }
   },
   { immediate: true },
-)
+);
 
 const shouldDisabled = computed(() => {
-  return isDisabled.value || disabled || computedProperties.value?.disabled
-})
+  return isDisabled.value || disabled || computedProperties.value?.disabled;
+});
 
 const customContentRender = computed(() => {
   if (!isFunction(renderComponentContent)) {
-    return {}
+    return {};
   }
-  return renderComponentContent(values.value, formApi!)
-})
+  return renderComponentContent(values.value, formApi!);
+});
 
 const renderContentKey = computed(() => {
-  return Object.keys(customContentRender.value)
-})
+  return Object.keys(customContentRender.value);
+});
 
 const fieldProps = computed(() => {
-  const rules = fieldRules.value
+  const rules = fieldRules.value;
   return {
     keepValue: true,
     label: isString(label) ? label : '',
     ...(rules && { rules }),
     ...(formFieldProps as Record<string, any>),
-  }
-})
+  };
+});
 
 function fieldBindEvent(slotProperties: Record<string, any>) {
-  const modelValue = slotProperties.componentField.modelValue
-  const handler = slotProperties.componentField['onUpdate:modelValue']
+  const modelValue = slotProperties.componentField.modelValue;
+  const handler = slotProperties.componentField['onUpdate:modelValue'];
 
   const bindEventField =
     modelPropName ||
-    (isString(component) ? componentBindEventMap.value?.[component] : null)
+    (isString(component) ? componentBindEventMap.value?.[component] : null);
 
-  let value = modelValue
+  let value = modelValue;
   // antd design 的一些组件会传递一个 event 对象
   if (modelValue && isObject(modelValue) && bindEventField) {
     value = isEventObjectLike(modelValue)
       ? modelValue?.target?.[bindEventField]
-      : (modelValue?.[bindEventField] ?? modelValue)
+      : (modelValue?.[bindEventField] ?? modelValue);
   }
 
   if (bindEventField) {
@@ -243,25 +243,25 @@ function fieldBindEvent(slotProperties: Record<string, any>) {
       onChange: disabledOnChangeListener
         ? undefined
         : (e: Record<string, any>) => {
-            const shouldUnwrap = isEventObjectLike(e)
-            const onChange = slotProperties?.componentField?.onChange
+            const shouldUnwrap = isEventObjectLike(e);
+            const onChange = slotProperties?.componentField?.onChange;
             if (!shouldUnwrap) {
-              return onChange?.(e)
+              return onChange?.(e);
             }
 
-            return onChange?.(e?.target?.[bindEventField] ?? e)
+            return onChange?.(e?.target?.[bindEventField] ?? e);
           },
       ...(disabledOnInputListener && { onInput: undefined }),
-    }
+    };
   }
   return {
     ...(disabledOnInputListener && { onInput: undefined }),
     ...(disabledOnChangeListener && { onChange: undefined }),
-  }
+  };
 }
 
 function createComponentProps(slotProperties: Record<string, any>) {
-  const bindEvents = fieldBindEvent(slotProperties)
+  const bindEvents = fieldBindEvent(slotProperties);
 
   const binds = {
     ...slotProperties.componentField,
@@ -273,9 +273,9 @@ function createComponentProps(slotProperties: Record<string, any>) {
     ...(Reflect.has(computedProperties.value, 'onInput') && {
       onInput: computedProperties.value.onInput,
     }),
-  }
+  };
 
-  return binds
+  return binds;
 }
 
 function autofocus() {
@@ -285,18 +285,18 @@ function autofocus() {
     // 检查当前是否有元素被聚焦
     document.activeElement !== fieldComponentRef.value
   ) {
-    fieldComponentRef.value?.focus?.()
+    fieldComponentRef.value?.focus?.();
   }
 }
-const componentReferenceMap = injectComponentReferenceMap()
+const componentReferenceMap = injectComponentReferenceMap();
 watch(fieldComponentRef, (componentReference) => {
-  componentReferenceMap?.set(fieldName, componentReference)
-})
+  componentReferenceMap?.set(fieldName, componentReference);
+});
 onUnmounted(() => {
   if (componentReferenceMap?.has(fieldName)) {
-    componentReferenceMap.delete(fieldName)
+    componentReferenceMap.delete(fieldName);
   }
-})
+});
 </script>
 
 <template>
@@ -384,7 +384,7 @@ onUnmounted(() => {
                     <CircleAlert
                       :class="
                         cn(
-                          'inline-flex size-5 cursor-pointer text-foreground/80 hover:text-foreground',
+                          'text-foreground/80 hover:text-foreground inline-flex size-5 cursor-pointer',
                         )
                       "
                     />

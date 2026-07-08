@@ -1,25 +1,29 @@
 <script setup lang="ts">
-import type { MsDropdownMenuItem } from '@ms-core/shadcn-ui'
-import type { AuthPageLayoutType } from '@ms/types'
+import type { MsDropdownMenuItem } from '@ms-core/shadcn-ui';
+import type { AuthPageLayoutType } from '@ms/types';
 // import type { AuthPageLayoutType } from '@ms-core/typings'
-import { MsDropdownRadioMenu, MsIconButton } from '@ms-core/shadcn-ui'
-import { InspectionPanel, PanelLeft, PanelRight } from '@ms/icons'
-import { preferences, updatePreferences, usePreferences } from '@ms/preferences'
-import { computed } from 'vue'
+import { MsDropdownRadioMenu, MsIconButton } from '@ms-core/shadcn-ui';
+import { InspectionPanel, PanelLeft, PanelRight } from '@ms/icons';
+import {
+  preferences,
+  updatePreferences,
+  usePreferences,
+} from '@ms/preferences';
+import { computed } from 'vue';
 
 defineOptions({
   name: 'AuthenticationLayoutToggle',
-})
+});
 
-const { authPanelRight, authPanelLeft, authPanelCenter } = usePreferences()
+const { authPanelRight, authPanelLeft, authPanelCenter } = usePreferences();
 
 function handleUpdate(value: string | undefined): any {
-  if (!value) return
+  if (!value) return;
   updatePreferences({
     app: {
       authPageLayout: value as AuthPageLayoutType,
     },
-  })
+  });
 }
 
 const menus = computed((): MsDropdownMenuItem[] => [
@@ -38,7 +42,7 @@ const menus = computed((): MsDropdownMenuItem[] => [
     label: '居右',
     value: 'panel-right',
   },
-])
+]);
 </script>
 
 <template>

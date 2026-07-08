@@ -1,4 +1,4 @@
-import './design-tokens'
+import './design-tokens';
 
-import './css/nprogress.css'
-import './css/global.css'
+import './css/nprogress.css';
+import './css/global.css';

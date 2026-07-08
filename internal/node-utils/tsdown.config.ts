@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsdown'
+import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   clean: false,
@@ -7,4 +7,4 @@ export default defineConfig({
   },
   entry: ['src/index.ts'],
   format: ['esm'],
-})
+});

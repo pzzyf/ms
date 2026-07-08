@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DropdownMenuProps as DropdownMenuProperties } from './interface'
+import type { DropdownMenuProps as DropdownMenuProperties } from './interface';
 
 import {
   DropdownMenu,
@@ -7,16 +7,16 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../../ui'
+} from '../../ui';
 
 interface Properties extends DropdownMenuProperties {}
 
-withDefaults(defineProps<Properties>(), {})
+withDefaults(defineProps<Properties>(), {});
 
-const modelValue = defineModel<string>()
+const modelValue = defineModel<string>();
 
 function handleItemClick(value: string) {
-  modelValue.value = value
+  modelValue.value = value;
 }
 </script>
 

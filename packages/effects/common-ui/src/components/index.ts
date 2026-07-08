@@ -1,3 +1,3 @@
-export * from './loading'
+export * from './loading';
 
-export * from '@ms-core/form-ui'
+export * from '@ms-core/form-ui';

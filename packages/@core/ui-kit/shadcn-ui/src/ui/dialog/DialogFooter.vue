@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
-import { Button } from '@ms-core/shadcn-ui/ui/button'
-import { cn } from '@ms-core/shared/utils'
-import { DialogClose } from 'reka-ui'
+import type { HTMLAttributes } from 'vue';
+import { Button } from '@ms-core/shadcn-ui/ui/button';
+import { cn } from '@ms-core/shared/utils';
+import { DialogClose } from 'reka-ui';
 
 const props = withDefaults(
   defineProps<{
-    class?: HTMLAttributes['class']
-    showCloseButton?: boolean
+    class?: HTMLAttributes['class'];
+    showCloseButton?: boolean;
   }>(),
   {
     showCloseButton: false,
   },
-)
+);
 </script>
 
 <template>

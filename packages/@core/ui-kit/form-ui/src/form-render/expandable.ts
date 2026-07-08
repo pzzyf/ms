@@ -1,26 +1,26 @@
-import type { Ref } from 'vue'
+import type { Ref } from 'vue';
 
-import type { FormRenderProps as FormRenderProperties } from '../types'
+import type { FormRenderProps as FormRenderProperties } from '../types';
 
 import {
   breakpointsTailwind,
   useBreakpoints,
   useElementVisibility,
-} from '@vueuse/core'
+} from '@vueuse/core';
 
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 function getRowStart(rowHeights: string[], itemTop: number) {
-  let cumulativeHeight = 0
+  let cumulativeHeight = 0;
 
   for (const [index, rowHeight] of rowHeights.entries()) {
-    cumulativeHeight += Number(rowHeight.replace('px', ''))
+    cumulativeHeight += Number(rowHeight.replace('px', ''));
     if (itemTop < cumulativeHeight) {
-      return index + 1
+      return index + 1;
     }
   }
 
-  return 0
+  return 0;
 }
 
 /**
@@ -30,23 +30,23 @@ export function useExpandable(
   properties: FormRenderProperties,
   wrapperReference: Readonly<Ref<HTMLElement | null>>,
 ) {
-  const isVisible = useElementVisibility(wrapperReference)
-  const rowMapping = ref<Record<number, number>>({})
+  const isVisible = useElementVisibility(wrapperReference);
+  const rowMapping = ref<Record<number, number>>({});
   // 是否已经计算过一次
-  const isCalculated = ref(false)
+  const isCalculated = ref(false);
 
-  const breakpoints = useBreakpoints(breakpointsTailwind)
+  const breakpoints = useBreakpoints(breakpointsTailwind);
 
   const keepFormItemIndex = computed(() => {
-    const rows = properties.collapsedRows ?? 1
-    const mapping = rowMapping.value
-    let maxItem = 0
+    const rows = properties.collapsedRows ?? 1;
+    const mapping = rowMapping.value;
+    let maxItem = 0;
     for (let index = 1; index <= rows; index++) {
-      maxItem += mapping?.[index] ?? 0
+      maxItem += mapping?.[index] ?? 0;
     }
     // 保持一行
-    return maxItem - 1 || 1
-  })
+    return maxItem - 1 || 1;
+  });
 
   watch(
     [
@@ -57,53 +57,53 @@ export function useExpandable(
     ],
     async ([value]) => {
       if (!value) {
-        return
+        return;
       }
 
-      await nextTick()
-      rowMapping.value = {}
-      isCalculated.value = false
-      await calculateRowMapping()
+      await nextTick();
+      rowMapping.value = {};
+      isCalculated.value = false;
+      await calculateRowMapping();
     },
-  )
+  );
 
   async function calculateRowMapping() {
     if (!properties.showCollapseButton) {
-      return
+      return;
     }
 
-    await nextTick()
+    await nextTick();
     if (!wrapperReference.value) {
-      return
+      return;
     }
 
-    const formItems = [...wrapperReference.value.children]
+    const formItems = [...wrapperReference.value.children];
 
-    const container = wrapperReference.value
-    const containerStyles = window.getComputedStyle(container)
+    const container = wrapperReference.value;
+    const containerStyles = window.getComputedStyle(container);
     const rowHeights = containerStyles
       .getPropertyValue('grid-template-rows')
-      .split(' ')
+      .split(' ');
 
-    const containerRect = container?.getBoundingClientRect()
+    const containerRect = container?.getBoundingClientRect();
 
     for (const element of formItems) {
-      const itemRect = element.getBoundingClientRect()
+      const itemRect = element.getBoundingClientRect();
 
       // 计算元素在第几行
-      const itemTop = itemRect.top - containerRect.top
-      const rowStart = getRowStart(rowHeights, itemTop)
+      const itemTop = itemRect.top - containerRect.top;
+      const rowStart = getRowStart(rowHeights, itemTop);
       if (rowStart > (properties?.collapsedRows ?? 1)) {
-        continue
+        continue;
       }
-      rowMapping.value[rowStart] = (rowMapping.value[rowStart] ?? 0) + 1
-      isCalculated.value = true
+      rowMapping.value[rowStart] = (rowMapping.value[rowStart] ?? 0) + 1;
+      isCalculated.value = true;
     }
   }
 
   onMounted(() => {
-    calculateRowMapping()
-  })
+    calculateRowMapping();
+  });
 
-  return { isCalculated, keepFormItemIndex, wrapperRef: wrapperReference }
+  return { isCalculated, keepFormItemIndex, wrapperRef: wrapperReference };
 }

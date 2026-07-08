@@ -1,4 +1,4 @@
-import { defineEventHandler } from 'h3'
+import { defineEventHandler } from 'h3';
 
 export default defineEventHandler(() => {
   return `
@@ -9,5 +9,5 @@ export default defineEventHandler(() => {
 <li><a href="/api/auth/codes">/api/auth/codes</a></li>
 <li><a href="/api/auth/login">/api/auth/login</a></li>
 </ul>
-`
-})
+`;
+});

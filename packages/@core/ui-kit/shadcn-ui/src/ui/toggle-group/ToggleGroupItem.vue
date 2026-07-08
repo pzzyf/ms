@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import type { VariantProps } from 'class-variance-authority'
-import type { ToggleGroupItemProps } from 'reka-ui'
-import type { HTMLAttributes } from 'vue'
-import { toggleVariants } from '@ms-core/shadcn-ui/ui/toggle'
-import { cn } from '@ms-core/shared/utils'
-import { reactiveOmit } from '@vueuse/core'
-import { ToggleGroupItem, useForwardProps } from 'reka-ui'
-import { inject } from 'vue'
+import type { VariantProps } from 'class-variance-authority';
+import type { ToggleGroupItemProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { toggleVariants } from '@ms-core/shadcn-ui/ui/toggle';
+import { cn } from '@ms-core/shared/utils';
+import { reactiveOmit } from '@vueuse/core';
+import { ToggleGroupItem, useForwardProps } from 'reka-ui';
+import { inject } from 'vue';
 
 type ToggleGroupVariants = VariantProps<typeof toggleVariants> & {
-  spacing?: number
-}
+  spacing?: number;
+};
 
 const props = defineProps<
   ToggleGroupItemProps & {
-    class?: HTMLAttributes['class']
-    variant?: ToggleGroupVariants['variant']
-    size?: ToggleGroupVariants['size']
+    class?: HTMLAttributes['class'];
+    variant?: ToggleGroupVariants['variant'];
+    size?: ToggleGroupVariants['size'];
   }
->()
+>();
 
-const context = inject<ToggleGroupVariants>('toggleGroup')
+const context = inject<ToggleGroupVariants>('toggleGroup');
 
 const delegatedProperties = reactiveOmit(
   props,
@@ -28,8 +28,8 @@ const delegatedProperties = reactiveOmit(
   'size',
   'variant',
   'value',
-)
-const forwardedProps = useForwardProps(delegatedProperties)
+);
+const forwardedProps = useForwardProps(delegatedProperties);
 </script>
 
 <template>

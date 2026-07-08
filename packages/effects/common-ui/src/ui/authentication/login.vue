@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { MsFormSchema } from '@ms-core/form-ui'
-import type { Recordable } from '@ms-core/typings'
-import type { AuthenticationProps as AuthenticationProperties } from './types'
-import { useMsForm } from '@ms-core/form-ui'
+import type { MsFormSchema } from '@ms-core/form-ui';
+import type { Recordable } from '@ms-core/typings';
+import type { AuthenticationProps as AuthenticationProperties } from './types';
+import { useMsForm } from '@ms-core/form-ui';
 
-import { MsButton } from '@ms-core/shadcn-ui'
-import { computed, reactive } from 'vue'
-import Title from './auth-title.vue'
+import { MsButton } from '@ms-core/shadcn-ui';
+import { computed, reactive } from 'vue';
+import Title from './auth-title.vue';
 
 interface Properties extends AuthenticationProperties {
-  formSchema?: MsFormSchema[]
+  formSchema?: MsFormSchema[];
 }
 
 const properties = withDefaults(defineProps<Properties>(), {
@@ -17,11 +17,11 @@ const properties = withDefaults(defineProps<Properties>(), {
   subTitle: '',
   loading: false,
   formSchema: () => [],
-})
+});
 
 const emit = defineEmits<{
-  submit: [Recordable<any>]
-}>()
+  submit: [Recordable<any>];
+}>();
 
 const [Form, formApi] = useMsForm(
   reactive({
@@ -32,13 +32,13 @@ const [Form, formApi] = useMsForm(
     schema: computed(() => properties.formSchema),
     showDefaultActions: false,
   }),
-)
+);
 
 async function handleSubmit() {
-  const { valid } = await formApi.validate()
-  const values = await formApi.getValues()
+  const { valid } = await formApi.validate();
+  const values = await formApi.getValues();
   if (valid) {
-    emit('submit', values)
+    emit('submit', values);
   }
 }
 </script>

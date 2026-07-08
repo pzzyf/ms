@@ -3,7 +3,7 @@
  * @param string
  */
 function capitalizeFirstLetter(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1)
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 /**
@@ -13,8 +13,8 @@ function capitalizeFirstLetter(string: string): string {
  * @returns 首字母小写的字符串
  */
 function toLowerCaseFirstLetter(str: string): string {
-  if (!str) return str // 如果字符串为空，直接返回
-  return str.charAt(0).toLowerCase() + str.slice(1)
+  if (!str) return str; // 如果字符串为空，直接返回
+  return str.charAt(0).toLowerCase() + str.slice(1);
 }
 
 /**
@@ -24,9 +24,9 @@ function toLowerCaseFirstLetter(str: string): string {
  */
 function toCamelCase(key: string, parentKey: string): string {
   if (!parentKey) {
-    return key
+    return key;
   }
-  return parentKey + key.charAt(0).toUpperCase() + key.slice(1)
+  return parentKey + key.charAt(0).toUpperCase() + key.slice(1);
 }
 
 function kebabToCamelCase(string_: string): string {
@@ -36,7 +36,7 @@ function kebabToCamelCase(string_: string): string {
     .map((word, index) =>
       index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1),
     )
-    .join('')
+    .join('');
 }
 
 export {
@@ -44,4 +44,4 @@ export {
   kebabToCamelCase,
   toCamelCase,
   toLowerCaseFirstLetter,
-}
+};

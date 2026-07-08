@@ -296,6 +296,9 @@ importers:
       lefthook:
         specifier: 'catalog:'
         version: 2.1.8
+      prettier:
+        specifier: 'catalog:'
+        version: 3.9.4
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.0

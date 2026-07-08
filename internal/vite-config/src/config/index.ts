@@ -1,9 +1,9 @@
-import type { DefineConfig, MsViteConfig } from '../typing'
+import type { DefineConfig, MsViteConfig } from '../typing';
 
-import { defineApplicationConfig as defineAppConfig } from './application'
+import { defineApplicationConfig as defineAppConfig } from './application';
 
 function defineConfig(userConfigPromise?: DefineConfig): MsViteConfig {
-  return defineAppConfig(userConfigPromise)
+  return defineAppConfig(userConfigPromise);
 }
 
-export { defineConfig }
+export { defineConfig };
