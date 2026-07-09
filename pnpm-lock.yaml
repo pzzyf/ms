@@ -281,6 +281,9 @@ importers:
       '@ms/vite-config':
         specifier: workspace:*
         version: link:internal/vite-config
+      '@ms/vsh':
+        specifier: workspace:*
+        version: link:scripts/vsh
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.1
@@ -826,6 +829,15 @@ importers:
       tsdown:
         specifier: 'catalog:'
         version: 0.22.0(typescript@6.0.3)(vue-tsc@3.2.9(typescript@6.0.3))
+
+  scripts/vsh:
+    dependencies:
+      '@ms/node-utils':
+        specifier: workspace:*
+        version: link:../../internal/node-utils
+      cac:
+        specifier: 'catalog:'
+        version: 7.0.0
 
 packages:
 

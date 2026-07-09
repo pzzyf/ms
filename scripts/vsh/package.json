@@ -1,0 +1,14 @@
+{
+  "name": "@ms/vsh",
+  "version": "1.0.0",
+  "scripts": {
+    "stub": "pnpm exec tsdown"
+  },
+  "bin": {
+    "vsh": "./bin/vsh.mjs"
+  },
+  "dependencies": {
+    "@ms/node-utils": "workspace:*",
+    "cac": "catalog:"
+  }
+}
