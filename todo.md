@@ -42,5 +42,5 @@
     - ~~mockPlugin~~
     - ~~api auth/login~~
     - layout
-    - vsh script
+    - ~~vsh script~~
     - vitest
