@@ -20,7 +20,8 @@ function defineAppConfig(userConfigPromise?: DefineAppOptions) {
     const plugins = await loadAppPlugins({
       injectMetadata: true,
       injectAppLoading: true,
-      nitroMock: !isBuild,
+      nitroMock: false,
+      // nitroMock: !isBuild,
       nitroMockOptions: {},
     });
 

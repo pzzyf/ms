@@ -20,7 +20,7 @@
 - task
   - 主线
     - fe
-    - ~~mock~~
+    - ~~be/mock(hono/nitro)~~
   - 支线
     - ~~preference~~
       - ~~updatePreferences~~
@@ -43,4 +43,4 @@
     - ~~api auth/login~~
     - layout
     - ~~vsh script~~
-    - vitest
+    - ~~vitest~~
